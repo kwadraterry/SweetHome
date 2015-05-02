@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
+using SweetHome.Models;
 
 namespace SweetHome.Controllers
 {
     public class HomeController : Controller
     {
+        ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
-            return View();
+            var shelters = context.Shelters.Where(s => s.Name == "ABC").ToList();
+            return View(shelters);
         }
 
         public IActionResult About()
