@@ -16,6 +16,7 @@ namespace SweetHome.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private static bool _created = false;
+        public DbSet<Shelter> Shelters { get; set; }
         
         public ApplicationDbContext()
         {            
