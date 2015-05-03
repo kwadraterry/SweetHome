@@ -15,6 +15,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+wwwroot/
 
 # Roslyn cache directories
 *.ide/
@@ -139,6 +140,9 @@ packages/*
 # This line needs to be after the ignore of the build folder
 # (and the packages folder if the line above has been uncommented)
 !packages/build/
+
+# bower packages
+lib/
 
 # Windows Azure Build Output
 csx/
