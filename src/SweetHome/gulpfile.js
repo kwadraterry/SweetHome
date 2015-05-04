@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-    bower = require('gulp-bower'),
 	sourcemaps = require('gulp-sourcemaps'),
 	rename = require('gulp-rename'),
 	_if = require('gulp-if'),

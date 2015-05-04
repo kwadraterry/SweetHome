@@ -2,9 +2,9 @@ var libPath = "../lib";
 
 var config = {
 	paths: {
-		"jquery": libPath + "jquery/jquery",
+		"jquery": libPath + "jquery/dist/jquery",
 		"bootstrap": libPath + "bootstrap/js",
-		"bxslider": libPath + "bxslider-4/src/jquery.bxslider"
+		"bxslider": libPath + "bxslider-4/dist/jquery.bxslider"
 	},
 	shim: {
 		'bootstrap/affix':      { deps: ['jquery'], exports: '$.fn.affix' }, 
