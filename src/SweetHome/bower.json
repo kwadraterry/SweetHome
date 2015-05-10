@@ -4,7 +4,8 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "bxslider-4": "~4.2.3",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "almond": "~0.3.1"
   },
   "overrides": {
     "bxslider-4": {

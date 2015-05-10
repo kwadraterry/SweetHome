@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
+    uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	_if = require('gulp-if'),
 	_ignore = require('gulp-ignore'),
@@ -45,10 +46,9 @@ gulp.task('styles', ['fixBxSlider', 'clean:css'], function() {
 		.pipe(gulp.dest(paths.dst.styles));
 });
 
-gulp.task('scripts', ['clean:js'], function() {
+gulp.task('scripts', ['clean:js','almond'], function() {
 	var amdOptimize = require('amd-optimize'),
-		concat = require('gulp-concat'),
-		uglify = require('gulp-uglify');
+		concat = require('gulp-concat');
 
 	return gulp.src([
 			paths.src.scripts + '/**/*.js',
@@ -64,6 +64,14 @@ gulp.task('scripts', ['clean:js'], function() {
 		.pipe(concat("index.js"))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.dst.scripts));
+});
+
+gulp.task('almond', function () {
+    return gulp.src(paths.src.bower + '/almond/almond.js')
+        .pipe(sourcemaps.init())
+		.pipe(uglify())
+		.pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(paths.dst.scripts));
 });
 
 gulp.task('images', ['clean:img'], function() {

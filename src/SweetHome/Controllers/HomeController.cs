@@ -8,11 +8,11 @@ namespace SweetHome.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationDbContext context = new ApplicationDbContext();
+        //ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
-            var shelters = context.Shelters.Where(s => s.Name == "ABC").ToList();
-            return View(shelters);
+            //var shelters = context.Shelters.Where(s => s.Name == "ABC").ToList();
+            return View();
         }
 
         public IActionResult About()

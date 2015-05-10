@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SweetHome.Models.Shelter>
+﻿
 
 @{
     ViewBag.Title = "Home Page";
@@ -7,10 +7,7 @@
 
 <div class="col-md-3">
     <ul >
-        @foreach (var shelter in Model)
-        {
-            <li>@shelter.Name</li>
-        }
+       
     </ul>
 </div>
 <div class="col-md-6">
@@ -55,9 +52,15 @@
 @section scripts
     {
         <script>
-        $('.bxslider').bxSlider({
-          mode: 'fade',
-          captions: true
-        });
+            define('index', ['require'], function (require) {
+                console.log("hellokeesa");
+                require(['bxslider']);
+                $('.bxslider').bxSlider({
+                    mode: 'fade',
+                    captions: true
+                });
+            });
+
+        
         </script>
     }

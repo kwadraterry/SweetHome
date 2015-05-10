@@ -1,4 +1,4 @@
-var libPath = "../lib";
+var libPath = "../lib/";
 
 var config = {
 	paths: {
