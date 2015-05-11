@@ -1,6 +1,4 @@
-define([
-	'require'
-], function(require) {
+define(function(require) {
 	'use strict';
 	return {
 		name: "second"

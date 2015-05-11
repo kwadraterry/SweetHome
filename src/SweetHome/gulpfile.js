@@ -41,12 +41,12 @@ gulp.task('styles', ['fixBxSlider', 'clean:css'], function() {
 			relativeUrls: true
 		})))
 		.pipe(autoprefixer())
-		//.pipe(csso())
+		.pipe(csso())
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.dst.styles));
 });
 
-gulp.task('scripts', ['clean:js','almond'], function() {
+gulp.task('scripts', ['almond'], function() {
 	var amdOptimize = require('amd-optimize'),
 		concat = require('gulp-concat');
 
@@ -54,19 +54,19 @@ gulp.task('scripts', ['clean:js','almond'], function() {
 			paths.src.scripts + '/**/*.js',
 			paths.src.bower + '/**/*.js',
 			'!**/_references.js'])
+		.pipe(sourcemaps.init())
 		.pipe(amdOptimize("main", {
 			findNestedDependencies: true,
-    		baseUrl: "app/scripts",
-			configFile: "app/scripts/require_config.js"
+    		baseUrl: paths.src.scripts,
+			configFile: paths.src.scripts + "/require_config.js"
 		}))
-		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(concat("index.js"))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.dst.scripts));
 });
 
-gulp.task('almond', function () {
+gulp.task('almond', ['clean:js'], function () {
     return gulp.src(paths.src.bower + '/almond/almond.js')
         .pipe(sourcemaps.init())
 		.pipe(uglify())
