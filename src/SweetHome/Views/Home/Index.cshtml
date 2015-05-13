@@ -52,15 +52,12 @@
 @section scripts
     {
         <script>
-            define('index', ['require'], function (require) {
-                console.log("hellokeesa");
-                require(['bxslider']);
+            (function () {
+                require('bxslider');
                 $('.bxslider').bxSlider({
                     mode: 'fade',
                     captions: true
                 });
-            });
-
-        
+            })();
         </script>
     }
