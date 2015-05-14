@@ -5,8 +5,8 @@ using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Routing;
-using Microsoft.AspNet.Security.Cookies;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
@@ -32,12 +32,15 @@ namespace SweetHome
         public void ConfigureServices(IServiceCollection services)
         {
             // Add EF services to the services container.
-            services.AddEntityFramework(Configuration)
+            services.AddEntityFramework()
                 .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>();
+                .AddDbContext<ApplicationDbContext>(options => 
+                    options.UseSqlServer(Configuration.Get("Data:DefaultConnection:ConnectionString")));
 
             // Add Identity services to the services container.
-            services.AddDefaultIdentity<ApplicationDbContext, ApplicationUser, IdentityRole>(Configuration);
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
             // Add MVC services to the services container.
             services.AddMvc();
@@ -58,7 +61,6 @@ namespace SweetHome
             // Add the following to the request pipeline only in development environment.
             if (string.Equals(env.EnvironmentName, "Development", StringComparison.OrdinalIgnoreCase))
             {
-                app.UseBrowserLink();
                 app.UseErrorPage(ErrorPageOptions.ShowAll);
                 app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }

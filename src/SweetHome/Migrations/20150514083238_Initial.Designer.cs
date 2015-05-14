@@ -8,9 +8,19 @@ using SweetHome.Models;
 namespace SweetHome.Migrations
 {
     [ContextType(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class Initial
     {
-        public override IModel Model
+        public override string Id
+        {
+            get { return "20150514083238_Initial"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta4-12943"; }
+        }
+        
+        public override IModel Target
         {
             get
             {
