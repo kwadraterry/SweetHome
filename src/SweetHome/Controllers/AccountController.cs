@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Authorization;
 using SweetHome.Models;
 
 namespace SweetHome.Controllers
@@ -12,13 +14,9 @@ namespace SweetHome.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
+        [FromServices]
         public UserManager<ApplicationUser> UserManager { get; private set; }
+        [FromServices]
         public SignInManager<ApplicationUser> SignInManager { get; private set; }
 
         // GET: /Account/Login
@@ -40,13 +38,13 @@ namespace SweetHome.Controllers
             if (ModelState.IsValid)
             {
                 var signInStatus = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-                switch (signInStatus)
+                if (signInStatus.Succeeded)
                 {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid username or password.");
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
                         return View(model);
                 }
             }
@@ -144,13 +142,13 @@ namespace SweetHome.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError("", error.Description);
             }
         }
 
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return await UserManager.FindByIdAsync(Context.User.Identity.GetUserId());
+            return await UserManager.FindByIdAsync(Context.User.GetUserId());
         }
 
         public enum ManageMessageId

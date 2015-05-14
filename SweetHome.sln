@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.22310.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C79F02FA-F5E6-46CE-B0BA-79F6B66524BF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SweetHome", "src\SweetHome\SweetHome.kproj", "{88D1FBA4-B24A-4BEE-9B7D-B28B40989B0A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SweetHome", "src\SweetHome\SweetHome.xproj", "{88D1FBA4-B24A-4BEE-9B7D-B28B40989B0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ED51D1EA-D518-4722-B855-9F8811A71659}"
 	ProjectSection(SolutionItems) = preProject
