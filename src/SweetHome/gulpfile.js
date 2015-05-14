@@ -16,13 +16,13 @@ var gulp = require('gulp'),
 			scripts: src + '/scripts',
 			styles: src + '/styles',
 			bower: src + '/lib',
-			images: src + '/img'
+			images: src + '/images'
 		},
 		dst: {
 			scripts: dst + '/js',
 			styles: dst + '/css',
 			bower: dst + '/lib',
-			images: dst + '/img'
+			images: dst + '/images'
 		}
 	};
 
@@ -89,9 +89,9 @@ gulp.task('bower:copy', ['clean:lib'], function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(paths.src.images, ['images']);
-	gulp.watch(paths.src.scripts, ['scripts']);
-	gulp.watch(paths.src.styles, ['styles']);
+    gulp.watch(paths.src.images + '/*.*', ['images']);
+    gulp.watch(paths.src.scripts + '/**/*.js', ['scripts']);
+	gulp.watch([paths.src.styles + '/**/*.less', paths.src.styles + '/**/*.css'], ['styles']);
 });
 
 gulp.task('clean:js', function (done) {

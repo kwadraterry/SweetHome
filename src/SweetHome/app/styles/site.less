@@ -19,7 +19,12 @@ select,
 textarea {
     max-width: 280px;
 }
-
+.thumb {
+    width: 485px;
+    height: 445px;
+    background-position: center center;
+    background-size: cover;
+}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
@@ -30,4 +35,38 @@ textarea {
     .body-content {
         padding: 0;
     }
+}
+
+.bx-wrapper{
+    border: 0px solid #fff;
+}
+
+.bx-viewport{
+    width: 500px !important;
+    height: 445px !important;
+}
+
+.bx-wrapper .bx-next{
+    background: url(../images/slider_fp_right.png) no-repeat top center;
+}
+
+.bx-wrapper .bx-prev{
+    background: url(../images/slider_fp_left.png) no-repeat top center;
+}
+
+.main-left-block{
+    background-color: #B2DFDB;
+    height:445px;
+
+}
+
+.main-rigth-block{
+    background-color: #FFE082;
+    height:445px;
+}
+
+.center{
+    text-align:center;
+    margin-top: 0px;
+    padding-top: 10px;
 }
