@@ -17,6 +17,7 @@ namespace SweetHome.Models
     {
         private static bool _created = false;
         public DbSet<Shelter> Shelters { get; set; }
+        public DbSet<ShelterAnimal> ShelterAnimals { get; set; }
         
         public ApplicationDbContext()
         {            
