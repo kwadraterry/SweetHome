@@ -40,7 +40,7 @@ namespace SweetHome.Models
         [Required]
         public AnimalType AnimalType { get; set; }
         [DataType(DataType.Date)]
-        public string BirthDay { get; set; }
+        public DateTime BirthDay { get; set; }
         [Required]
         public PlaceType PlaceType { get; set; }
         public int ShelterId { get; set; }

@@ -22,11 +22,22 @@
         <ul class="catalog">
             @foreach(var animal in Model)
             {
+            @{
+                var imageUrl = animal.Images.DefaultIfEmpty("images/doggy.jpg").First();
+                var age = (System.DateTime.Today - animal.BirthDay).TotalDays / 365.0;
+            }
             <li>                
-                <div class="little-img" style="background-image: url('images/doggy.jpg');" title="Landscape: 800x400"></div>
-                <h4 class="name">Милая песя</h4>
-                <div class="age">5 месяцев</div>
-                <div class="place">Приют "Хочу домой"</div>
+                <div class="little-img" style="background-image: url('@imageUrl');"></div>
+                <h4 class="name">@animal.Name</h4>
+                <div class="age">@age</div>
+                @if (animal.Place != null)
+                {
+                <div class="place">@animal.Place.Name</div>
+                }
+                else
+                {
+                    <div>Нету места</div>
+                }
             </li>
             }
         </ul>

@@ -19,7 +19,7 @@ namespace SweetHome.Controllers
                 .Include(a => a.Shelter)
                 .Take(5)
                 .ToList();
-            return View();
+            return View(animals);
         }
 
         public IActionResult About()

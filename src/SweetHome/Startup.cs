@@ -88,6 +88,9 @@ namespace SweetHome
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+            
+            var dbInitializer = ActivatorUtilities.CreateInstance<Models.DbInitializer>(app.ApplicationServices);
+            dbInitializer.InitializeData();
         }
     }
 }
