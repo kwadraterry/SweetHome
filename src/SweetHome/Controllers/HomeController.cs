@@ -14,6 +14,11 @@ namespace SweetHome.Controllers
         public IActionResult Index()
         {
             var shelters = DbContext.Shelters.Where(s => s.Name == "ABC").ToList();
+            var animals = DbContext.ShelterAnimals
+                .Where(a => a.IsHappy == false)
+                .Include(a => a.Shelter)
+                .Take(5)
+                .ToList();
             return View();
         }
 

@@ -1,0 +1,36 @@
+@import "../lib/bxslider-4/src/jquery.bxslider.less";
+
+.bx-wrapper{
+    border: 0px solid #fff;
+}
+
+.bxslider {
+    position: relative !important;
+    height: 100% !important;
+    li {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+.bx-viewport{
+    height: 445px !important;
+}
+
+.fix-bx-control(@x, @y, @hoverOffset, @background) {
+    background: url(@background) no-repeat;
+    background-position: @x @y;
+    &:hover,
+    &:focus {
+        background-position: @x (@y + @hoverOffset);
+    }
+}
+
+.bx-wrapper .bx-next{
+    .fix-bx-control(-16px, -32px, -92px, "../images/slider_fp_right.png");
+}
+
+.bx-wrapper .bx-prev{
+    .fix-bx-control(0px, -32px, -92px, "../images/slider_fp_left.png");
+    
+}

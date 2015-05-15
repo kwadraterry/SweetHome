@@ -1,5 +1,5 @@
 @import "../lib/bootstrap/less/bootstrap.less";
-@import "../lib/bxslider-4/src/jquery.bxslider.less";
+@import "bxslider.less";
 
 body {
     padding-top: 250px;
@@ -20,8 +20,7 @@ textarea {
     max-width: 280px;
 }
 .thumb {
-    width: 485px;
-    height: 445px;
+    height: 100%;
     background-position: center center;
     background-size: cover;
 }
@@ -37,22 +36,7 @@ textarea {
     }
 }
 
-.bx-wrapper{
-    border: 0px solid #fff;
-}
 
-.bx-viewport{
-    width: 500px !important;
-    height: 445px !important;
-}
-
-.bx-wrapper .bx-next{
-    background: url(../images/slider_fp_right.png) no-repeat top center;
-}
-
-.bx-wrapper .bx-prev{
-    background: url(../images/slider_fp_left.png) no-repeat top center;
-}
 
 .main-left-block{
     background-color: #B2DFDB;
@@ -78,9 +62,9 @@ textarea {
 .little-img{
     width: 100px;
     height: 100px;
+    float: left;
     background-position: center center;
     background-size: cover;
-    display:inline-block;
 }
 .name{
     display: inline-block;

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SweetHome.Models
 {
@@ -56,8 +59,37 @@ namespace SweetHome.Models
         public bool IsHappy { get; set; }
         [Required]
         [DataType(DataType.DateTime)]     
-        public string Created { get; set; }
+        public DateTime Created { get; set; }
         
         public virtual Shelter Shelter { get; set; }
+        public string ImagesSerialized
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(_Images);
+            }
+            set
+            {
+                _Images = JsonConvert.DeserializeObject<IList<string>>(value);
+            }
+        }
+        public virtual IList<string> Images
+        {
+            get
+            {
+                return _Images;
+            }
+            set
+            {
+                _Images = value;
+            }
+        }
+        private IList<string> _Images;
+        
+        public ShelterAnimal()
+        {
+            this.IsHappy = false;
+            this._Images = new List<string>();
+        }
     }
 }

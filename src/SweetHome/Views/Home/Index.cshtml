@@ -1,4 +1,4 @@
-﻿
+﻿@model System.Collections.Generic.IList<SweetHome.Models.ShelterAnimal>
 
 @{
     ViewBag.Title = "Home Page";
@@ -12,21 +12,23 @@
 </div>
 <div class="col-md-6">
     <ul class="bxslider">
-        <li><div class="thumb" style="background-image: url('images/tshirt.jpg');" title="Landscape: 800x400"></div></li>
-        <li><img src="~/images/hill_road.jpg" title="The long and winding road" /></li>
-        <li><img src="~/images/trees.jpg" title="Happy trees" /></li>
+        <li><div class="thumb" style="background-image: url('images/tshirt.jpg');" title="1"></div></li>
+        <li><div class="thumb" style="background-image: url('images/tshirt.jpg');" title="2"></div></li>
     </ul>
 </div>
 <div class="col-md-3">
     <div class="main-rigth-block">
     <h3 class="center">Мы ищем дом</h3>
         <ul class="catalog">
+            @foreach(var animal in Model)
+            {
             <li>                
                 <div class="little-img" style="background-image: url('images/doggy.jpg');" title="Landscape: 800x400"></div>
                 <h4 class="name">Милая песя</h4>
                 <div class="age">5 месяцев</div>
                 <div class="place">Приют "Хочу домой"</div>
             </li>
+            }
         </ul>
     </div>
 </div>
