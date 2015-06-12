@@ -88,7 +88,7 @@ gulp.task('bower:copy', ['clean:lib'], function() {
 		.pipe(gulp.dest(paths.dst.bower));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['styles', 'scripts', 'images'], function() {
     gulp.watch(paths.src.images + '/*.*', ['images']);
     gulp.watch(paths.src.scripts + '/**/*.js', ['scripts']);
 	gulp.watch([paths.src.styles + '/**/*.less', paths.src.styles + '/**/*.css'], ['styles']);
