@@ -4,85 +4,115 @@
     ViewBag.Title = "Home Page";
 }
 
-
-<div class="col-md-3">
-    <div class="main-left-block">
-        <h3 class="center">Мы потерялись</h3>
-    </div>
-</div>
-<div class="col-md-6">
+<div class="carousel-container">
     <ul class="bxslider">
-        <li><div class="thumb" style="background-image: url('images/tshirt.jpg');" title="1"></div></li>
-        <li><div class="thumb" style="background-image: url('images/tshirt.jpg');" title="2"></div></li>
+        <li><div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');"
+                 title="1">
+            </div>
+        </li>
+        <li><div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');"
+                 title="2">
+            </div>
+        </li>
     </ul>
 </div>
-<div class="col-md-3">
-    <div class="main-rigth-block">
-    <h3 class="center">Мы ищем дом</h3>
-    <h3>@Model.Count()</h3>    
-        <ul class="catalog">
-            @foreach(var animal in Model)
-            {
-            var imageUrl = animal.Images.DefaultIfEmpty("images/doggy.jpg").First();
-            var age = (System.DateTime.Today - animal.BirthDay).TotalDays / 365.0;
-            <li>                
-                <div class="little-img" style="background-image: url('@imageUrl');"></div>
-                <h4 class="name">@animal.Name</h4>
-                <div class="age">@age</div>
-                @if (animal.Shelter != null)
-                {
-                <div class="place">@animal.Shelter.Name</div>
-                }
-                else
-                {
-                    <div>Нету места</div>
-                }
-            </li>
-            }
-        </ul>
+<div class="info-row">
+    <div class="volunteer-text">
+        <h1>СТАНЬТЕ ВОЛОНТЕРОМ</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <div class="news-block">
+        <div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <h3>Новость</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <h3>Ещё новость</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+</div>
+<div class="lost-animals-row">
+    <div class="dogs">
+        <h1>Собаки ищут хозяев</h1>
+        <div class="image-list">
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
+            </div>
+        </div>
+    </div>
+    <div class="cats">
+        <h1>Кошки ищут хозяев</h1>
+        <div class="image-list">
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+            <div class="img"
+                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>This application consists of:</h2>
-        <ul>
-            <li>Sample pages showing basic nav</li>
-            <li>Theming using <a href="http://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-4">
-        <h2>Customize app</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398600">Add Controllers and Views</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398602">Add Data using EntityFramework</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398603">Add Authentication using Identity</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398606">Add real time support using SignalR</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398604">Add Class library</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517848">Add client packages using Bower</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517849">Manage client packages using Grunt</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517850">Develop on different platforms</a></li>
-        </ul>
-    </div>
-    <div class="col-md-4">
-        <h2>Run & Deploy</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517851">Run your app locally</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517852">Run your app on ASP.NET Core 5</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517853">Run commands defined in your project.json</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Sites</a></li>
-        </ul>
-    </div>
-</div>
 @section scripts
-    {
-        <script>
-            (function () {
-                require('bxslider');
-                $('.bxslider').bxSlider({
-                    mode: 'fade',
-                    captions: true
-                });
-            })();
-        </script>
-    }
+{
+<script>
+    (function () {
+        require('bxslider');
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            captions: true
+        });
+    })();
+</script>
+}

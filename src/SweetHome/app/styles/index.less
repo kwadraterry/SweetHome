@@ -1,0 +1,42 @@
+@import (reference) "../lib/bootstrap/less/bootstrap.less";
+@import (reference) "vars.less";
+
+@news-image-size: 100px;
+
+.news-block {
+	> div {
+		> .img {
+			margin: 5px;
+			float: left;
+			width: @news-image-size;
+			height: @news-image-size;
+		}
+	}
+	> div + div {
+		border-top: 2px solid @body-bg;
+	}
+}
+
+.info-row {
+	.row-2();
+}
+
+@animal-picture-size: 200px;
+
+.lost-animals-row {
+	.row-2();
+	> * {
+		padding-bottom: 2 * @vertical-layout-margin;
+	}
+	.image-list {
+		display: flex;
+		overflow: hidden;
+		> * {
+			flex: 0 0 @animal-picture-size;
+			.square(@animal-picture-size);
+		}
+		> * + * {
+			margin-left: 2 * @text-block-margin;
+		}
+	}
+}

@@ -1,0 +1,52 @@
+@import (reference) "../lib/bootstrap/less/bootstrap.less";
+
+
+@navbar-height: 100px;
+@navbar-default-bg: #fff;
+@footer-height: 20px;
+@body-bg: #eee;
+@text-block-bg: #fff;
+@text-block-margin: 5px;
+@vertical-layout-margin: 5px;
+@layout-margin: 30px;
+@h-color: #097aaa;
+
+.text-block() {
+	background-color: @text-block-bg;
+	border: @layout-margin/2 solid rgba(0, 0, 0, 0);
+	background-clip: padding-box;
+}
+
+.row-2() {
+	.row;
+	margin: 0px;
+	padding: 0px;
+	@media only screen and (min-width: @screen-sm-min) {
+		display: flex;
+		flex-wrap: wrap;
+		overflow: hidden;
+	}
+	> * {
+		.make-sm-column(6);
+		.text-block();
+		@media only screen and (min-width: @screen-sm-min) {
+			flex: 1;
+			&:first-child {
+				border-left: 0px;
+			}
+			&:last-child {
+				border-right: 0px;
+			}
+		}
+		@media only screen and (max-width: @screen-xs-max) {
+			border-left: 0px;
+			border-right: 0px;
+			&:first-child {
+				border-top: 0px;
+			}
+			&:last-child {
+				border-bottom: 0px;
+			}
+		}
+	}
+}

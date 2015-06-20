@@ -1,0 +1,51 @@
+@import "../lib/bootstrap/less/bootstrap.less";
+@import (reference) "vars.less";
+
+// отступы для навбаров совпадают с их высотами
+body {
+    padding-top: @navbar-height;
+    padding-bottom: @footer-height;
+}
+
+// главная навигационная панель
+div.main-navbar {
+    .navbar;
+    .navbar-default;
+    .navbar-fixed-top;
+    border-radius: initial;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
+
+// Main wrapping container
+.main-container {
+    .container;
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin-top: @vertical-layout-margin;
+        margin-bottom: @vertical-layout-margin;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
