@@ -3,7 +3,6 @@
 
 // отступы для навбаров совпадают с их высотами
 body {
-    padding-top: @navbar-height;
     padding-bottom: @footer-height;
 }
 
@@ -11,8 +10,47 @@ body {
 div.main-navbar {
     .navbar;
     .navbar-default;
-    .navbar-fixed-top;
     border-radius: initial;
+    .navbar-brand {
+        color: #097aaa !important;
+        > img {
+            .square(48px);
+            display: inline-block;
+        }
+    }
+    .nav {
+        a {
+            color: #097aaa !important;
+        }
+        li:first-child > a {
+            color: #f23333 !important;
+        }
+    }
+}
+
+.navigation {
+    height: @navbar-height;
+    background-color: @navbar-default-bg;
+    width: 100%;
+    > div {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .container();
+        > *:first-child {
+           > img {
+               .square(48px);
+           }
+           margin-right: auto;
+           margin-left: 15px;
+        }
+        > *:not(:first-child) {
+            margin-left: 30px;
+        }
+        > *:last-child {
+            margin-right: 15px;
+        }
+    }
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
