@@ -29,8 +29,7 @@ div.main-navbar {
 }
 
 .navigation {
-    height: @navbar-height;
-    background-color: @navbar-default-bg;
+    height: @navbar-height; 
     width: 100%;
     > div {
         display: flex;
@@ -38,18 +37,29 @@ div.main-navbar {
         height: 100%;
         .container();
         > *:first-child {
+           font-size: 30px;
            > img {
-               .square(48px);
+               .square(108px);
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+                filter: FlipH;
+                -ms-filter: "FlipH";
            }
            margin-right: auto;
-           margin-left: 15px;
+        }
+        > *:nth-child(2){
+            color:#f23333;
         }
         > *:not(:first-child) {
             margin-left: 30px;
+            font-size: 18px;
         }
-        > *:last-child {
-            margin-right: 15px;
+        > *:hover {
+            text-decoration: none;
         }
+        
     }
 }
 
