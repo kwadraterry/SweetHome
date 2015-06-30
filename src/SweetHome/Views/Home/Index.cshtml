@@ -5,18 +5,23 @@
 }
 
 <div class="carousel-container">
-    <ul class="bxslider">
-        <li><div class="img"
-                 style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');"
-                 title="1">
-            </div>
-        </li>
-        <li><div class="img"
-                 style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');"
-                 title="2">
-            </div>
-        </li>
-    </ul>
+    <div class="carousel">
+        <ul class="bxslider">
+            <li><div class="img"
+                     style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');"
+                     title="1">
+                </div>
+            </li>
+            <li><div class="img"
+                     style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');"
+                     title="2">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="f-a-b">
+        <button class="button-fab">></button>
+    </div>
 </div>
 <div class="info-row">
     <div class="volunteer-text">
@@ -115,7 +120,8 @@
         require('bxslider');
         $('.bxslider').bxSlider({
             mode: 'fade',
-            captions: true
+            captions: true,
+            pager:  false
         });
     })();
 </script>

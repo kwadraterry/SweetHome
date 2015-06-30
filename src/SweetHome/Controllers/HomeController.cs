@@ -26,6 +26,11 @@ namespace SweetHome.Controllers
 
             return View();
         }
+        
+        public IActionResult Volunteers()
+        {
+            return View();
+        }
 
         public IActionResult Contact()
         {

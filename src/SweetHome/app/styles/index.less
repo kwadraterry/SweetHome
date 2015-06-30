@@ -1,5 +1,30 @@
-@import (reference) "../lib/bootstrap/less/bootstrap.less";
 @import (reference) "vars.less";
+
+@fab-bg-color: #097aaa;
+
+.carousel-container {
+	display: flex;
+	> .carousel {
+		flex: 2;
+		> .bx-wrapper {
+			margin: 0;
+		}
+	}
+	> .f-a-b {
+		flex: 1;
+		.text-block();
+		> .button-fab {
+			border: none;
+			border-radius: 50%;
+			.square(64px);
+			background-color: @fab-bg-color;
+			color: white;
+			&:hover {
+				background-color: darken(@fab-bg-color, 7.5%);
+			}
+		}
+	}
+}
 
 @news-image-size: 160px;
 
