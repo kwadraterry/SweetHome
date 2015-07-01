@@ -57,14 +57,14 @@
 .lost-animals-row {
 	.row-2();
 	> * {
-		padding-bottom: 2 * @vertical-layout-margin;
+		padding-bottom: 30px;
 	}
 	.image-list {
 		display: flex;
 		overflow: hidden;
 		> * {
-			flex: 0 0 @animal-picture-size;
-			.square(@animal-picture-size);
+			flex: 0 1 @animal-picture-size * 2;
+			height: @animal-picture-size;
 		}
 		> * + * {
 			margin-left: 10px;
