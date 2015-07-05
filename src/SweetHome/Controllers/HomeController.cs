@@ -31,6 +31,11 @@ namespace SweetHome.Controllers
         {
             return View();
         }
+        
+        public IActionResult Animals()
+        {
+            return View();
+        }
 
         public IActionResult Contact()
         {

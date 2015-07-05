@@ -1,0 +1,57 @@
+@import (reference) "vars.less";
+
+@animal-card-gutter: 20px;
+@animal-card-width: (@container-lg - 30px - @animal-card-gutter*3)/4;
+@animal-card-padding: 15px;
+@animal-image-width: @animal-card-width - 2*@animal-card-padding;
+
+.animals-container {
+	display: flex;
+	> .filter-column {
+		width: @animal-card-width;
+		background-color: @text-block-bg;
+		margin-right: @animal-card-gutter;
+	}
+	> .animals-display {
+		flex: 1; // растянуться на всю оставшуюся ширину
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: -@animal-card-gutter/2;
+		> div {
+			.text-block();
+			padding: @animal-card-padding;
+			width: @animal-card-width;
+			margin: @animal-card-gutter/2;
+			
+			> .img {
+				.square(@animal-image-width);
+				border-radius: 50%;
+			}
+			
+			> h3 {
+				width: @animal-image-width;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+}
+
+// REMOVE ME
+.an0 {
+	background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');
+}
+.an1 {
+	background-image: url('https://pp.vk.me/c625128/v625128472/34ed0/nC7to7uAsiI.jpg');
+}
+.an2 {
+	background-image: url('https://pp.vk.me/c625320/v625320750/8042/x2tVza6bhnE.jpg');
+}
+.an3 {
+	background-image: url('https://pp.vk.me/c625128/v625128472/34ebb/BxZNdgLrNWk.jpg');
+}
+.an4 {
+	background-image: url('https://pp.vk.me/c628119/v628119790/4a0d/wxh9G0nyDiQ.jpg');
+}
