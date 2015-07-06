@@ -5,6 +5,48 @@
 
 <div class="animals-container">
     <div class="filter-column">
+        <ul>
+            <li>
+                <h4>Приюты</h4>
+                <ul>
+                    <li>Все</li>
+                    <li>Я живой</li>
+                    <li>Хочу домой</li>
+                </ul>
+            </li>
+            <li>
+                <h4>Собаки</h4>
+                <ul>
+                    <li>Все</li>
+                    <li>Щенки</li>
+                    <li>
+                        <h4>Размер</h4>
+                        <ul>
+                            <li>Все</li>
+                            <li>Большие</li>
+                            <li>Средние</li>
+                            <li>Маленькие</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h4>Кошки</h4>
+                <ul>
+                    <li>Все</li>
+                    <li>Котята</li>
+                    <li>
+                        <h4>Цвет</h4>
+                        <ul>
+                            <li>Все</li>
+                            <li>Светлые</li>
+                            <li>Темные</li>
+                            <li>Разноцветные</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
     <div class="animals-display">
         <div>
@@ -72,3 +114,15 @@
         </div>
     </div>
 </div>
+
+
+$(document).ready(function () {       
+    $("#filter-animal-menu .right-plus").click(function (evt) {
+        var $this = $(this);        
+        $this.closest('li').siblings().find('ul').slideUp();       
+        $this.siblings().slideDown();
+        $this.find('i').removeClass("fa-plus-square-o");        
+        $this.closest('li').siblings().find('span i').addClass("fa-plus-square-o");
+        evt.preventDefault();        
+    });    
+});
