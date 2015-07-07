@@ -1,9 +1,12 @@
 @import (reference) "vars.less";
 
-@animal-card-gutter: 20px;
+@animal-card-gutter: 15px;
 @animal-card-width: (@container-lg - 30px - @animal-card-gutter*3)/4;
-@animal-card-padding: 15px;
+@animal-card-padding: 20px;
 @animal-image-width: @animal-card-width - 2*@animal-card-padding;
+@fold-icon-size: 8px;
+@menu-item-hover-color: #ddd;
+@menu-item-padding: 4px;
 
 .animals-container {
 	display: flex;
@@ -11,6 +14,48 @@
 		width: @animal-card-width;
 		background-color: @text-block-bg;
 		margin-right: @animal-card-gutter;
+		ul {
+			list-style: none outside none;
+			> li {
+				a, span {
+					display: inline-block;
+					padding: @menu-item-padding;
+					transition: background-color 0.5s;
+					border-radius: @menu-item-padding;
+				}
+				a {
+					cursor: pointer;
+				}
+				span {
+					cursor: default;
+				}
+				a:hover {
+					background-color: @menu-item-hover-color;
+					text-decoration: none;
+				}
+			}
+			> li.menu {
+				position: relative;
+				& > div::before {
+					cursor: pointer;
+					content: "-";
+					display: inline-block;
+					width: @fold-icon-size;
+					position: absolute;
+					left: -@fold-icon-size;
+					padding-top: @menu-item-padding;
+				}
+				// > ul {
+				// 	transition: height 0.5s;
+				// 	overflow: hidden;
+				// }
+				&.folded {
+					& > div::before {
+						content: "+";
+					}
+				}
+			}
+		}
 	}
 	> .animals-display {
 		flex: 1; // растянуться на всю оставшуюся ширину

@@ -6,42 +6,42 @@
 <div class="animals-container">
     <div class="filter-column">
         <ul>
-            <li>
-                <h4>Приюты</h4>
+            <li class="menu">
+                <div><span>Приюты</span></div>
                 <ul>
-                    <li>Все</li>
-                    <li>Я живой</li>
-                    <li>Хочу домой</li>
+                    <li><a>Все</a></li>
+                    <li><a>Я живой</a></li>
+                    <li><a>Хочу домой</a></li>
                 </ul>
             </li>
-            <li>
-                <h4>Собаки</h4>
+            <li class="menu">
+                <div><a>Собаки</a></div>
                 <ul>
-                    <li>Все</li>
-                    <li>Щенки</li>
-                    <li>
-                        <h4>Размер</h4>
+                    <li><a>Все</a></li>
+                    <li><a>Щенки</a></li>
+                    <li class="menu">
+                        <div><span>Размер</span></div>
                         <ul>
-                            <li>Все</li>
-                            <li>Большие</li>
-                            <li>Средние</li>
-                            <li>Маленькие</li>
+                            <li><a>Все</a></li>
+                            <li><a>Большие</a></li>
+                            <li><a>Средние</a></li>
+                            <li><a>Маленькие</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li>
-                <h4>Кошки</h4>
+            <li class="menu">
+                <div><a>Кошки</a></div>
                 <ul>
-                    <li>Все</li>
-                    <li>Котята</li>
-                    <li>
-                        <h4>Цвет</h4>
+                    <li><a>Все</a></li>
+                    <li><a>Котята</a></li>
+                    <li class="menu">
+                        <div><span>Цвет</span></div>
                         <ul>
-                            <li>Все</li>
-                            <li>Светлые</li>
-                            <li>Темные</li>
-                            <li>Разноцветные</li>
+                            <li><a>Все</a></li>
+                            <li><a>Светлые</a></li>
+                            <li><a>Темные</a></li>
+                            <li><a>Разноцветные</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -115,14 +115,30 @@
     </div>
 </div>
 
-
-$(document).ready(function () {       
-    $("#filter-animal-menu .right-plus").click(function (evt) {
-        var $this = $(this);        
-        $this.closest('li').siblings().find('ul').slideUp();       
-        $this.siblings().slideDown();
-        $this.find('i').removeClass("fa-plus-square-o");        
-        $this.closest('li').siblings().find('span i').addClass("fa-plus-square-o");
-        evt.preventDefault();        
-    });    
-});
+@section scripts
+{
+<script>
+    (function () {
+        var calculate_children_height = function(el) {
+            var children = $(el).children();
+            var height = 0;
+            for (var i = 0; i < children.length; i++)
+            {
+                height += children[i].clientHeight;
+            }
+            return height; 
+        };
+        $('.filter-column').on(
+            'click',
+            'li.menu>div',
+            function(e){
+                var $this = $(this);
+                if (e.offsetX < 0) { // клик по псевдоэлементу
+                    $this.parent().children('ul').slideToggle(500);
+                    $this.parent().toggleClass("folded");
+                }
+            }
+        );
+    })();
+</script>
+}
