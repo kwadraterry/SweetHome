@@ -1,5 +1,6 @@
 @{
     ViewBag.Title = "Ищем хозяев";
+    string url = Url.Action("Animals", "Home", new {});
 }
 
 
@@ -9,39 +10,39 @@
             <li class="menu">
                 <div><span>Приюты</span></div>
                 <ul>
-                    <li><a>Все</a></li>
-                    <li><a>Я живой</a></li>
-                    <li><a>Хочу домой</a></li>
+                    <li><a href="@url">Все</a></li>
+                    <li><a href="@url?shelter=1">Я живой</a></li>
+                    <li><a href="@url?shelter=2">Хочу домой</a></li>
                 </ul>
             </li>
             <li class="menu">
-                <div><a>Собаки</a></div>
+                <div><a href="@url?type=dog">Собаки</a></div>
                 <ul>
-                    <li><a>Все</a></li>
-                    <li><a>Щенки</a></li>
+                    <li><a href="@url?type=dog">Все</a></li>
+                    <li><a href="@url?type=dog&age_less=1">Щенки</a></li>
                     <li class="menu">
                         <div><span>Размер</span></div>
                         <ul>
-                            <li><a>Все</a></li>
-                            <li><a>Большие</a></li>
-                            <li><a>Средние</a></li>
-                            <li><a>Маленькие</a></li>
+                            <li><a href="@url?type=dog">Все</a></li>
+                            <li><a href="@url?type=dog&size=l">Большие</a></li>
+                            <li><a href="@url?type=dog&size=m">Средние</a></li>
+                            <li><a href="@url?type=dog&size=s">Маленькие</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="menu">
-                <div><a>Кошки</a></div>
+                <div><a href="@url?type=cat">Кошки</a></div>
                 <ul>
-                    <li><a>Все</a></li>
-                    <li><a>Котята</a></li>
+                    <li><a href="@url?type=cat">Все</a></li>
+                    <li><a href="@url?type=cat&age_less=1">Котята</a></li>
                     <li class="menu">
                         <div><span>Цвет</span></div>
                         <ul>
-                            <li><a>Все</a></li>
-                            <li><a>Светлые</a></li>
-                            <li><a>Темные</a></li>
-                            <li><a>Разноцветные</a></li>
+                            <li><a href="@url?type=cat">Все</a></li>
+                            <li><a href="@url?type=cat&color=light">Светлые</a></li>
+                            <li><a href="@url?type=cat&color=dark">Темные</a></li>
+                            <li><a href="@url?type=cat&color=multi">Разноцветные</a></li>
                         </ul>
                     </li>
                 </ul>
