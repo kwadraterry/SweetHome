@@ -6,6 +6,7 @@
 @animal-image-width: @animal-card-width - 2*@animal-card-padding;
 @fold-icon-size: 8px;
 @menu-item-hover-color: #ddd;
+@menu-item-checked-color: #B3E5FC;
 @menu-item-padding: 4px;
 
 .animals-container {
@@ -16,18 +17,22 @@
 		margin-right: @animal-card-gutter;
 		ul {
 			list-style: none outside none;
+			padding-left:20px;
 			> li {
 				a, span {
 					display: inline-block;
 					padding: @menu-item-padding;
-					transition: background-color 0.5s;
+					transition: background-color 0.2s;
 					border-radius: @menu-item-padding;
+					
 				}
 				a {
 					cursor: pointer;
+					color:#1f1f1f;
 				}
 				span {
 					cursor: default;
+					color:#7f7f7f;
 				}
 				a:hover {
 					background-color: @menu-item-hover-color;
