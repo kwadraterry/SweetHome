@@ -3,6 +3,56 @@
     string url = Url.Action("Animals", "Home", new {});
 }
 
+@section modal {
+<div id="animal-modal"> 
+    <aside>
+        <section>
+            <h3>Имя пёси</h3>
+            <p>Живёт в приюте "Я живой"</p>
+            <p>+7-654-321-0987, +7-890-123-4567</p>
+        </section>
+        <section class="gallery">
+            <ul class="bxslider">
+                <li><div class="img"
+                         style="background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');"
+                         title="1">
+                    </div>
+                </li>
+                <li><div class="img"
+                         style="background-image: url('https://pp.vk.me/c625128/v625128472/34ed0/nC7to7uAsiI.jpg');"
+                         title="2">
+                    </div>
+                </li>
+                <li><div class="img"
+                         style="background-image: url('https://pp.vk.me/c625320/v625320750/8042/x2tVza6bhnE.jpg');"
+                         title="2">
+                    </div>
+                </li>
+                <li><div class="img"
+                         style="background-image: url('https://pp.vk.me/c625128/v625128472/34ebb/BxZNdgLrNWk.jpg');"
+                         title="2">
+                    </div>
+                </li>
+                <li><div class="img"
+                         style="background-image: url('https://pp.vk.me/c628119/v628119790/4a0d/wxh9G0nyDiQ.jpg');"
+                         title="2">
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section>
+            Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание  
+        </section>
+        <footer>
+            <a>Ссылка</a>
+            <a>Иконки</a>
+            <a>Чего там ещё надо</a>
+        </footer>
+        <span class="close"></span>
+    </aside>
+</div>
+}
+
 
 <div class="animals-container">
     <div class="filter-column">
@@ -111,11 +161,19 @@
         </div>
     </div>
 </div>
+<button id="activate-modal">&times;</button>
 
 @section scripts
 {
 <script>
     (function () {
+        var getScrollBarWidth = function() {
+            var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
+                widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
+            $outer.remove();
+            return 100 - widthWithScroll;
+        };
+        var scroll_w = getScrollBarWidth();
         var calculate_children_height = function(el) {
             var children = $(el).children();
             var height = 0;
@@ -136,6 +194,29 @@
                 }
             }
         );
+        $("#activate-modal").click(function(){
+            $("#animal-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
+        });
+        $(".close").click(function(){
+            $(this).parents(".active").removeClass("active");
+            $("body").css("overflow-y", "auto");
+            $("body").css("padding-right", 0);
+        });
+        $("#animal-modal").click(function(e){
+            if (e.target === this){
+                $(this).removeClass("active");   
+                $("body").css("overflow-y", "auto");
+                $("body").css("padding-right", 0);
+            }
+        });
+        require('bxslider');
+        $('.bxslider').bxSlider({
+            mode: 'horizontal',
+            captions: true,
+            pager:  false
+        });
     })();
 </script>
 }
