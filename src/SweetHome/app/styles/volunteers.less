@@ -1,23 +1,25 @@
 @import (reference) "mixins.less";
 
+
+.volunteers-h {
+	background-color: #009688;
+	height: 80px;
+	text-align: center;
+	color: white;
+	vertical-align: middle;
+	margin-top: 0;
+	display: table;
+	width: 100%;
+	> div {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
 .volunteers-info {
 	> .volunteers-text {
 		background-color: white;
 		text-align: center;
-		> h1 {
-			background-color: #009688;
-			height: 80px;
-			text-align: center;
-			color: white;
-			vertical-align: middle;
-			margin-top: 0;
-			display: table;
-			width: 100%;
-			> div {
-				display: table-cell;
-  				vertical-align: middle;
-			}
-		}
 		> p {
 			&:nth-child(2) {
 				color: #00838F;
@@ -85,6 +87,64 @@
 					}
 				}			
 				
+			}
+		}
+	}
+}
+
+.volunteers-message {
+	margin-top:40px;
+	>.volunteers-t{
+		background-color:white;
+		padding-bottom: 20px;
+		>div{
+			display: flex;
+  			align-items: stretch;  		
+			>div{
+				padding: 30px;
+				color:#1f1f1f;
+				width: 600px;
+			}
+			>.message-info{			
+				border-right: 1px #eee solid;
+				text-align: left;
+				display: inline-block;
+				width: 50%;
+				vertical-align: top;
+			}
+			>.message-form{
+				display: inline-block;
+				width: 45%;
+				text-align: left;
+				>form{
+					>div{
+						margin-bottom: 7px;
+						>input{
+							.form-control();
+							width:100%;
+							max-width:100%;
+							padding-left: 8px;
+							border-radius:0px;
+						}
+						>textarea{
+							.form-control();
+							width:100%;
+							max-width:100%;
+							padding-left: 8px;
+							border-radius:0px;
+						}
+						>#inputMessage{
+							height:150px;
+						}
+					}
+					>button{
+						.btn();
+						.btn-danger();
+						.pull-right();
+						border-radius: 0px;					
+	  					background-color: #EF5350;
+					}
+				}			
 			}
 		}
 	}
