@@ -1,11 +1,8 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Routing;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
@@ -31,16 +28,10 @@ namespace SweetHome
         // This method gets called by the runtime.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add EF services to the services container.
-            services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>(options => 
-                    options.UseSqlServer(Configuration.Get("Data:DefaultConnection:ConnectionString")));
-
             // Add Identity services to the services container.
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+            //  services.AddIdentity<ApplicationUser, IdentityRole>()
+            //          .AddEntityFrameworkStores<ApplicationDbContext>()
+            //          .AddDefaultTokenProviders();
 
             // Add MVC services to the services container.
             services.AddMvc();
@@ -62,7 +53,6 @@ namespace SweetHome
             if (string.Equals(env.EnvironmentName, "Development", StringComparison.OrdinalIgnoreCase))
             {
                 app.UseErrorPage(ErrorPageOptions.ShowAll);
-                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }
             else
             {
@@ -73,9 +63,6 @@ namespace SweetHome
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
-
-            // Add cookie-based authentication to the request pipeline.
-            app.UseIdentity();
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
@@ -88,9 +75,6 @@ namespace SweetHome
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
-            
-            var dbInitializer = ActivatorUtilities.CreateInstance<Models.DbInitializer>(app.ApplicationServices);
-            dbInitializer.InitializeData();
         }
     }
 }
