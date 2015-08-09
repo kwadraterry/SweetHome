@@ -76,7 +76,14 @@ namespace SweetHome.Controllers
             }
         }
 
-        public IActionResult Contact()
+        public IActionResult Shelters()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Shelter()
         {
             ViewBag.Message = "Your contact page.";
 
