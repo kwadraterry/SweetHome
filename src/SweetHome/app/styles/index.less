@@ -89,15 +89,38 @@
 	.row-2();
 	> * {
 		padding-bottom: 30px;
+		>h1{
+			margin-bottom:20px;
+		}
 	}
 	.image-list {
 		display: flex;
 		overflow: hidden;
-		> * {
+		> .image-item{
 			flex: 0 1 @animal-picture-size * 2;
 			height: @animal-picture-size;
+			position: relative;
+			>.img-color{
+				background-color: rgba(0,0,0,0);
+				transition: background-color 0.5s ease;
+				height: @animal-picture-size;
+			    width: 100%;
+			    position: absolute;
+				padding-left: 20px;
+				>h4,h5{
+					color:#A7FFEB;
+					display: none;
+				}
+			}
+			>.img-color:hover{
+				background-color: rgba(0,0,0,0.7);
+				cursor: pointer;	
+				>h4,h5{
+					display: block;
+				}		    
+			}
 		}
-		> * + * {
+		> .image-item + .image-item {
 			margin-left: 10px;
 		}
 	}

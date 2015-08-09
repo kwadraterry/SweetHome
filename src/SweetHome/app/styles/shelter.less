@@ -1,0 +1,59 @@
+@import (reference) "mixins.less";
+
+.contacts-block {
+	.content-block();
+	> div {
+		.split-2-columns(60px);
+		> .message-info {
+			>ul {
+				>*:not(:first-child) {
+					margin-top:20px;
+				}
+				>li{
+					>a{
+						color:@top-color;
+					}
+				}
+			}
+		}
+		> .message-form {
+			> form {
+				> div {
+					margin-bottom: 7px;
+					> input, textarea {
+						.form-control();
+						width:100%;
+						max-width:100%;
+						padding-left: 8px;
+						border-radius:0px;
+					}
+					> #inputMessage{
+						height:150px;
+					}
+				}
+				> button {
+					.btn();
+					.btn-danger();
+					.pull-right();
+					border-radius: 0px;					
+  					background-color: #EF5350;
+				}
+			}
+		}
+	}
+}
+
+
+.help-block {
+	.content-block();
+	> div {
+		.split-3-columns(40px);
+	}
+}
+
+.find-block {
+	.content-block();
+	> div {
+		.split-2-columns(60px);
+	}
+}
