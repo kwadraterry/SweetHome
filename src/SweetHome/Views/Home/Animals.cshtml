@@ -1,6 +1,16 @@
+@model IEnumerable<SweetHome.Models.ShelterAnimal>
+@using SweetHome.Models;
 @{
     ViewBag.Title = "Ищем хозяев";
     string url = Url.Action("Animals", "Home", new {});
+    string dog_type = AnimalType.Dog.ToString();
+    string cat_type = AnimalType.Cat.ToString();
+    string blond_color = Color.Blond.ToString();
+    string multi_color = Color.Varicoloured.ToString();
+    string dark_color = Color.Dark.ToString();
+    string small_size = Size.Small.ToString();
+    string medium_size = Size.Medium.ToString();
+    string large_size = Size.Large.ToString();
 }
 
 @section modal {
@@ -83,29 +93,29 @@
                 </ul>
             </li>
             <li class="menu">
-                <div><a href="@url?type=dog">Собаки</a></div>
+                <div><a href="@url?type=@dog_type">Собаки</a></div>
                 <ul>
-                    <li><a href="@url?type=dog&age_less=1">Щенки</a></li>
+                    <li><a href="@url?type=@dog_type&age_less=1">Щенки</a></li>
                     <li class="menu">
                         <div><span>Размер</span></div>
                         <ul>
-                            <li><a href="@url?type=dog&size=l">Большие</a></li>
-                            <li><a href="@url?type=dog&size=m">Средние</a></li>
-                            <li><a href="@url?type=dog&size=s">Маленькие</a></li>
+                            <li><a href="@url?type=@dog_type&size=@large_size">Большие</a></li>
+                            <li><a href="@url?type=@dog_type&size=@medium_size">Средние</a></li>
+                            <li><a href="@url?type=@dog_type&size=@small_size">Маленькие</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="menu">
-                <div><a href="@url?type=cat">Кошки</a></div>
+                <div><a href="@url?type=@cat_type">Кошки</a></div>
                 <ul>
-                    <li><a href="@url?type=cat&age_less=1">Котята</a></li>
+                    <li><a href="@url?type=@cat_type&age_less=1">Котята</a></li>
                     <li class="menu">
                         <div><span>Цвет</span></div>
                         <ul>
-                            <li><a href="@url?type=cat&color=light">Светлые</a></li>
-                            <li><a href="@url?type=cat&color=dark">Темные</a></li>
-                            <li><a href="@url?type=cat&color=multi">Разноцветные</a></li>
+                            <li><a href="@url?type=@cat_type&color=@blond_color">Светлые</a></li>
+                            <li><a href="@url?type=@cat_type&color=@dark_color">Темные</a></li>
+                            <li><a href="@url?type=@cat_type&color=@multi_color">Разноцветные</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -113,6 +123,15 @@
         </ul>
     </div>
     <div class="animals-display">
+        @foreach(var animal in Model)
+        {
+        <div>
+            <div class="img" style="background-image: url('@animal.Images[0]');"></div>
+            <h3>@animal.Name</h3>
+            <p>приют</p>
+            <p>телефон</p>
+        </div>
+        }
         <div>
             <div class="img an0"></div>
             <h3>Пёся красивый</h3>

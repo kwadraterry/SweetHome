@@ -2,14 +2,10 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
-using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Logging.Console;
-using SweetHome.Models;
+using NHibernate;
 
 namespace SweetHome
 {
@@ -40,10 +36,11 @@ namespace SweetHome
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();
 
+            services.AddTransient<ISessionFactory>(provider => Models.DAL.CreateSessionFactory());
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Microsoft.Framework.Logging.ILoggerFactory loggerfactory)
         {
             // Configure the HTTP request pipeline.
             // Add the console logger.

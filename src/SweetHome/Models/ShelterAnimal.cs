@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using FluentNHibernate.Mapping;
 
 namespace SweetHome.Models
 {
@@ -31,38 +32,43 @@ namespace SweetHome.Models
         Medium,
         Large        
     }
+    public enum Gender
+    {
+        Male,
+        Female,
+        Unknown
+    }
     public class ShelterAnimal
     {
         [Key]
-        public int ShelterAnimalId { get; set; }
+        public virtual int Id { get; protected set; }
         [Required]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         [Required]
-        public AnimalType AnimalType { get; set; }
+        public virtual AnimalType AnimalType { get; set; }
         [DataType(DataType.Date)]
-        public DateTime BirthDay { get; set; }
+        public virtual DateTime? BirthDay { get; set; }
         [Required]
-        public PlaceType PlaceType { get; set; }
-        public int ShelterId { get; set; }
+        public virtual PlaceType PlaceType { get; set; }
+        public virtual Shelter Shelter { get; set; }
         [Display(Name = "Полностью здоров")]
-        public bool IsHealth { get; set; }
+        public virtual bool IsHealthy { get; set; }
         [Display(Name = "Подходит для содержания в квартире")]
-        public bool IsForFlat { get; set; }
+        public virtual bool IsForFlat { get; set; }
         [Display(Name = "Подходит для содержания в частном доме")]
-        public bool IsForHome { get; set; }
+        public virtual bool IsForHome { get; set; }
         [Display(Name = "Приучен к выгулу/туалету")]
-        public bool Toilet { get; set; }
-        public Color Color { get; set; }
-        public Size Size { get; set; }
+        public virtual bool Toilet { get; set; }
+        public virtual Color Color { get; set; }
+        public virtual Size Size { get; set; }
         [StringLength(500)]
-        public string Info { get; set; }
-        public bool IsHappy { get; set; }
+        public virtual string Info { get; set; }
+        public virtual bool IsHappy { get; set; }
         [Required]
         [DataType(DataType.DateTime)]     
-        public DateTime Created { get; set; }
-        
-        public virtual Shelter Shelter { get; set; }
-        public string ImagesSerialized
+        public virtual DateTime Created { get; set; }
+        public virtual Gender Gender { get; set; }
+        protected string ImagesSerialized
         {
             get
             {
@@ -90,6 +96,31 @@ namespace SweetHome.Models
         {
             this.IsHappy = false;
             this._Images = new List<string>();
+        }
+        
+        public class ShelterAnimalMap: ClassMap<ShelterAnimal>
+        {
+            public ShelterAnimalMap()
+    		{
+    			Id(shelter => shelter.Id).GeneratedBy.Increment();
+    			Map(animal => animal.Name).Not.Nullable();
+    			Map(animal => animal.AnimalType).Not.Nullable().CustomType<AnimalType>();
+                Map(animal => animal.BirthDay).CustomSqlType("date");
+                Map(animal => animal.Color).CustomType<Color>();
+                Map(animal => animal.Created).Not.Nullable();
+                Map(animal => animal.ImagesSerialized).CustomSqlType("text");
+                Map(animal => animal.Info).Length(500);
+                Map(animal => animal.IsForFlat);
+                Map(animal => animal.IsForHome);
+                Map(animal => animal.IsHappy);
+                Map(animal => animal.IsHealthy);
+                Map(animal => animal.PlaceType).Not.Nullable().CustomType<PlaceType>();
+                Map(animal => animal.Size).CustomType<Size>();
+                Map(animal => animal.Toilet);
+                Map(animal => animal.Gender).CustomType<Gender>().Not.Nullable();
+                References(animal => animal.Shelter);
+    			Table("animals");
+    		}
         }
     }
 }
