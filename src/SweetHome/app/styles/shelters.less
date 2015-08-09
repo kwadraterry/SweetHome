@@ -1,0 +1,59 @@
+@import (reference) "mixins.less";
+
+.shelters-list-info {
+	background-color: white;
+	.sm({
+		padding-top: 30px;
+		padding-left: 60px;
+		padding-right: 60px;
+		padding-bottom: 30px;
+	});
+	> div {
+		padding-bottom: 30px;
+		display: flex;
+		.xs-max({
+			flex-direction: column;
+		});
+		&:not(:last-child) {
+			border-bottom: 1px #eee solid;
+		}
+		> .description {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			.xs-max({
+				order: 2;
+			});
+			> h2, .text {
+				color: #616161;
+			}
+			> .text {
+				flex: 1;
+			}
+			> .phone {
+				color: #3d3f55;
+			}
+			> button {
+			  	.btn();
+				.btn-danger();
+				border-radius: 0px;
+				background-color: #009688;
+				border-color:#009688;
+				align-self: flex-start;
+			}
+		}
+		> .img {
+			.sm({
+				margin-left: 30px;
+				width: 400px;
+			});
+			display: inline-block;
+			.xs-max({
+				width: 100%;
+				order: 1;
+			});
+			height: 300px;
+			margin-top: 30px;
+		}
+	}
+}
