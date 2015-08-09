@@ -40,8 +40,6 @@ namespace SweetHome.Controllers
                     AnimalType animalType;
                     if (Enum.TryParse(Context.Request.Query["type"], out animalType))
                         animals = animals.Where(animal => animal.AnimalType == animalType);
-                    else
-                        Console.WriteLine("SOMETHING WRONG");
                 }
                 if (Context.Request.Query.ContainsKey("color"))
                 {
@@ -55,7 +53,6 @@ namespace SweetHome.Controllers
                     if (Int32.TryParse(Context.Request.Query["age_less"], out age))
                     {
                         DateTime birthDay = DateTime.UtcNow.AddYears(-age);
-                        Console.WriteLine(birthDay.ToShortDateString());
                         animals = animals.Where(animal => animal.BirthDay !=null &&
                                                           animal.BirthDay.Value >= birthDay);
                     }
@@ -72,7 +69,7 @@ namespace SweetHome.Controllers
                     if (Enum.TryParse(Context.Request.Query["gender"], out gender))
                         animals = animals.Where(animal => animal.Gender == gender);
                 }
-                return View(animals.List());
+                return View(animals.JoinQueryOver(animal => animal.Shelter).List());
             }
         }
 

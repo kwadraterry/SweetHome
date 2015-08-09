@@ -128,73 +128,16 @@
         <div>
             <div class="img" style="background-image: url('@animal.Images[0]');"></div>
             <h3>@animal.Name</h3>
-            <p>приют</p>
-            <p>телефон</p>
+            @if(animal.Shelter != null)
+            {
+                <p>@animal.Shelter.Name</p>
+                @if (animal.Shelter.Phone != null)
+                {
+                <p>@animal.Shelter.Phone</p>
+                }
+            }
         </div>
         }
-        <div>
-            <div class="img an0"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an1"></div>
-            <h3>Киса красивый</h3>
-            <p>Я тоже хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an3"></div>
-            <h3>Киса самый красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an2"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an4"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an1"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an0"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an3"></div>
-            <h3>Пёся красивый</h3>
-            <p>Хочу домой</p>
-            <p>+7-654-321-0987</p>
-        </div>
-        <div>
-            <div class="img an4"></div>
-        </div>
-        <div>
-            <div class="img an2"></div>
-        </div>
-        <div>
-            <div class="img an3"></div>
-        </div>
-        <div>
-            <div class="img an0"></div>
-        </div>
-        <div>
-            <div class="img an1"></div>
-        </div>
     </div>
 </div>
 <button id="activate-modal">&times;</button>
