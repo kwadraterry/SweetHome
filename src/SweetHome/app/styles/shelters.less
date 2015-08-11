@@ -24,14 +24,31 @@
 			.xs-max({
 				order: 2;
 			});
-			> h2, .text {
-				color: #616161;
+			> h2{
+				>a{
+					color: #616161;
+				}
+				>a:hover{
+					text-decoration: none;
+					color: #525252;
+				}
+				
 			}
 			> .text {
 				flex: 1;
+				color: #616161;
 			}
 			> .phone {
 				color: #3d3f55;
+			}
+			> .vk {
+				>*{
+					color: #009688;;
+					text-decoration: none;
+				}
+				> a:hover{
+					color:#00695C;
+				}				
 			}
 			> button {
 			  	.btn();
@@ -40,6 +57,10 @@
 				background-color: #009688;
 				border-color:#009688;
 				align-self: flex-start;
+			}
+			> button:hover {
+				background-color: #00695C;
+				border-color:#00695C;
 			}
 		}
 		> .img {

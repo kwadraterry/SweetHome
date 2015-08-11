@@ -109,7 +109,7 @@ namespace SweetHome.Models
                 Map(animal => animal.Color).CustomType<Color>();
                 Map(animal => animal.Created).Not.Nullable();
                 Map(animal => animal.ImagesSerialized).CustomSqlType("text");
-                Map(animal => animal.Info).Length(500);
+                Map(animal => animal.Info).CustomSqlType("text");
                 Map(animal => animal.IsForFlat);
                 Map(animal => animal.IsForHome);
                 Map(animal => animal.IsHappy);

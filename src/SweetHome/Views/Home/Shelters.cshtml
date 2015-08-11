@@ -1,34 +1,23 @@
-
+@model IEnumerable<SweetHome.Models.Shelter>
 <div class="shelters-list-info">
-	<div>
-		<div class="description">
-		  <h2>Хочу домой </h2>
-		  <div class="phone">8982348888</div>
-		  <div class="vk"> <a href="https://vk.com/sobakot74" target="_blank">Группа Вконтакте</a> </div>
-		  <div class="text">
-			  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam eu justo dignissim placerat. Nam accumsan est in facilisis tristique. Vestibulum id iaculis eros. Morbi euismod accumsan nisl vel malesuada. Aliquam volutpat purus nec erat luctus, sed vehicula lacus ultrices. Vivamus vel egestas magna. Praesent eget leo placerat, pharetra massa et, lacinia eros. Cras dui tellus, ultricies vitae sagittis eu, consequat ac ipsum. Nunc eu eros in est varius luctus. Praesent ac rutrum lorem. Nulla in placerat dui.
-		  </div>
-		  <button>Посмотреть животных</button>
-	    </div>
-		<div class="img"
-	         style="background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');"
-	         title="1">
-	    </div>
-	</div>
 	
+		@foreach(var shelter in Model)
+		{
+			<div>
+				<div class="description">
+				  <h2><a href="#">@shelter.Name</a></h2>
+				  <div class="phone">@shelter.Phone</div>
+				  <div class="vk"> <a href="@shelter.VKGroup" target="_blank">Группа Вконтакте</a> </div>
+				  <div class="text">
+					  @shelter.Info
+				  </div>
+				  <button>Посмотреть животных</button>
+			    </div>
+				<div class="img"
+			         style="background-image: url('@shelter.Image');"
+			         title="1">
+			    </div>
+			</div>
+		}
 	
-	<div>
-		<div class="description">
-		  <h2>Я живой </h2>
-		  <div class="phone">8982348888</div>
-		  <div class="text">
-			  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam eu justo dignissim placerat. Nam accumsan est in facilisis tristique. Vestibulum id iaculis eros. Morbi euismod accumsan nisl vel malesuada. Aliquam volutpat purus nec erat luctus, sed vehicula lacus ultrices. Vivamus vel egestas magna. Praesent eget leo placerat, pharetra massa et, lacinia eros. Cras dui tellus, ultricies vitae sagittis eu, consequat ac ipsum. Nunc eu eros in est varius luctus. Praesent ac rutrum lorem. Nulla in placerat dui.
-		  </div>
-		  <button class="btn btn-primary">Посмотреть животных</button>
-	    </div>
-		<div class="img"
-	         style="background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');"
-	         title="1">
-	    </div>
-	</div>
 </div>

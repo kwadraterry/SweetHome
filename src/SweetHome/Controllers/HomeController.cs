@@ -75,9 +75,12 @@ namespace SweetHome.Controllers
 
         public IActionResult Shelters()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var shelters = session.QueryOver<Shelter>();
+                return View(shelters.List());
+            }            
         }
 
         public IActionResult Shelter()

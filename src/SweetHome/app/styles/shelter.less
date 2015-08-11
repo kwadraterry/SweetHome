@@ -57,3 +57,33 @@
 		.split-2-columns(60px);
 	}
 }
+
+.shelters-list-info{
+	>* {
+		>.description{
+			>.hrefs{
+				>*{
+					width:120px;
+					text-align:center;
+					display: inline-block; 
+					margin-right: 20px; 
+					cursor: pointer;
+				}	
+				>.img-color{
+					background-color: rgba(255,255,255,0);
+					transition: background-color 0.5s ease;
+					height: 15%;
+				    width: 120px;
+				    position: absolute;
+					padding-left: 20px;
+					
+				}
+				>.img-color:hover{
+					background-color: rgba(255,255,255,0.3);
+					cursor: pointer;		    
+				}
+			}	
+		}
+	}
+	
+}

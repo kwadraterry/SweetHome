@@ -23,7 +23,10 @@ namespace SweetHome
                     {
                         Name = shelterFields[0],
                         Address = shelterFields[1],
-                        Phone = shelterFields[2]
+                        Phone = shelterFields[2],
+						Info = shelterFields[3],
+						VKGroup = shelterFields[4],
+						Image = shelterFields[5]
                     };
                 });
             Console.WriteLine("Finished parsing file");
@@ -117,7 +120,9 @@ namespace SweetHome
             if (command == "animals")
             {
                 int shelterId = Int32.Parse(config.Get("shelter_id"));
+				Console.WriteLine (shelterId);
                 ParseAnimals(line, shelterId);
+
             }
             else if (command == "shelters")
             {
