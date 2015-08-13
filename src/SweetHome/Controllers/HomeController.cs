@@ -69,7 +69,9 @@ namespace SweetHome.Controllers
                     if (Enum.TryParse(Context.Request.Query["gender"], out gender))
                         animals = animals.Where(animal => animal.Gender == gender);
                 }
-                return View(animals.JoinQueryOver(animal => animal.Shelter).List());
+                var returns = animals.JoinQueryOver(animal => animal.Shelter)
+                                     .Fetch(animal => animal.Shelter).Eager.List();
+                return View(returns);
             }
         }
 

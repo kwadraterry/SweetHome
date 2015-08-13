@@ -1,5 +1,6 @@
 @model IEnumerable<SweetHome.Models.ShelterAnimal>
 @using SweetHome.Models;
+@using SweetHome;
 @{
     ViewBag.Title = "Ищем хозяев";
     string url = Url.Action("Animals", "Home", new {});
@@ -125,7 +126,8 @@
     <div class="animals-display">
         @foreach(var animal in Model)
         {
-        <div>
+        var jsonAnimal = SweetHome.Utils.Json.SerializeObject<Shelter>(animal, (shelter => shelter.Animals));
+        <div data-animal="@jsonAnimal">
             <div class="img" style="background-image: url('@animal.Images[0]');"></div>
             <h3>@animal.Name</h3>
             @if(animal.Shelter != null)
@@ -173,11 +175,6 @@
                 }
             }
         );
-        $("#activate-modal").click(function(){
-            $("#animal-modal").addClass("active");
-            $("body").css("overflow-y", "hidden");
-            $("body").css("padding-right", scroll_w + "px");
-        });
         $(".close").click(function(){
             $(this).parents(".active").removeClass("active");
             $("body").css("overflow-y", "auto");
@@ -191,22 +188,42 @@
             }
         });
         require('bxslider');
-        var slider = $('.bxslider').bxSlider({
-            mode: 'horizontal',
-            captions: true,
-            pager:  false,
-            onSlideBefore: function(e, o, i) {
-                $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
-                $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
-            }
-        });
+        var slider = undefined;
         $("#animal-modal").on("click", ".gallery-aux li", function(e){
             var li = this;
             var ul = li.parentNode;
             var index = Array.prototype.indexOf.call(ul.children, li);
             slider.goToSlide(index);
-            // $(ul).children().removeClass("selected");
-            // $(li).addClass("selected");
+        });
+        $('[data-animal]').on('click', function() {
+            var animalData = $(this).data('animal');
+            console.log(animalData.Images);
+            // Заполним модал данными из animalData
+            $('#animal-modal>aside>section:nth-child(1)>h3')
+                .html(animalData.Name);
+            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
+                .html("Живет в приюте \"" + animalData.Shelter.Name + "\"");
+            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
+                .html(animalData.Shelter.Phone);
+            var photoElems = "";
+            for (var i = 0; i < animalData.Images.length; i++) {
+                photoElems += '<li><div class="img" style="background-image: url(\'' + animalData.Images[i] + '\');"></div></li>';
+            }
+            $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+            $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
+            $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
+            slider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
+                mode: 'horizontal',
+                // captions: true,
+                pager:  false,
+                onSlideBefore: function(e, o, i) {
+                    $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
+                    $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
+                }
+            });
+            $("#animal-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
         });
     })();
 </script>
