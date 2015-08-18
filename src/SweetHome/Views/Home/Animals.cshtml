@@ -180,7 +180,9 @@
                 .html(animalData.Shelter.Phone);
             var photoElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
-                photoElems += '<li><div class="img" style="background-image: url(\'' + animalData.Images[i] + '\');"></div></li>';
+                var active = "";
+                if (i==0) active = ' class="selected"';
+                photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + animalData.Images[i] + '\');"></div></li>';
             }
             $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
             $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
