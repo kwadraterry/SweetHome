@@ -15,6 +15,7 @@ namespace SweetHome.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.PageAction = "Index";
             return View();
         }
 
@@ -26,11 +27,13 @@ namespace SweetHome.Controllers
         
         public IActionResult Volunteers()
         {
+            ViewBag.PageAction = "Volunteers";
             return View();
         }
         
         public IActionResult Animals()
         {
+            ViewBag.PageAction = "Animals";
             if (Context.Request.Query.ContainsKey("animal_id"))
             {
                 int animalId;
@@ -89,6 +92,7 @@ namespace SweetHome.Controllers
 
         public IActionResult Shelters()
         {
+            ViewBag.PageAction = "Shelters";
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
