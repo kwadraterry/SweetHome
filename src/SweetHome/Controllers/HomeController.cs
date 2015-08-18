@@ -31,6 +31,18 @@ namespace SweetHome.Controllers
         
         public IActionResult Animals()
         {
+            if (Context.Request.Query.ContainsKey("animal_id"))
+            {
+                int animalId;
+                if (Int32.TryParse(Context.Request.Query["animal_id"], out animalId))
+                {
+                    ViewBag.AnimalId = animalId;
+                }
+                else
+                {
+                    ViewBag.AnimalId = null;
+                }
+            }
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
