@@ -18,36 +18,21 @@
 <div id="animal-modal"> 
     <aside>
         <section>
-            <h3>Имя пёси</h3>
-            <p>Живёт в приюте "Я живой"</p>
-            <p>+7-654-321-0987, +7-890-123-4567</p>
+            <h3></h3>
+            <p><a></a></p>
+            <p></p>
         </section>
         <section class="gallery">
             <ul class="gallery-aux">
-                <li><div class="img"
-                         style="background-image: url('https://pp.vk.me/c625618/v625618260/2cd1c/faddhazs5hs.jpg');"
-                         title="1">
-                    </div>
-                </li>
-                <li><div class="img"
-                         style="background-image: url('https://pp.vk.me/c625128/v625128472/34ed0/nC7to7uAsiI.jpg');"
-                         title="2">
-                    </div>
-                </li>
-                <li><div class="img"
-                         style="background-image: url('https://pp.vk.me/c625320/v625320750/8042/x2tVza6bhnE.jpg');"
-                         title="2">
-                    </div>
-                </li>
             </ul>
         </section>
         <section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  
+            <p></p>
         </section>
         <footer>
-            <a>Ссылка</a>
-            <a>Иконки</a>
-            <a>Чего там ещё надо</a>
+            <a></a>
+            <a></a>
+            <a></a>
         </footer>
         <span class="close"></span>
     </aside>
@@ -105,7 +90,7 @@
             <h3>@animal.Name</h3>
             @if(animal.Shelter != null)
             {
-                <p>@animal.Shelter.Name</p>
+                <p><a href="@animal.Shelter.URL">@animal.Shelter.Name</a></p>
                 @if (animal.Shelter.Phone != null)
                 {
                 <p>@animal.Shelter.Phone</p>
@@ -115,7 +100,6 @@
         }
     </div>
 </div>
-<button id="activate-modal">&times;</button>
 
 @section scripts
 {
@@ -175,9 +159,13 @@
             $('#animal-modal>aside>section:nth-child(1)>h3')
                 .html(animalData.Name);
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
-                .html("Живет в приюте \"" + animalData.Shelter.Name + "\"");
+                .html("Живет в приюте <a>" + animalData.Shelter.Name + "</a>");
+            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)>a')
+                .attr("href","/Shelters/"+animalData.Shelter.URL);
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
                 .html(animalData.Shelter.Phone);
+           $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
+                .html(animalData.Info);
             var photoElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = "";
