@@ -20,6 +20,7 @@
         "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta4",
         "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta4",
         "Microsoft.Framework.Logging.Console": "1.0.0-beta4",
+        "Microsoft.Framework.CodeGeneration.EntityFramework": "1.0.0-beta4",
         "NHibernate": "4.0.3.4000",
         "FluentNHibernate": "2.0.1.0",
         "Npgsql": "3.0.0-rc0002"

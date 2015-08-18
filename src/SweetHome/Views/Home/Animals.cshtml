@@ -184,7 +184,11 @@
                 if (i==0) active = ' class="selected"';
                 photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + animalData.Images[i] + '\');"></div></li>';
             }
-            $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+            if (animalData.Images.length > 1) {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+            } else {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html("");
+            }
             $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
             $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
             slider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
