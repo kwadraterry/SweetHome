@@ -20,10 +20,33 @@
                 <img src="http://www.jamieweb.net/images/home-icons/pets.png">
                 @appName
             </a>
-            @Html.ActionLink("Главная", "Index", "Home")
-            @Html.ActionLink("Ищем хозяев", "Animals", "Home")
-            @Html.ActionLink("Приюты", "Shelters", "Home")
-            @Html.ActionLink("Волонтёрам", "Volunteers", "Home")
+            @{
+                var indexClass = "";
+                var animalsClass = "";
+                var sheltersClass = "";
+                var volunteersClass = "";
+                var current = " class=current";
+                string pageAction = ViewBag.PageAction;
+                switch (pageAction)
+                {
+                    case "Index":
+                        indexClass = current;
+                        break;
+                    case "Animals":
+                        animalsClass = current;
+                        break;
+                    case "Shelters":
+                        sheltersClass = current;
+                        break;
+                    case "Volunteers":
+                        volunteersClass = current;
+                        break;
+                }
+            }
+            <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
+            <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
+            <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
+            <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
         </div>
     </div>
     <div class="main-container">

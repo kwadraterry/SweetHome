@@ -15,6 +15,7 @@ namespace SweetHome.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.PageAction = "Index";
             return View();
         }
 
@@ -26,11 +27,25 @@ namespace SweetHome.Controllers
         
         public IActionResult Volunteers()
         {
+            ViewBag.PageAction = "Volunteers";
             return View();
         }
         
         public IActionResult Animals()
         {
+            ViewBag.PageAction = "Animals";
+            if (Context.Request.Query.ContainsKey("animal_id"))
+            {
+                int animalId;
+                if (Int32.TryParse(Context.Request.Query["animal_id"], out animalId))
+                {
+                    ViewBag.AnimalId = animalId;
+                }
+                else
+                {
+                    ViewBag.AnimalId = null;
+                }
+            }
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
@@ -85,6 +100,7 @@ namespace SweetHome.Controllers
 
         public IActionResult Shelters()
         {
+            ViewBag.PageAction = "Shelters";
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {

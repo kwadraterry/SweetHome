@@ -4,31 +4,21 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Kestrel": "1.0.0-beta4",
-        "Microsoft.AspNet.Authentication.Cookies": "1.0.0-beta4",
-        "Microsoft.AspNet.Authentication.Facebook": "1.0.0-beta4",
-        "Microsoft.AspNet.Authentication.Google": "1.0.0-beta4",
-        "Microsoft.AspNet.Authentication.OpenIdConnect": "1.0.0-beta4",
-        "Microsoft.AspNet.Authentication.Twitter": "1.0.0-beta4",
         "Microsoft.AspNet.Diagnostics": "1.0.0-beta4",
         "Microsoft.AspNet.Mvc": "6.0.0-beta4",
-        "Microsoft.AspNet.Server.IIS": "1.0.0-beta4",
-        "Microsoft.AspNet.Server.WebListener": "1.0.0-beta4",
         "Microsoft.AspNet.Session": "1.0.0-beta4",
         "Microsoft.AspNet.SignalR.Server": "3.0.0-beta4",
         "Microsoft.AspNet.StaticFiles": "1.0.0-beta4",
         "Microsoft.Framework.Caching.Distributed": "1.0.0-beta4",
-        "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta4",
         "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta4",
         "Microsoft.Framework.Logging.Console": "1.0.0-beta4",
-        "Microsoft.Framework.CodeGeneration.EntityFramework": "1.0.0-beta4",
         "NHibernate": "4.0.3.4000",
         "FluentNHibernate": "2.0.1.0",
         "Npgsql": "3.0.0-rc0002"
     },
     "commands": {
-        "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5002",
         "kestrel": "Microsoft.AspNet.Hosting --server Kestrel --server.urls http://0.0.0.0:5004",
-        "gen": "Microsoft.Framework.CodeGeneration",
+        "production": "Microsoft.AspNet.Hosting --server Kestrel --server.urls localhost:5004",
         "db": "SweetHome"
     },
     "frameworks": {
@@ -47,6 +37,5 @@
         "**.vspscc"
     ],
     "scripts": {
-        "postrestore": [ "npm install" ]
     }
 }
