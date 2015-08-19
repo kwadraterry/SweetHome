@@ -34,7 +34,15 @@ namespace SweetHome.Controllers
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
+                var shelters = session.QueryOver<Shelter>().List();
+                ViewBag.Shelters = shelters;
                 var animals = session.QueryOver<ShelterAnimal>();
+                if (Context.Request.Query.ContainsKey("shelter"))
+                {
+                    int id;
+                    if (Int32.TryParse(Context.Request.Query["shelter"], out id))
+                        animals = animals.Where(animal => animal.Shelter.Id == id);
+                }
                 if (Context.Request.Query.ContainsKey("type"))
                 {
                     AnimalType animalType;

@@ -46,9 +46,11 @@
             <li><a href="@url">Все</a></li>
             <li class="menu">
                 <div><span>Приюты</span></div>
-                <ul>                    
-                    <li><a href="@url?shelter=1">Я живой</a></li>
-                    <li><a href="@url?shelter=2">Хочу домой</a></li>
+                <ul> 
+                    @foreach(var shelter in ViewBag.Shelters)
+		            {
+                        <li><a href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
+                    }
                 </ul>
             </li>
             <li class="menu">
