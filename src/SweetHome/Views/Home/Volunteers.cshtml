@@ -2,6 +2,18 @@
     ViewBag.Title = "Contact";
 }
 
+@section modal {
+<div id="volunteers-modal"> 
+    <aside>
+        <footer>
+            <a>Ссылка</a>
+            <a>Иконки</a>
+            <a>Чего там ещё надо</a>
+        </footer>
+        <span class="close"></span>
+    </aside>
+</div>
+}
 
 <div class="volunteers-info">
     <div class="volunteers-text">
@@ -30,7 +42,7 @@
                 <div>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium diam eu justo dignissim placerat. Nam accumsan est in facilisis tristique. Vestibulum id iaculis eros. Morbi euismod accumsan nisl vel malesuada. Aliquam volutpat purus nec erat luctus, sed vehicula lacus ultrices. Vivamus vel egestas magna. Praesent eget leo placerat, pharetra massa et, lacinia eros. Cras dui tellus, ultricies vitae sagittis eu, consequat ac ipsum. Nunc eu eros in est varius luctus. Praesent ac rutrum lorem. Nulla in placerat dui.
                     
-                    <button>ПОМОЧЬ</button>
+                    <button id="volunteers-help">ПОМОЧЬ</button>
 
                    
                 </div>
@@ -66,3 +78,28 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+<script>
+    (function () {
+        $("#volunteers-modal").click(function(e){
+            if (e.target === this){
+                $(this).removeClass("active");   
+                $("body").css("overflow-y", "auto");
+                $("body").css("padding-right", 0);
+            }
+        });
+        $("#volunteers-help").click(function(){
+            $("#volunteers-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
+        });
+        $(".close").click(function(){
+            $(this).parents(".active").removeClass("active");
+            $("body").css("overflow-y", "auto");
+            $("body").css("padding-right", 0);
+        });
+    })();
+</script>
+}

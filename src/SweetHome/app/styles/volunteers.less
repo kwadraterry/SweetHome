@@ -1,5 +1,23 @@
 @import (reference) "mixins.less";
 
+#volunteers-modal {
+	.modal-x(@padding: 30px);
+	span.close {
+		.close-button();
+		@color: #666;
+		position: absolute;
+		right: 0;
+		.md({
+			right: -30px;
+		});
+		top: 0;
+		cursor: pointer;
+		color: @color;
+		&:hover {
+			color: darken(@color, 20%);
+		}
+	}
+}
 
 .volunteers-h {
 	background-color: #009688;
@@ -84,6 +102,8 @@
 							margin: auto;
 							color: #EF5350;
 							margin-top: 40px;
+							border: none;
+							outline:none;
 					}
 				}			
 				

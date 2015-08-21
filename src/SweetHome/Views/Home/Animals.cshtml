@@ -67,29 +67,55 @@
                 </ul>
             </li>
             <li class="menu">
-                <div><a href="@url?type=@dog_type">Собаки</a></div>
+                @{
+                    var dogOnly = (ViewBag.Type == AnimalType.Dog &&
+                                   ViewBag.Size == null &&
+                                   ViewBag.AgeLess == null) ? " class=active" : "";
+                    var dogYoung = (ViewBag.Type == AnimalType.Dog &&
+                                    ViewBag.AgeLess == 1) ? " class=active" : "";
+                    var dogSmall = (ViewBag.Type == AnimalType.Dog &&
+                                    ViewBag.Size == Size.Small) ? " class=active" : "";
+                    var dogMedium = (ViewBag.Type == AnimalType.Dog &&
+                                     ViewBag.Size == Size.Medium) ? " class=active" : "";
+                    var dogLarge = (ViewBag.Type == AnimalType.Dog &&
+                                    ViewBag.Size == Size.Large) ? " class=active" : "";
+                }
+                <div><a href="@url?type=@dog_type"@dogOnly>Собаки</a></div>
                 <ul>
-                    <li><a href="@url?type=@dog_type&age_less=1">Щенки</a></li>
+                    <li><a href="@url?type=@dog_type&age_less=1"@dogYoung>Щенки</a></li>
                     <li class="menu">
                         <div><span>Размер</span></div>
                         <ul>
-                            <li><a href="@url?type=@dog_type&size=@large_size">Большие</a></li>
-                            <li><a href="@url?type=@dog_type&size=@medium_size">Средние</a></li>
-                            <li><a href="@url?type=@dog_type&size=@small_size">Маленькие</a></li>
+                            <li><a href="@url?type=@dog_type&size=@large_size"@dogLarge>Большие</a></li>
+                            <li><a href="@url?type=@dog_type&size=@medium_size"@dogMedium>Средние</a></li>
+                            <li><a href="@url?type=@dog_type&size=@small_size"@dogSmall>Маленькие</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="menu">
-                <div><a href="@url?type=@cat_type">Кошки</a></div>
+                @{
+                    var catOnly = (ViewBag.Type == AnimalType.Cat &&
+                                   ViewBag.Color == null &&
+                                   ViewBag.AgeLess == null) ? " class=active" : "";
+                    var catYoung = (ViewBag.Type == AnimalType.Cat &&
+                                    ViewBag.AgeLess == 1) ? " class=active" : "";
+                    var catBlond = (ViewBag.Type == AnimalType.Cat &&
+                                    ViewBag.Color == Color.Blond) ? " class=active" : "";
+                    var catMulti = (ViewBag.Type == AnimalType.Cat &&
+                                     ViewBag.Color == Color.Varicoloured) ? " class=active" : "";
+                    var catDark = (ViewBag.Type == AnimalType.Cat &&
+                                    ViewBag.Color == Color.Dark) ? " class=active" : "";
+                }
+                <div><a href="@url?type=@cat_type"@catOnly>Кошки</a></div>
                 <ul>
-                    <li><a href="@url?type=@cat_type&age_less=1">Котята</a></li>
+                    <li><a href="@url?type=@cat_type&age_less=1"@catYoung>Котята</a></li>
                     <li class="menu">
                         <div><span>Цвет</span></div>
                         <ul>
-                            <li><a href="@url?type=@cat_type&color=@blond_color">Светлые</a></li>
-                            <li><a href="@url?type=@cat_type&color=@dark_color">Темные</a></li>
-                            <li><a href="@url?type=@cat_type&color=@multi_color">Разноцветные</a></li>
+                            <li><a href="@url?type=@cat_type&color=@blond_color"@catBlond>Светлые</a></li>
+                            <li><a href="@url?type=@cat_type&color=@dark_color"@catDark>Темные</a></li>
+                            <li><a href="@url?type=@cat_type&color=@multi_color"@catMulti>Разноцветные</a></li>
                         </ul>
                     </li>
                 </ul>

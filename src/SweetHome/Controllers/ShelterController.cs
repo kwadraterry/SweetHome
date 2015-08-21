@@ -15,6 +15,7 @@ namespace SweetHome.Controllers
         }
         public IActionResult HochuDomoi()
         {
+            ViewBag.PageAction = "Shelters";
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
@@ -26,6 +27,7 @@ namespace SweetHome.Controllers
 
         public IActionResult LuchikNadejdy()
         {
+            ViewBag.PageAction = "Shelters";
             using(var session = sessionFactory.OpenSession())
             using(session.BeginTransaction())
             {
