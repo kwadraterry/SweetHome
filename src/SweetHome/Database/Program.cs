@@ -26,7 +26,8 @@ namespace SweetHome
                         Phone = shelterFields[2],
 						Info = shelterFields[3],
 						VKGroup = shelterFields[4],
-						Image = shelterFields[5]
+						Image = shelterFields[5],
+                        URL = shelterFields[6]
                     };
                 });
             Console.WriteLine("Finished parsing file");

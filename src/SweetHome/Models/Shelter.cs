@@ -16,6 +16,7 @@ namespace SweetHome.Models
         public virtual string Info { get; set; }
         public virtual string VKGroup { get; set; }
         public virtual string Image { get; set; }
+        public virtual string URL { get; set; }
         public virtual IList<ShelterAnimal> Animals { get; set; }
         public Shelter()
         {
@@ -32,6 +33,7 @@ namespace SweetHome.Models
     			Map(shelter => shelter.Phone);
                 Map(shelter => shelter.Info).CustomSqlType("text");
                 Map(shelter => shelter.VKGroup).Length(500);
+                Map(shelter => shelter.URL).Length(500);
                 Map(shelter => shelter.Image).Length(500);
                 HasMany(shelter => shelter.Animals);
     			Table("shelters");

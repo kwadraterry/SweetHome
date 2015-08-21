@@ -66,51 +66,37 @@
     <div class="dogs">
         <h1>Собаки ищут хозяев</h1>
         <div class="image-list">
-            <div class="image-item">
-                <div class="img-color">
-                    <h4><b>Маруся</b></h4>
-                    <h5>Живет в приюте "Хочу Домой"</h5>
-                    <h5>8-904-123-4567</h5>
-                </div>
-                <div class="img"
-                     style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
-                </div>
-            </div>
-            <div class="image-item">
-                <div class="img-color">
-                    <h4><b>Маруся</b></h4>
-                    <h5>Живет в приюте "Хочу Домой"</h5>
-                    <h5>8-904-123-4567</h5>
-                </div>
-                <div class="img"
-                     style="background-image: url('http://www.explosion.com/wp-content/uploads/2014/12/813.jpg');">
-                </div>
-            </div>
+            @foreach(var dog in ViewBag.Dogs)
+		            {
+                        <a class="image-item" href="/Home/Animals?animal_id=@dog.Id">
+                            <div class="img-color">
+                                <h4><b>@dog.Name</b></h4>
+                                <h5>@dog.Shelter.Name</h5>
+                                <h5>@dog.Shelter.Phone</h5>
+                            </div>
+                            <div class="img"
+                                 style="background-image: url('@dog.Images[0]');">
+                            </div>
+                        </a>
+                    }
         </div>
     </div>
     <div class="cats">
         <h1>Кошки ищут хозяев</h1>
         <div class="image-list">
-            <div class="image-item">
-                <div class="img-color">
-                    <h4><b>Маруся</b></h4>
-                    <h5>Живет в приюте "Хочу Домой"</h5>
-                    <h5>8-904-123-4567</h5>
-                </div>
-                <div class="img"
-                     style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
-                </div>
-            </div>
-            <div class="image-item">
-                <div class="img-color">
-                    <h4><b>Маруся</b></h4>
-                    <h5>Живет в приюте "Хочу Домой"</h5>
-                    <h5>8-904-123-4567</h5>
-                </div>
-                <div class="img"
-                     style="background-image: url('http://i.kinja-img.com/gawker-media/image/upload/flhfczsxt5metxltus25.jpg');">
-                </div>
-            </div>
+            @foreach(var cat in ViewBag.Cats)
+            {
+                <a class="image-item" href="/Home/Animals?animal_id=@cat.Id">
+                    <div class="img-color">
+                        <h4><b>@cat.Name</b></h4>
+                        <h5>@cat.Shelter.Name</h5>
+                        <h5>@cat.Shelter.Phone</h5>
+                    </div>
+                    <div class="img"
+                         style="background-image: url('@cat.Images[0]');">
+                    </div>
+                </a>
+            }
         </div>
     </div>
 </div>

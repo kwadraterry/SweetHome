@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Mvc;
 using SweetHome.Models;
 using NHibernate;
@@ -16,7 +17,20 @@ namespace SweetHome.Controllers
         public IActionResult Index()
         {
             ViewBag.PageAction = "Index";
-            return View();
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var dogs = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Dog).List();
+                var cats = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Cat).List();
+                Random rand = new Random();
+                ViewBag.Cats = cats.OrderBy(x => rand.Next()).Take(2);
+                ViewBag.Dogs = dogs.OrderBy(x => rand.Next()).Take(2);
+                return View();
+            }
         }
 
         public IActionResult About()
@@ -54,7 +68,15 @@ namespace SweetHome.Controllers
                 ViewBag.AgeLess = null;
                 ViewBag.Size = null;
                 ViewBag.Gender = null;
+                var shelters = session.QueryOver<Shelter>().List();
+                ViewBag.Shelters = shelters;
                 var animals = session.QueryOver<ShelterAnimal>();
+                if (Context.Request.Query.ContainsKey("shelter"))
+                {
+                    int id;
+                    if (Int32.TryParse(Context.Request.Query["shelter"], out id))
+                        animals = animals.Where(animal => animal.Shelter.Id == id);
+                }
                 if (Context.Request.Query.ContainsKey("type"))
                 {
                     AnimalType animalType;

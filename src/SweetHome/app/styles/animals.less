@@ -29,6 +29,17 @@
 	section:first-child > h3 {
 		margin-top: 0;
 	}
+	section:first-child > p {
+		color: @top-color;
+		>a{
+			text-decoration: none;
+			color:@h-color;
+		}
+		a:hover{
+			text-decoration: none;
+			color:@top-color;
+		}
+	}
 	section.gallery {
 		@gallery-border-color: @h-color;
 		@gallery-border-width: 4px;
@@ -78,6 +89,7 @@
 		width: @animal-card-width;
 		background-color: @text-block-bg;
 		margin-right: @animal-card-gutter;
+		padding:20px;
 		ul {
 			list-style: none outside none;
 			padding-left:20px;
@@ -139,6 +151,7 @@
 			padding: @animal-card-padding;
 			width: @animal-card-width;
 			margin: @animal-card-gutter/2;
+			cursor:pointer;
 			
 			> .img {
 				.square(@animal-image-width);
@@ -150,6 +163,24 @@
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+			}
+			>p{
+				>a{
+					text-decoration: none;
+					color:@top-color;
+				}
+				a:hover{
+					text-decoration: none;
+					color:@h-color;
+				}
+			}
+		}
+		>div:hover{
+			background-color: #80CBC4;
+			transition: background-color 0.5s ease;
+			> h3 {
+				color:white;
+				transition: color 0.3s ease;
 			}
 		}
 	}
