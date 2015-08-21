@@ -43,13 +43,21 @@
 <div class="animals-container">
     <div class="filter-column">
         <ul>
-            <li><a href="@url">Все</a></li>
+            @{
+                var allActive = ViewBag.All ? " class=active" : "";
+            }
+            <li><a href="@url"@allActive>Все</a></li>
             <li class="menu">
                 <div><span>Приюты</span></div>
                 <ul> 
                     @foreach(var shelter in ViewBag.Shelters)
 		            {
-                        <li><a href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
+                        var shelterActive = "";
+                        if (ViewBag.ShelterId == shelter.Id)
+                        {
+                            shelterActive = " class=active";
+                        }
+                        <li><a href="@url?shelter=@shelter.Id"@shelterActive>@shelter.Name</a></li>
                     }
                 </ul>
             </li>

@@ -68,6 +68,7 @@ namespace SweetHome.Controllers
                 ViewBag.AgeLess = null;
                 ViewBag.Size = null;
                 ViewBag.Gender = null;
+                ViewBag.All = true;
                 var shelters = session.QueryOver<Shelter>().List();
                 ViewBag.Shelters = shelters;
                 var animals = session.QueryOver<ShelterAnimal>();
@@ -75,7 +76,11 @@ namespace SweetHome.Controllers
                 {
                     int id;
                     if (Int32.TryParse(Context.Request.Query["shelter"], out id))
+                    {
+                        ViewBag.ShelterId = id;
+                        ViewBag.All = false;
                         animals = animals.Where(animal => animal.Shelter.Id == id);
+                    }
                 }
                 if (Context.Request.Query.ContainsKey("type"))
                 {
@@ -83,6 +88,7 @@ namespace SweetHome.Controllers
                     if (Enum.TryParse(Context.Request.Query["type"], out animalType))
                     {
                         ViewBag.Type = animalType;
+                        ViewBag.All = false;
                         animals = animals.Where(animal => animal.AnimalType == animalType);
                     }
                 }
@@ -92,6 +98,7 @@ namespace SweetHome.Controllers
                     if(Enum.TryParse(Context.Request.Query["color"], out color))
                     {
                         ViewBag.Color = color;
+                        ViewBag.All = false;
                         animals = animals.Where(animal => animal.Color == color);
                     }
                 }
@@ -101,6 +108,7 @@ namespace SweetHome.Controllers
                     if (Int32.TryParse(Context.Request.Query["age_less"], out age))
                     {
                         ViewBag.AgeLess = age;
+                        ViewBag.All = false;
                         DateTime birthDay = DateTime.UtcNow.AddYears(-age);
                         animals = animals.Where(animal => animal.BirthDay !=null &&
                                                           animal.BirthDay.Value >= birthDay);
@@ -112,6 +120,7 @@ namespace SweetHome.Controllers
                     if (Enum.TryParse(Context.Request.Query["size"], out size))
                     {
                         ViewBag.Size = size;
+                        ViewBag.All = false;
                         animals = animals.Where(animal => animal.Size == size);
                     }
                 }
@@ -121,6 +130,7 @@ namespace SweetHome.Controllers
                     if (Enum.TryParse(Context.Request.Query["gender"], out gender))
                     {
                         ViewBag.Gender = gender;
+                        ViewBag.All = false;
                         animals = animals.Where(animal => animal.Gender == gender);
                     }
                 }
