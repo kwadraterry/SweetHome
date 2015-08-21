@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNet.Mvc;
 using SweetHome.Models;
 using NHibernate;
@@ -16,7 +17,20 @@ namespace SweetHome.Controllers
         public IActionResult Index()
         {
             ViewBag.PageAction = "Index";
-            return View();
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var dogs = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Dog).List();
+                var cats = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Cat).List();
+                Random rand = new Random();
+                ViewBag.Cats = cats.OrderBy(x => rand.Next()).Take(2);
+                ViewBag.Dogs = dogs.OrderBy(x => rand.Next()).Take(2);
+                return View();
+            }
         }
 
         public IActionResult About()
