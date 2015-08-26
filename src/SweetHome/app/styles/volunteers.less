@@ -91,19 +91,31 @@
 			> div:last-child{			
 				background-color: #EF5350;	
 				> div{
-					>button{
-						  	display:block;
-							border-radius: 50%;
-							width: 150px;
-							height: 150px;
-							background-color: white;
-							border: none;
-							font-size: 28px;
-							margin: auto;
-							color: #EF5350;
-							margin-top: 40px;
-							border: none;
-							outline:none;
+					>div{
+						width: 180px;
+						height: 180px;
+						margin: auto;
+						margin-top: 40px;
+						display:table;
+						>button{
+							  	display:table;
+								border-radius: 50%;
+								width: 150px;
+								height: 150px;
+								background-color: white;
+								border: none;
+								font-size: 28px;
+								margin: auto;
+								color: #EF5350;								
+								border: none;
+								outline:none;
+								transition: all 0.5s ease;
+						}
+						>button:hover{
+							width: 180px;
+							height: 180px;
+							font-size: 30px;
+						}
 					}
 				}			
 				
@@ -173,4 +185,8 @@
 			}
 		}
 	}
+}
+
+.b-widget-donate{
+	width:650px;
 }
