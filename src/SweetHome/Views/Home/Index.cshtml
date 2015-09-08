@@ -2,6 +2,31 @@
     ViewBag.Title = "Home Page";
 }
 
+@section modal {
+<div id="animal-modal"> 
+    <aside>
+        <section>
+            <h3></h3>
+            <p><a></a></p>
+            <p></p>
+        </section>
+        <section class="gallery">
+            <ul class="gallery-aux">
+            </ul>
+        </section>
+        <section>
+            <p></p>
+        </section>
+        <footer>
+            <a></a>
+            <a></a>
+            <a></a>
+        </footer>
+        <span class="close"></span>
+    </aside>
+</div>
+}
+
 <div class="carousel-container">
     <div class="carousel">
         <ul class="bxslider">
@@ -105,11 +130,68 @@
 {
 <script>
     (function () {
+        var getScrollBarWidth = function() {
+            var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
+                widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
+            $outer.remove();
+            return 100 - widthWithScroll;
+        };
+        var scroll_w = getScrollBarWidth();
+        $(".close").click(function(){
+            $(this).parents(".active").removeClass("active");
+            $("body").css("overflow-y", "auto");
+            $("body").css("padding-right", 0);
+        });
+        $("#animal-modal").click(function(e){
+            if (e.target === this){
+                window.history.pushState("", "Animals", "/Home/Animals");
+                $(this).removeClass("active");   
+                $("body").css("overflow-y", "auto");
+                $("body").css("padding-right", 0);
+            }
+        });
         require('bxslider');
-        $('.bxslider').bxSlider({
+        var modalSlider = undefined;
+        $('.carousel>.bxslider').bxSlider({
             mode: 'horizontal',
             captions: true,
             pager:  false
+        });
+        $('.news-block>div').on('click', function() {
+            var header = $(this).find('div>h3').html();
+            var text = $(this).find('div>p').html();
+            var image = $(this).find('div.img').css('background-image');
+            var images = [image.substring(4, image.length - 1)];
+            // Заполним модал данными
+            $('#animal-modal>aside>section:nth-child(1)>h3')
+                .html(header);
+           $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
+                .html(text);
+            var photoElems = "";
+            for (var i = 0; i < images.length; i++) {
+                var active = "";
+                if (i==0) active = ' class="selected"';
+                photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + images[i] + '\');"></div></li>';
+            }
+            if (images.length > 1) {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+            } else {
+                $('#animal-modal>aside>.gallery>.gallery-aux').html("");
+            }
+            $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
+            $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
+            modalSlider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
+                mode: 'horizontal',
+                // captions: true,
+                pager:  false,
+                onSlideBefore: function(e, o, i) {
+                    $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
+                    $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
+                }
+            });
+            $("#animal-modal").addClass("active");
+            $("body").css("overflow-y", "hidden");
+            $("body").css("padding-right", scroll_w + "px");
         });
     })();
 </script>

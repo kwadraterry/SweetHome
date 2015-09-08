@@ -22,20 +22,6 @@
 			}
 		}
 	}
-	> .f-a-b {
-		flex: 1;
-		.text-block();
-		> .button-fab {
-			border: none;
-			border-radius: 50%;
-			.square(64px);
-			background-color: @fab-bg-color;
-			color: white;
-			&:hover {
-				background-color: darken(@fab-bg-color, 7.5%);
-			}
-		}
-	}
 }
 
 @news-image-size: 160px;
@@ -49,7 +35,10 @@
 }
 
 .news-block {
+	display: flex;
+	flex-direction: column;
 	> div {
+		flex: 1;
 		padding-top:30px;
 		padding-bottom: 20px;
 		display: flex;
@@ -59,7 +48,6 @@
 			margin-right: 20px;
 		}
 		> div {
-			max-height: @news-image-size;
 			position: relative;
 			overflow: hidden;
 			> h3 {
