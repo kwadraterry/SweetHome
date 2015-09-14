@@ -163,35 +163,4 @@ namespace SweetHome.Controllers
             return View("~/Views/Shared/Error.cshtml");
         }
     }
-    
-    public abstract class GenericAPIController<T>: Controller where T: class
-    {
-        protected ISessionFactory sessionFactory;
-        [HttpGet]
-        public IEnumerable<T> GetAll()
-        {
-            using(var session = sessionFactory.OpenSession())
-            using(session.BeginTransaction())
-            {
-                return session.QueryOver<T>().List();
-            }
-        }
-    }
-    
-    [Route("api/[controller]")]
-    public class ShelterController: GenericAPIController<Shelter>
-    {
-        public ShelterController(ISessionFactory sessionFactory)
-        {
-            this.sessionFactory = sessionFactory;
-        }
-    }
-    [Route("api/[controller]")]
-    public class AnimalController: GenericAPIController<ShelterAnimal>
-    {
-        public AnimalController(ISessionFactory sessionFactory)
-        {
-            this.sessionFactory = sessionFactory;
-        }
-    }
 }

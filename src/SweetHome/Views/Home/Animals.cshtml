@@ -141,13 +141,8 @@
 {
 <script>
     (function () {
-        var getScrollBarWidth = function() {
-            var $outer = $('<div>').css({visibility: 'hidden', width: 100, overflow: 'scroll'}).appendTo('body'),
-                widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
-            $outer.remove();
-            return 100 - widthWithScroll;
-        };
-        var scroll_w = getScrollBarWidth();
+        var modalUtils = require('utils/modal');
+        var scroll_w = modalUtils.getScrollBarWidth();
         var calculate_children_height = function(el) {
             var children = $(el).children();
             var height = 0;
@@ -189,6 +184,7 @@
             var index = Array.prototype.indexOf.call(ul.children, li);
             slider.goToSlide(index);
         });
+        var img = require('utils/img');
         $('[data-animal]').on('click', function() {
             var animalData = $(this).data('animal');
             console.log(animalData.Images);
@@ -207,10 +203,16 @@
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = "";
                 if (i==0) active = ' class="selected"';
-                photoElems += '<li' + active + '><div class="img" style="background-image: url(\'' + animalData.Images[i] + '\');"></div></li>';
+                photoElems += '<li' + active + '>' + img.img(animalData.Images[i]) + '</li>';
+            }
+            var galleryElems = "";
+            for (var i = 0; i < animalData.Images.length; i++) {
+                var active = "";
+                if (i==0) active = ' class="selected"';
+                galleryElems += '<li' + active + '>' + img.div(animalData.Images[i]) + '</li>';
             }
             if (animalData.Images.length > 1) {
-                $('#animal-modal>aside>.gallery>.gallery-aux').html(photoElems);
+                $('#animal-modal>aside>.gallery>.gallery-aux').html(galleryElems);
             } else {
                 $('#animal-modal>aside>.gallery>.gallery-aux').html("");
             }
