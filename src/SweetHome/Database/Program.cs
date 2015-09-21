@@ -57,10 +57,10 @@ namespace SweetHome
                     var animalFields = animalString.Split(new string[]{"\n\n"}, StringSplitOptions.RemoveEmptyEntries);
                     
                     DateTime? birthday = null;
-                    int years;
-                    if (Int32.TryParse(animalFields[2], out years))
+                    int months;
+                    if (Int32.TryParse(animalFields[2], out months))
                     {
-                        birthday = DateTime.UtcNow.AddYears(- years);
+                        birthday = DateTime.UtcNow.AddMonths(- months);
                     }
                     
                     Gender gender;
@@ -80,7 +80,7 @@ namespace SweetHome
                     return new ShelterAnimal
                     {
                         Name = animalFields[0],
-                        AnimalType = AnimalType.Dog,
+                        AnimalType = AnimalType.Cat,
                         BirthDay = birthday,
                         Gender = gender,
                         Info = animalFields[3],

@@ -1,6 +1,8 @@
 @model IEnumerable<SweetHome.Models.ShelterAnimal>
 @using SweetHome.Models;
+@using SweetHome.Utils;
 @using SweetHome;
+
 @{
     ViewBag.Title = "Ищем хозяев";
     string url = Url.Action("Animals", "Home", new {});
@@ -126,11 +128,18 @@
             <h3>@animal.Name</h3>
             @if(animal.Shelter != null)
             {
-                <p><a href="@animal.Shelter.URL">@animal.Shelter.Name</a></p>
-                @if (animal.Shelter.Phone != null)
-                {
-                <p>@animal.Shelter.Phone</p>
-                }
+                <p><a href="@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
+                 @if(animal.BirthDay != null)
+                     {
+                        <p>@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
+                     }
+                 else
+                     {
+                         @if (animal.Shelter.Phone != null)
+                            {
+                            <p>@animal.Shelter.Phone</p>
+                            }
+                     }
             }
         </div>
         }

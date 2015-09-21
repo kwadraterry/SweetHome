@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SweetHome.Utils;
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -103,8 +104,16 @@
                         <a class="image-item" href="/Home/Animals?animal_id=@dog.Id">
                             <div class="img-color">
                                 <h4><b>@dog.Name</b></h4>
-                                <h5>@dog.Shelter.Name</h5>
-                                <h5>@dog.Shelter.Phone</h5>
+                                <h5>Приют "@dog.Shelter.Name"</h5>
+                                 @if(dog.BirthDay != null)
+                                 {
+                                    <h5>@DateUtils.Age(dog.BirthDay,DateTime.UtcNow)</h5>
+                                 }
+                                 else
+                                 {
+                                     <h5>@dog.Shelter.Phone</h5>
+                                 }
+                                 
                             </div>
                             <div class="img"
                                  style="background-image: url('@dog.Images[0]');">
@@ -121,8 +130,15 @@
                 <a class="image-item" href="/Home/Animals?animal_id=@cat.Id">
                     <div class="img-color">
                         <h4><b>@cat.Name</b></h4>
-                        <h5>@cat.Shelter.Name</h5>
-                        <h5>@cat.Shelter.Phone</h5>
+                        <h5>Приют "@cat.Shelter.Name"</h5>
+                         @if(cat.BirthDay != null)
+                                 {
+                                    <h5>@DateUtils.Age(cat.BirthDay,DateTime.UtcNow)</h5>
+                                 }
+                                 else
+                                 {
+                                     <h5>@cat.Shelter.Phone</h5>
+                                 }
                     </div>
                     <div class="img"
                          style="background-image: url('@cat.Images[0]');">
