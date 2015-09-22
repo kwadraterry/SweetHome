@@ -128,7 +128,7 @@
             <h3>@animal.Name</h3>
             @if(animal.Shelter != null)
             {
-                <p><a href="@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
+                <p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
                  @if(animal.BirthDay != null)
                      {
                         <p>@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
