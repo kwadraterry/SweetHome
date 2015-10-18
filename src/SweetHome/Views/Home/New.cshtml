@@ -1,0 +1,101 @@
+<div class="new-info">
+        <h1 class="new-h"><div>Новый питомец</div></h1>
+        <div class="new-text">     
+                <form>
+                        <h2>Информация о владельце</h2>
+                        <div class="form-group">
+                                <label for="place">Место содержания животного</label>
+                                 <select id="place">
+                                        <option value="shelter">Приют для животных</option>
+                                        <option value="private">Частная передержка</option>
+                                 </select>
+                        </div>
+                        <div class="form-group" id="shelter-name">
+                                <label for="shelter">Название приюта</label>
+                                <select id="shelter">
+                                         @foreach(var shelter in ViewBag.Shelters)
+		                              {
+                                                 <option>@shelter.Name</option>
+                                                
+                                                }                                   
+                                </select>
+                        </div>
+                        
+                        <div class="form-group hidden" id="div-name">
+                                <label for="Name">Ваше имя</label>
+                                <input type="text" id="Name">
+                        </div>
+                        <div class="form-group">
+                                <label for="Phone">Номер телефона</label>
+                                <input type="text" id="phone" class="form-control" data-format="+1 (ddd) ddd-dddd">
+                        </div>
+                        
+                        
+                        <h2>Информация о животном</h2>
+                        <div class="form-group">
+                                <label for="animal">Вид животного</label>
+                                <select id="animal">                                                
+                                        <option id="option-cat">Собака</option>
+                                        <option id="option-dog">Кошка</option>
+                                </select>
+                        </div>
+                        <div class="form-group" id="animal-name">
+                                <label for="an-name">Кличка животного</label>
+                                <input type="text" id="an-name">
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="description">Описание</label>
+                                <textarea id="description" rows="7"  placeholder="Подробно опишите характер животного. Не забудьте упомянуть, стерелизовано ли животное, проставлены ли прививки."></textarea>
+                        </div>
+                        <div>
+                               <div>
+                                       <label>Фотографии</label>
+                                       <br>
+                                       <span>Вы можете прикрепить не более 5 фотографий</span>
+                               </div>
+                               <div id="my-awesome-dropzone" class="dropzone">                                               
+                               </div>
+                        </div>
+                        
+                       
+                        <button type="submit" class="btn btn-default">Сохранить</button>
+                </form>
+        </div>
+</div>
+
+@section scripts
+{
+<script src="~/javascript/dropzone.js"></script>
+<script>
+        $(document).ready(function () {
+                require('jquery.maskedinput');
+                $('#my-awesome-dropzone').dropzone({
+                        url: '/file/post',
+                        dictDefaultMessage: "Перетащите изображения или нажмите для выбора",
+                        dictRemoveFile: " ",
+                        maxFiles: 1,
+                        acceptedFiles: "image/*",
+                        addRemoveLinks: true
+                });
+                $("#phone").mask("+7 (999) 999-9999");
+                $("#place").change(function() {
+                        console.log($(this).val());
+                        if($(this).val() === "shelter"){
+                                $("#shelter-name").removeClass("hidden");
+                                $("#div-name").addClass("hidden");
+                        }
+                        else{
+                                $("#shelter-name").addClass("hidden");
+                                $("#div-name").removeClass("hidden");
+                        }
+                  
+                });
+                //     $("#shelter-name").removeClass("hidden");
+                // });   
+                $("#option-private").click(function(){
+                    $("#shelter-name").addClass("hidden");
+                });        
+        });
+</script>
+}        

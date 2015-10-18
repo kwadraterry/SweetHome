@@ -158,6 +158,28 @@ namespace SweetHome.Controllers
             return View();
         }
 
+
+        public IActionResult New()
+        {
+            ViewBag.PageAction = "New";
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var shelters = session.QueryOver<Shelter>().List();
+                var dogs = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Dog).List();
+                var cats = session.QueryOver<ShelterAnimal>()
+                                  .Fetch(animal => animal.Shelter).Eager
+                                  .Where(animal => animal.AnimalType == AnimalType.Cat).List();
+                Random rand = new Random();
+                ViewBag.Cats = cats.OrderBy(x => rand.Next()).Take(2);
+                ViewBag.Dogs = dogs.OrderBy(x => rand.Next()).Take(2);
+                ViewBag.Shelters = shelters;
+                return View();
+            }
+        }
+
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");

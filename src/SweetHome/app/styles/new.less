@@ -1,0 +1,157 @@
+@import (reference) "mixins.less";
+
+.new-h {
+	background-color: #009688;
+	height: 80px;
+	text-align:center;
+	color: white;
+	vertical-align: middle;
+	margin-top: 0;
+	margin-bottom: 0;
+	display: table;
+	width: 100%;
+	> div {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
+.dz-remove {
+	position: absolute;
+    top: -7px;
+    left: 105px;
+    z-index: 10;
+	width: 20px;
+    height: 20px;
+	border: 1px #ccc solid !important;
+	background-color: white;
+	color:black;
+    border-radius: 50%;
+	
+
+}
+
+.dz-remove:before {
+   content: "\00d7";
+}
+
+.dz-remove:hover {
+    text-decoration: none !important;
+	background-color: @h-color;
+	color:white;
+	transition: background-color 0.5s ease;
+}
+
+.new-info {
+	> .new-text {
+		background-color: white;
+		text-align: left;
+		padding:20px;
+		>form{
+			
+			>h2{
+				margin-top:0px;
+				border-bottom: 2px #009688 solid;
+				padding-bottom: 5px;
+				padding-top: 5px;
+			}
+			>div{
+				display: flex;
+				flex-direction: row;
+				label{
+					font-weight: normal;
+					margin-bottom: 0px;
+				// 	.control-label();
+				// 	.col-sm-2();
+					
+					
+				}
+				span{
+					font-weight: 12px;
+					color:#aaa;
+						
+				}
+				>.dropzone{
+					.form-control();
+					border:1px solid #ccc;
+					border-radius:4px;
+					color:#aaa;
+					
+				}
+				>input, select, textarea{
+					max-width: none;					
+					.form-control();
+					height: auto;
+					
+				}
+				>:first-child {
+					flex: 3;
+				}
+				>:last-child {
+					flex: 6;
+				}
+			}
+			
+			>button{
+				.btn(); 
+				.btn-success();
+			}
+		}
+		
+			
+		> div{
+			display: flex;
+			justify-content: space-between;
+  			align-items: stretch;  								
+			> div{
+				color:#fff;
+				width: 32%;		
+				padding-top: 10px;
+				padding-left: 40px;
+				padding-right: 40px;
+				padding-bottom: 40px;			
+				background-color: #00BFA5;
+				display:inline-block;
+				>h3{
+					color:#fff;
+				}		
+				> div{
+					margin-top:20px;
+					text-align: left;	
+				}			
+				
+			}
+			> div:last-child{			
+				background-color: #EF5350;	
+				> div{
+					>div{
+						width: 180px;
+						height: 180px;
+						margin: auto;
+						margin-top: 40px;
+						display:table;
+						>button{
+							  	display:table;
+								border-radius: 50%;
+								width: 150px;
+								height: 150px;
+								background-color: white;
+								border: none;
+								font-size: 28px;
+								margin: auto;
+								color: #EF5350;								
+								border: none;
+								outline:none;
+								transition: all 0.5s ease;
+						}
+						>button:hover{
+							transform: scale(1.2);
+							font-size: 30px;
+						}
+					}
+				}			
+				
+			}
+		}
+	}
+}

@@ -4,4 +4,5 @@ define(function(require) {
 	require('bootstrap/modal');
 	require('utils/img');
 	require('utils/modal');
+	console.log(require('jquery.maskedinput'));
 });
