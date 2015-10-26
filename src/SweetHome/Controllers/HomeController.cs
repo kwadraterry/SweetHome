@@ -1,18 +1,27 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using SweetHome.Models;
-using NHibernate;
 
 namespace SweetHome.Controllers
 {
+    public class FileUploadInfo
+    {
+        public String FileName { get; set; }
+    } 
     public class HomeController : Controller
     {   
-        private readonly ISessionFactory sessionFactory;
-        public HomeController(ISessionFactory sessionFactory)
+        private readonly NHibernate.ISessionFactory sessionFactory;
+        private readonly IHostingEnvironment hostingEnvironment;
+        public HomeController(NHibernate.ISessionFactory sessionFactory, IHostingEnvironment hostingEnvironment)
         {
             this.sessionFactory = sessionFactory;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -166,18 +175,55 @@ namespace SweetHome.Controllers
             using(session.BeginTransaction())
             {
                 var shelters = session.QueryOver<Shelter>().List();
-                var dogs = session.QueryOver<ShelterAnimal>()
-                                  .Fetch(animal => animal.Shelter).Eager
-                                  .Where(animal => animal.AnimalType == AnimalType.Dog).List();
-                var cats = session.QueryOver<ShelterAnimal>()
-                                  .Fetch(animal => animal.Shelter).Eager
-                                  .Where(animal => animal.AnimalType == AnimalType.Cat).List();
-                Random rand = new Random();
-                ViewBag.Cats = cats.OrderBy(x => rand.Next()).Take(2);
-                ViewBag.Dogs = dogs.OrderBy(x => rand.Next()).Take(2);
                 ViewBag.Shelters = shelters;
                 return View();
             }
+        }
+        
+        [HttpPost]
+        public IActionResult AddAnimal(string animalName, string animalType, string info, string images, string shelterId)
+        {
+            var shelterIdNum = Int32.Parse(shelterId);
+            AnimalType animalTypeEnum;
+            Enum.TryParse(animalType, out animalTypeEnum);
+            if (animalName == null) {
+                animalName = "";
+            }
+            if (info == null) {
+                info = "";
+            }
+            if (images == null) {
+                images = "";
+            }
+            using(var session = sessionFactory.OpenSession())
+            using(var transaction = session.BeginTransaction())
+            {
+                var shelter = session.QueryOver<Shelter>().List().Where(s => s.Id == shelterIdNum).First();
+                var animal = new ShelterAnimal
+                {
+                    Name = animalName,
+                    AnimalType = animalTypeEnum,
+                    Info = info,
+                    Images = images.Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries),
+                    Created = DateTime.UtcNow,
+                    Shelter = shelter
+                };
+                session.Save(animal);
+                transaction.Commit();
+            }
+            return New();
+        }
+        
+        [HttpPost]
+        public FileUploadInfo ImageUpload(IFormFile file)
+        {
+            var fileName = Path.Combine(
+                "media",
+                Guid.NewGuid().ToString() +".png");
+            file.SaveAs(Path.Combine(
+                hostingEnvironment.WebRootPath,
+                fileName));
+            return new FileUploadInfo { FileName = "/" + fileName };
         }
 
         public IActionResult Error()
