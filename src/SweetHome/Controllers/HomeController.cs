@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Net.Mime;
+using System.Text.RegularExpressions;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
 using System.Linq;
@@ -18,10 +18,12 @@ namespace SweetHome.Controllers
     {   
         private readonly NHibernate.ISessionFactory sessionFactory;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly Random rng;
         public HomeController(NHibernate.ISessionFactory sessionFactory, IHostingEnvironment hostingEnvironment)
         {
             this.sessionFactory = sessionFactory;
             this.hostingEnvironment = hostingEnvironment;
+            this.rng = new Random();
         }
         public IActionResult Index()
         {
@@ -211,15 +213,18 @@ namespace SweetHome.Controllers
                 session.Save(animal);
                 transaction.Commit();
             }
-            return New();
+            return RedirectToAction("New");
         }
         
         [HttpPost]
         public FileUploadInfo ImageUpload(IFormFile file)
         {
+            var dirtyFileName = new ContentDisposition(file.ContentDisposition).FileName;
+            dirtyFileName = Regex.Replace(dirtyFileName, "[@,\\\";'\\\\]", string.Empty);
+            var randomString = Convert.ToBase64String(BitConverter.GetBytes(this.rng.Next()));
             var fileName = Path.Combine(
                 "media",
-                Guid.NewGuid().ToString() +".png");
+                randomString + dirtyFileName);
             file.SaveAs(Path.Combine(
                 hostingEnvironment.WebRootPath,
                 fileName));
