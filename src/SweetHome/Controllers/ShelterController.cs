@@ -35,6 +35,17 @@ namespace SweetHome.Controllers
 			    return View(shelter);
             }
         }
+        
+        public IActionResult Drug()
+        {
+            ViewBag.PageAction = "Shelters";
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var shelter = session.QueryOver<Shelter>().Take(1).List()[0];
+			    return View(shelter);
+            }
+        }
     }
        
 }

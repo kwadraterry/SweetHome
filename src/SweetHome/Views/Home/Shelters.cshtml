@@ -13,6 +13,10 @@
 					  {
 						  <h2><a href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
 					  }
+					  @if(shelter.Name == "Друг") 
+					  {
+						  <h2><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
+					  }
 					
 				  <div class="phone">@shelter.Phone</div>
 				  <div class="vk"> <a href="@shelter.VKGroup" target="_blank">Группа Вконтакте</a> </div>

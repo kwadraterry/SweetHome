@@ -5,6 +5,7 @@
 	> div {
 		.split-2-columns(60px);
 		> .message-info {
+			color:@text-color;
 			>ul {
 				>*:not(:first-child) {
 					margin-top:20px;
@@ -44,11 +45,12 @@
 }
 
 
-.help-block {
+.help-block {	
 	.content-block();
 	> div {
 		.split-3-columns(40px);
 	}
+	color:@text-color !important;
 }
 
 .find-block {
