@@ -1,5 +1,68 @@
 @import (reference) "mixins.less";
 
+.shelters2{
+	min-width:1170px;
+	max-width:1170px;
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: wrap;
+	> div.shelter-item {
+		background-color:white; 
+		margin-bottom:20px; 
+		width:370px;
+		display: flex; 
+		flex-direction: column;
+		margin-right: 20px;
+		
+		> div.image-item {
+			display: flex;
+			flex-direction: column;
+			> div.img{
+				width:370px;
+				height:370px;
+			}
+		}
+		>div.shelter-description{
+			flex: 1; 
+			margin:0px 20px 20px 20px;
+			>h2>a{
+				color:@h-color;
+			}
+		}
+	}
+	
+}
+
+.hrefs{
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-left:20px;
+	>*{
+		width:120px;
+		text-align:center;
+		display: inline-block; 
+		margin-right: 20px; 
+		cursor: pointer;		
+	}	
+	> div:first-child {
+		margin-left:20px;
+	}
+	>.img-color{
+		display: inline-block;
+		background-color: rgba(255,255,255,0);
+		transition: background-color 0.5s ease;
+		height: 15%;
+	    width: 120px;
+	    position: absolute;
+		padding-left: 20px;
+		
+	}
+	>.img-color:hover{
+		background-color: rgba(255,255,255,0.3);
+		cursor: pointer;		    
+	}
+}	
+
 .shelters-list-info {
 	background-color: white;
 	.sm({

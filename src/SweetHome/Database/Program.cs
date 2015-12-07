@@ -43,7 +43,7 @@ namespace SweetHome
             }
             Console.WriteLine("Finished saving items to the database");
         }
-        private void ParseAnimals(string fileContents, int shelterId)
+        private void ParseAnimals(string fileContents, int shelterId, AnimalType animalType)
         {
             Shelter shelter;
             using (var session = sessionFactory.OpenSession())
@@ -58,33 +58,33 @@ namespace SweetHome
                     
                     DateTime? birthday = null;
                     int months;
-                    if (Int32.TryParse(animalFields[2], out months))
+                    if (Int32.TryParse(animalFields[1], out months))
                     {
                         birthday = DateTime.UtcNow.AddMonths(- months);
                     }
                     
                     Gender gender;
-                    if (animalFields[1] == "М")
-                    {
-                        gender = Gender.Male;
-                    }
-                    else if (animalFields[1] == "Ж")
-                    {
-                        gender = Gender.Female;
-                    }
-                    else
-                    {
-                        gender = Gender.Unknown;
-                    }
+                    //  if (animalFields[1] == "М")
+                    //  {
+                    //      gender = Gender.Male;
+                    //  }
+                    //  else if (animalFields[1] == "Ж")
+                    //  {
+                    //      gender = Gender.Female;
+                    //  }
+                    //  else
+                    //  {
+                    gender = Gender.Unknown;
+                    //  }
                     
                     return new ShelterAnimal
                     {
                         Name = animalFields[0],
-                        AnimalType = AnimalType.Cat,
+                        AnimalType = animalType,
                         BirthDay = birthday,
                         Gender = gender,
-                        Info = animalFields[3],
-                        Images = animalFields[4].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries),
+                        Info = animalFields[2],
+                        Images = animalFields[3].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries),
                         Created = DateTime.UtcNow,
                         Shelter = shelter
                     };
@@ -92,13 +92,20 @@ namespace SweetHome
             Console.WriteLine("Finished parsing file");
             Console.WriteLine("Saving entries to the database...");
             using (var session = sessionFactory.OpenSession())
-            using (var transaction = session.BeginTransaction())
+            foreach(var animal in animals)
             {
-                foreach(var animal in animals)
+                using (var transaction = session.BeginTransaction())
                 {
-                    session.Save(animal);
+                    try
+                    {
+                        session.Save(animal);
+                        transaction.Commit();
+                    }
+                    catch (System.Exception)
+                    {
+                        Console.WriteLine("violates unique constraint");
+                    }
                 }
-                transaction.Commit();
             }
             Console.WriteLine("Finished saving items to the database");
         }
@@ -111,6 +118,13 @@ namespace SweetHome
             Console.WriteLine("Finished reading configuration");
 
             string filename = config.Get("file");
+            string type = config.Get("type");
+            AnimalType animalType;
+            if (type == "c") {
+                animalType = AnimalType.Cat;
+            } else {
+                animalType = AnimalType.Dog;
+            }
             string line = null;
             Console.WriteLine("Reading file...");
             using (StreamReader sr = new StreamReader(filename))
@@ -122,7 +136,7 @@ namespace SweetHome
             {
                 int shelterId = Int32.Parse(config.Get("shelter_id"));
 				Console.WriteLine (shelterId);
-                ParseAnimals(line, shelterId);
+                ParseAnimals(line, shelterId, animalType);
 
             }
             else if (command == "shelters")
