@@ -10,23 +10,26 @@
                                         <option value="private">Частная передержка</option>
                                  </select>
                         </div>
+                        <input id="inputShelterIid" type="hidden" value="" name="shelterId">
                         <div class="form-group" id="shelter-name">
                                 <label for="shelter">Название приюта</label>
-                                <select id="shelter" name="shelterId">
+                                <select id="shelter">
                                          @foreach(var shelter in ViewBag.Shelters)
 	                                 {
+                                             @if (shelter.Name != "Частная передержка"){
                                                 <option value="@shelter.Id">@shelter.Name</option>
+                                             }
                                          }
                                 </select>
                         </div>
                         
                         <div class="form-group hidden" id="div-name">
                                 <label for="Name">Ваше имя</label>
-                                <input type="text" id="Name">
+                                <input type="text" id="Name" name="ownerName">
                         </div>
                         <div class="form-group">
                                 <label for="Phone">Номер телефона</label>
-                                <input type="text" id="phone" class="form-control" data-format="+1 (ddd) ddd-dddd">
+                                <input type="text" id="phone" class="form-control" name="phoneNumbers" data-format="+1 (ddd) ddd-dddd">
                         </div>
                         
                         
@@ -34,8 +37,8 @@
                         <div class="form-group">
                                 <label for="animal">Вид животного</label>
                                 <select id="animal" name="animalType">                                                
-                                        <option id="option-cat" value="Cat">Собака</option>
-                                        <option id="option-dog" value="Dog">Кошка</option>
+                                        <option id="option-dog" value="Dog">Собака</option>
+                                        <option id="option-cat" value="Cat">Кошка</option>
                                 </select>
                         </div>
                         <div class="form-group" id="animal-name">
@@ -84,23 +87,27 @@
                                 });
                         }
                 });
+                $("#inputShelterIid").val($('#shelter option:selected').val());
                 $("#phone").mask("+7 (999) 999-9999");
                 $("#place").change(function() {
-                        console.log($(this).val());
+                        $("#shelter-name").toggleClass("myhidden");
                         if($(this).val() === "shelter"){
-                                $("#shelter-name").removeClass("hidden");
-                                $("#div-name").addClass("hidden");
+                                $("#inputShelterIid").val($('#shelter option:selected').val());
+                                // $("#shelter-name").removeClass("hidden");
+                                // $("#div-name").addClass("hidden");
                         }
                         else{
-                                $("#shelter-name").addClass("hidden");
-                                $("#div-name").removeClass("hidden");
+                                console.log($(this).val()); 
+                                $("#inputShelterIid").val('1');
+                                // $("#shelter-name").css("display","none");
+                                // $("#div-name").removeClass("hidden");
                         }
                   
                 });
                 //     $("#shelter-name").removeClass("hidden");
                 // });   
-                $("#option-private").click(function(){
-                    $("#shelter-name").addClass("hidden");
+                $("#shelter").change(function() {
+                    $("#inputShelterIid").val($('#shelter option:selected').val());
                 });        
         });
 </script>

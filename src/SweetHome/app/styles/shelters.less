@@ -37,30 +37,33 @@
 	margin-top:20px;
 	margin-bottom:20px;
 	margin-left:20px;
-	>*{
+	display: flex;
+	flex-direction: row;
+	>.href{
 		width:120px;
+		flex:1;
+		margin-right: 20px;
 		text-align:center;
-		display: inline-block; 
-		margin-right: 20px; 
-		cursor: pointer;		
+		cursor: pointer;
+		position: relative;
+		>.img-color{
+			background-color: rgba(255,255,255,0);
+			transition: background-color 0.5s ease;
+		    position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		>.img-color:hover{
+			background-color: rgba(255,255,255,0.3);
+			cursor: pointer;		    
+		}	
 	}	
-	> div:first-child {
-		margin-left:20px;
-	}
-	>.img-color{
-		display: inline-block;
-		background-color: rgba(255,255,255,0);
-		transition: background-color 0.5s ease;
-		height: 15%;
-	    width: 120px;
-	    position: absolute;
-		padding-left: 20px;
-		
-	}
-	>.img-color:hover{
-		background-color: rgba(255,255,255,0.3);
-		cursor: pointer;		    
-	}
+	// > div:first-child {
+	// 	margin-left:20px;
+	// }
+	
 }	
 
 .shelters-list-info {

@@ -3,6 +3,7 @@ using Microsoft.Framework.ConfigurationModel;
 using System.IO;
 using System.Linq;
 using SweetHome.Models;
+using System.Collections.Generic;
 
 namespace SweetHome
 {
@@ -23,7 +24,7 @@ namespace SweetHome
                     {
                         Name = shelterFields[0],
                         Address = shelterFields[1],
-                        Phone = shelterFields[2],
+                        PhoneNumbers = shelterFields[2].Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries),
 						Info = shelterFields[3],
 						VKGroup = shelterFields[4],
 						Image = shelterFields[5],
@@ -76,7 +77,8 @@ namespace SweetHome
                     //  {
                     gender = Gender.Unknown;
                     //  }
-                    
+                    List<String> Images = new List<String>(animalFields[3].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries));
+                    Images.RemoveAt(Images.Count-1);
                     return new ShelterAnimal
                     {
                         Name = animalFields[0],
@@ -84,22 +86,23 @@ namespace SweetHome
                         BirthDay = birthday,
                         Gender = gender,
                         Info = animalFields[2],
-                        Images = animalFields[3].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries),
+                        Images = Images,
                         Created = DateTime.UtcNow,
                         Shelter = shelter
                     };
                 });
             Console.WriteLine("Finished parsing file");
             Console.WriteLine("Saving entries to the database...");
-            using (var session = sessionFactory.OpenSession())
             foreach(var animal in animals)
             {
+                using (var session = sessionFactory.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
                     try
                     {
                         session.Save(animal);
                         transaction.Commit();
+                        Console.WriteLine("Записали " + animal.Name);
                     }
                     catch (System.Exception)
                     {

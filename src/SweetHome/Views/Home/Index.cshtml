@@ -105,14 +105,35 @@
                         <a class="image-item" href="/Home/Animals?animal_id=@dog.Id">
                             <div class="img-color">
                                 <h4><b>@dog.Name</b></h4>
-                                <h5>Приют "@dog.Shelter.Name"</h5>
+                                @if(dog.Shelter.Name == "Частная передержка"){
+                                    <h5>@dog.Shelter.Name</h5>
+                                 }
+                                 else{
+                                    <h5>Приют "@dog.Shelter.Name"</h5>
+                                }    
                                  @if(dog.BirthDay != null)
                                  {
                                     <h5>@DateUtils.Age(dog.BirthDay,DateTime.UtcNow)</h5>
                                  }
                                  else
+                                 
                                  {
-                                     <h5>@dog.Shelter.Phone</h5>
+                                     List<String> PhoneNumbers = dog.PhoneNumbers;
+                                     List<String> ShelterPhoneNumbers = dog.Shelter.PhoneNumbers;
+                                     <h5>
+                                         @if (PhoneNumbers.Count != 0){
+                                             foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                								  @ph
+                							  }	
+                                         }
+                                         else{
+                                            @if (ShelterPhoneNumbers.Count != 0){
+                                                 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                    								  @ph
+                    							  }	
+                                             }
+                                         }
+                                     </h5>
                                  }
                                  
                             </div>
@@ -130,15 +151,35 @@
             {
                 <a class="image-item" href="/Home/Animals?animal_id=@cat.Id">
                     <div class="img-color">
-                        <h4><b>@cat.Name</b></h4>
-                        <h5>Приют "@cat.Shelter.Name"</h5>
+                        <h4><b>@cat.Name</b></h4>                        
+                             @if(cat.Shelter.Name == "Частная передержка"){
+                                <h5>@cat.Shelter.Name</h5>
+                             }
+                             else{
+                                <h5>Приют "@cat.Shelter.Name"</h5>
+                            }                         
                          @if(cat.BirthDay != null)
                                  {
                                     <h5>@DateUtils.Age(cat.BirthDay,DateTime.UtcNow)</h5>
                                  }
                                  else
                                  {
-                                     <h5>@cat.Shelter.Phone</h5>
+                                     List<String> PhoneNumbers = cat.PhoneNumbers;
+                                     List<String> ShelterPhoneNumbers = cat.Shelter.PhoneNumbers;
+                                     <h5>
+                                         @if (PhoneNumbers.Count != 0){
+                                             foreach(var ph in PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                								  @ph
+                							  }	
+                                         }
+                                         else{
+                                            @if (ShelterPhoneNumbers.Count != 0){
+                                                 foreach(var ph in ShelterPhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + "," + p)){
+                    								  @ph
+                    							  }	
+                                             }
+                                         }
+                                     </h5>
                                  }
                     </div>
                     <div class="img"

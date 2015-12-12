@@ -77,6 +77,15 @@
                     var dogLarge = (ViewBag.Type == AnimalType.Dog &&
                                     ViewBag.Size == Size.Large) ? " class=active" : "";
                 }
+                <div>
+                    @if (ViewBag.ShelterId == 1)
+                        {
+                            <a href="@url?shelter=1" class="active">Частная передержка</a>
+                        }
+                    else{
+                            <a href="@url?shelter=1">Частная передержка</a>
+                    }
+                </div>
                 <div><a href="@url?type=@dog_type"@dogOnly>Собаки</a></div>
                 <ul>
                     <li><a href="@url?type=@dog_type&age_less=1"@dogYoung>Щенки</a></li>
@@ -128,16 +137,36 @@
             <h3>@animal.Name</h3>
             @if(animal.Shelter != null)
             {
-                <p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
+                @if(animal.Shelter.Name == "Частная передержка"){
+                    <p>@animal.Shelter.Name</p>
+                }
+                else{
+                    <p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
+                }
                  @if(animal.BirthDay != null)
                      {
                         <p>@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
                      }
                  else
                      {
-                         @if (animal.Shelter.Phone != null)
+                         @if (animal.PhoneNumbers.Count != 0)
                             {
-                            <p>@animal.Shelter.Phone</p>
+                            <p>
+                            @foreach(var ph in animal.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){
+								  @ph
+							  }	
+                            </p>
+                            }
+                            else{
+                                @if (animal.Shelter.PhoneNumbers.Count != 0)
+                                {
+                                    <p>
+                                    @foreach(var ph in animal.Shelter.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){
+        								  @ph
+        							  }	
+                                    </p>
+                                }                          
+                            
                             }
                      }
             }
@@ -205,7 +234,7 @@
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)>a')
                 .attr("href","/Shelters/"+animalData.Shelter.URL);
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
-                .html(animalData.Shelter.Phone);
+                .html(animalData.Shelter.PhoneNumbers);
            $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
                 .html(animalData.Info);
             var photoElems = "";

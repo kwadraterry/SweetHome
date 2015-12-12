@@ -80,8 +80,9 @@ namespace SweetHome.Controllers
                 ViewBag.Size = null;
                 ViewBag.Gender = null;
                 ViewBag.All = true;
-                var shelters = session.QueryOver<Shelter>().List();
-                ViewBag.Shelters = shelters;
+                var shelters = session.QueryOver<Shelter>();
+                shelters = shelters.Where(shelter => shelter.Id != 1);
+                ViewBag.Shelters = shelters.List();
                 var animals = session.QueryOver<ShelterAnimal>();
                 if (Context.Request.Query.ContainsKey("shelter"))
                 {
@@ -182,10 +183,22 @@ namespace SweetHome.Controllers
             }
         }
         
-        [HttpPost]
-        public IActionResult AddAnimal(string animalName, string animalType, string info, string images, string shelterId)
+        private string RemoveExtraText(string value)
         {
-            var shelterIdNum = Int32.Parse(shelterId);
+            var allowedChars = "01234567890,";
+           
+            return new string(value.Replace("+7","8").Where(c => allowedChars.Contains(c)).ToArray());
+        }
+        
+        [HttpPost]
+        public IActionResult AddAnimal(string animalName,
+            string animalType, string info, string images,
+            string shelterId, string ownerName, string phoneNumbers)
+        {
+            var shelterIdNum = 1;
+            if (shelterId != null){
+                shelterIdNum = Int32.Parse(shelterId);
+            }
             AnimalType animalTypeEnum;
             Enum.TryParse(animalType, out animalTypeEnum);
             if (animalName == null) {
@@ -197,19 +210,25 @@ namespace SweetHome.Controllers
             if (images == null) {
                 images = "";
             }
+            phoneNumbers = RemoveExtraText(phoneNumbers);
+            Console.WriteLine(phoneNumbers);
             using(var session = sessionFactory.OpenSession())
             using(var transaction = session.BeginTransaction())
             {
                 var shelter = session.QueryOver<Shelter>().List().Where(s => s.Id == shelterIdNum).First();
+                var imagesList = images.Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries);
                 var animal = new ShelterAnimal
                 {
                     Name = animalName,
                     AnimalType = animalTypeEnum,
+                    OwnerName = ownerName,
                     Info = info,
-                    Images = images.Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries),
+                    Images = imagesList,
+                    PhoneNumbers = phoneNumbers.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries),
                     Created = DateTime.UtcNow,
                     Shelter = shelter
                 };
+                
                 session.Save(animal);
                 transaction.Commit();
             }

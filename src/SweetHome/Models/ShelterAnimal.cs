@@ -44,7 +44,7 @@ namespace SweetHome.Models
         public virtual int Id { get; protected set; }
         [Required]
         public virtual string Name { get; set; }
-        [Required]
+        [Required]        
         public virtual AnimalType AnimalType { get; set; }
         [DataType(DataType.Date)]
         public virtual DateTime? BirthDay { get; set; }
@@ -92,24 +92,56 @@ namespace SweetHome.Models
         }
         private IList<string> _Images;
         
+        public virtual string OwnerName { get; set; }
+        
+        protected string PhonesSerialized
+        {
+            get
+            {
+                return JsonConvert.SerializeObject( _PhoneNumbers);
+            }
+            set
+            {
+                 _PhoneNumbers = JsonConvert.DeserializeObject<IList<string>>(value);
+            }
+        }
+        
+        public virtual IList<string> PhoneNumbers
+        {
+            get
+            {
+                return _PhoneNumbers;
+            }
+            set
+            {
+                _PhoneNumbers = value;
+            }
+        }
+        
+        
+        private IList<string> _PhoneNumbers;
+        
         public ShelterAnimal()
         {
             this.IsHappy = false;
             this._Images = new List<string>();
+            this._PhoneNumbers = new List<string>();
         }
         
         public class ShelterAnimalMap: ClassMap<ShelterAnimal>
         {
             public ShelterAnimalMap()
     		{
-    			Id(shelter => shelter.Id).GeneratedBy.Increment();
-    			Map(animal => animal.Name).Not.Nullable();
-    			Map(animal => animal.AnimalType).Not.Nullable().CustomType<AnimalType>();
+    			Id(animal => animal.Id).GeneratedBy.Increment();
+    			Map(animal => animal.Name).Not.Nullable().UniqueKey("UniqueAnimal");
+    			Map(animal => animal.AnimalType).Not.Nullable().CustomType<AnimalType>().UniqueKey("UniqueAnimal");
                 Map(animal => animal.BirthDay).CustomSqlType("date");
                 Map(animal => animal.Color).CustomType<Color>();
                 Map(animal => animal.Created).Not.Nullable();
                 Map(animal => animal.ImagesSerialized).CustomSqlType("text");
+                Map(animal => animal.PhonesSerialized).CustomSqlType("text");
                 Map(animal => animal.Info).CustomSqlType("text");
+                Map(animal => animal.OwnerName).CustomSqlType("text");
                 Map(animal => animal.IsForFlat);
                 Map(animal => animal.IsForHome);
                 Map(animal => animal.IsHappy);
@@ -118,7 +150,7 @@ namespace SweetHome.Models
                 Map(animal => animal.Size).CustomType<Size>();
                 Map(animal => animal.Toilet);
                 Map(animal => animal.Gender).CustomType<Gender>().Not.Nullable();
-                References(animal => animal.Shelter);
+                References(animal => animal.Shelter).UniqueKey("UniqueAnimal");
     			Table("animals");
     		}
         }

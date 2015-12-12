@@ -2,85 +2,65 @@
 	<div class="shelters2">
 		@foreach(var shelter in Model)
 		{
-			<div class="shelter-item">
-				<div  class="image-item">
-					<div class="img"
-			         style="background-image: url('@shelter.Image');"
-			         title="1">
-			    	</div>
-					<div class="hrefs">
-			              <a class="img-color"></a>
-						  <div>
-							  <div class="img"
-						         style="background-image: url('http://www.preventivevet.com/hs-fs/hub/347034/file-2362500793-jpg/Cat-dog-icon-small.jpg?t=1437097522219');height:50px;width:50px;margin:0 auto;"
-								 title="Животные">
-							    </div>
-								<span>Наши животные </span>
+			@if(shelter.Name != "Частная передержка"){
+				<div class="shelter-item">
+					<div  class="image-item">
+						<div class="img"
+				         style="background-image: url('@shelter.Image');"
+				         title="1">
+				    	</div>
+						<div class="hrefs">
+							<div class="href">
+				              <a class="img-color"></a>
+							  <div>
+									<img src="/images/LAPA.png" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
+									<span>Наши животные </span>
+								</div>
 							</div>
-			                <a class="img-color" href="https://vk.com/priutdrug74" target="_blank"></a>
-							<div>
-							  <div class="img"
-						         style="background-image: url('http://thedkmodels.com/vk.jpg');height:50px;width:50px;margin:0 auto;"
-								 title="Животные">
-							    </div>
-								<span>Группа вконтакте </span>
-							</div> 
+							<div class="href">
+				                <a class="img-color" href="https://vk.com/priutdrug74" target="_blank"></a>
+								<div>
+								  	<img src="http://thedkmodels.com/vk.jpg" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
+									<span>Группа вконтакте </span>
+								</div> 
+							</div>
+							@if(shelter.Name == "Друг") 
+							  {
+								  <div class="href">
+						                <a class="img-color" href="http://priutdrug74.ru" target="_blank"></a>
+										<div>
+										  	<img src="/images/WEB.png" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
+											<span>Веб-сайт</span>
+										</div> 
+									</div>
+							  }
+							  
+						</div>
 					</div>
-				</div>
-				<div class="shelter-description"> 
-						 @if(shelter.Name == "Хочу домой") 
-						  {
-							  <h2><a href="/Shelters/HochuDomoi">@shelter.Name</a></h2>
-						  }
-						  @if(shelter.Name == "Лучик надежды") 
-						  {
-							  <h2><a href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
-						  }
-						  @if(shelter.Name == "Друг") 
-						  {
-							  <h2><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
-						  }
-						
-					  <div class="phone">@shelter.Phone</div>
-					  <div class="text">
-						  @shelter.Info
-					  </div>
+					<div class="shelter-description"> 
+							 @if(shelter.Name == "Хочу домой") 
+							  {
+								  <h2><a href="/Shelters/HochuDomoi">@shelter.Name</a></h2>
+							  }
+							  @if(shelter.Name == "Лучик надежды") 
+							  {
+								  <h2><a href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
+							  }
+							  @if(shelter.Name == "Друг") 
+							  {
+								  <h2><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
+							  }
+							
+						  <div class="phone">
+							  @foreach(var ph in shelter.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){
+								  @ph
+							  }						  		
+						  </div>
+						  <div class="text">
+							  @shelter.Info
+						  </div>
+					</div>	
 				</div>	
-			</div>	
+			}
 		}
 	</div>
-<!--<div class="shelters-list-info">
-		
-	
-		@foreach(var shelter in Model)
-		{
-			<div>
-				<div class="description">				   
-					  @if(shelter.Name == "Хочу домой") 
-					  {
-						  <h2><a href="/Shelters/HochuDomoi">@shelter.Name</a></h2>
-					  }
-					  @if(shelter.Name == "Лучик надежды") 
-					  {
-						  <h2><a href="/Shelters/LuchikNadejdy" target="_blank" >@shelter.Name</a></h2>
-					  }
-					  @if(shelter.Name == "Друг") 
-					  {
-						  <h2><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
-					  }
-					
-				  <div class="phone">@shelter.Phone</div>
-				  <div class="vk"> <a href="@shelter.VKGroup" target="_blank">Группа Вконтакте</a> </div>
-				  <div class="text">
-					  @shelter.Info
-				  </div>
-				  <a type="button" href="/Home/Animals?shelter=@shelter.Id">Посмотреть животных</a>
-			    </div>
-				<div class="img"
-			         style="background-image: url('@shelter.Image');"
-			         title="1">
-			    </div>
-			</div>
-		}
-	
-</div>-->
