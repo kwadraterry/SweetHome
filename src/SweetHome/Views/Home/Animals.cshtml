@@ -44,90 +44,94 @@
 
 <div class="animals-container">
     <div class="filter-column">
-        <ul>
-            @{
-                var allActive = ViewBag.All ? " class=active" : "";
-            }
-            <li><a href="@url"@allActive>Все</a></li>
-            <li class="menu">
-                <div><span>Приюты</span></div>
-                <ul> 
-                    @foreach(var shelter in ViewBag.Shelters)
-		            {
-                        var shelterActive = "";
-                        if (ViewBag.ShelterId == shelter.Id)
-                        {
-                            shelterActive = " class=active";
-                        }
-                        <li><a href="@url?shelter=@shelter.Id"@shelterActive>@shelter.Name</a></li>
-                    }
-                </ul>
-            </li>
-            <li class="menu">
+        <div>
+            <ul>
                 @{
-                    var dogOnly = (ViewBag.Type == AnimalType.Dog &&
-                                   ViewBag.Size == null &&
-                                   ViewBag.AgeLess == null) ? " class=active" : "";
-                    var dogYoung = (ViewBag.Type == AnimalType.Dog &&
-                                    ViewBag.AgeLess == 1) ? " class=active" : "";
-                    var dogSmall = (ViewBag.Type == AnimalType.Dog &&
-                                    ViewBag.Size == Size.Small) ? " class=active" : "";
-                    var dogMedium = (ViewBag.Type == AnimalType.Dog &&
-                                     ViewBag.Size == Size.Medium) ? " class=active" : "";
-                    var dogLarge = (ViewBag.Type == AnimalType.Dog &&
-                                    ViewBag.Size == Size.Large) ? " class=active" : "";
+                    var allActive = ViewBag.All ? " class=active" : "";
                 }
-                <div>
-                    @if (ViewBag.ShelterId == 1)
-                        {
-                            <a href="@url?shelter=1" class="active">Частная передержка</a>
+                <li><a href="@url"@allActive>Все</a></li>
+                <li class="menu">
+                    <div><span>Приюты</span></div>
+                    <ul> 
+                        @foreach(var shelter in ViewBag.Shelters)
+    		            {
+                            var shelterActive = "";
+                            if (ViewBag.ShelterId == shelter.Id)
+                            {
+                                shelterActive = " class=active";
+                            }
+                            <li><a href="@url?shelter=@shelter.Id"@shelterActive>@shelter.Name</a></li>
                         }
-                    else{
-                            <a href="@url?shelter=1">Частная передержка</a>
+                    </ul>
+                </li>
+                <li class="menu">
+                    @{
+                        var dogOnly = (ViewBag.Type == AnimalType.Dog &&
+                                       ViewBag.Size == null &&
+                                       ViewBag.AgeLess == null) ? " class=active" : "";
+                        var dogYoung = (ViewBag.Type == AnimalType.Dog &&
+                                        ViewBag.AgeLess == 1) ? " class=active" : "";
+                        var dogSmall = (ViewBag.Type == AnimalType.Dog &&
+                                        ViewBag.Size == Size.Small) ? " class=active" : "";
+                        var dogMedium = (ViewBag.Type == AnimalType.Dog &&
+                                         ViewBag.Size == Size.Medium) ? " class=active" : "";
+                        var dogLarge = (ViewBag.Type == AnimalType.Dog &&
+                                        ViewBag.Size == Size.Large) ? " class=active" : "";
                     }
-                </div>
-                <div><a href="@url?type=@dog_type"@dogOnly>Собаки</a></div>
-                <ul>
-                    <li><a href="@url?type=@dog_type&age_less=1"@dogYoung>Щенки</a></li>
-                    <li class="menu">
-                        <!--<div><span>Размер</span></div>
-                        <ul>
-                            <li><a href="@url?type=@dog_type&size=@large_size"@dogLarge>Большие</a></li>
-                            <li><a href="@url?type=@dog_type&size=@medium_size"@dogMedium>Средние</a></li>
-                            <li><a href="@url?type=@dog_type&size=@small_size"@dogSmall>Маленькие</a></li>
-                        </ul>-->
-                    </li>
-                </ul>
-            </li>
-            <li class="menu">
-                @{
-                    var catOnly = (ViewBag.Type == AnimalType.Cat &&
-                                   ViewBag.Color == null &&
-                                   ViewBag.AgeLess == null) ? " class=active" : "";
-                    var catYoung = (ViewBag.Type == AnimalType.Cat &&
-                                    ViewBag.AgeLess == 1) ? " class=active" : "";
-                    var catBlond = (ViewBag.Type == AnimalType.Cat &&
-                                    ViewBag.Color == Color.Blond) ? " class=active" : "";
-                    var catMulti = (ViewBag.Type == AnimalType.Cat &&
-                                     ViewBag.Color == Color.Varicoloured) ? " class=active" : "";
-                    var catDark = (ViewBag.Type == AnimalType.Cat &&
-                                    ViewBag.Color == Color.Dark) ? " class=active" : "";
-                }
-                <div><a href="@url?type=@cat_type"@catOnly>Кошки</a></div>
-                <ul>
-                    <li><a href="@url?type=@cat_type&age_less=1"@catYoung>Котята</a></li>
-                    <li class="menu">
-                        <!--<div><span>Цвет</span></div>
-                        <ul>
-                            <li><a href="@url?type=@cat_type&color=@blond_color"@catBlond>Светлые</a></li>
-                            <li><a href="@url?type=@cat_type&color=@dark_color"@catDark>Темные</a></li>
-                            <li><a href="@url?type=@cat_type&color=@multi_color"@catMulti>Разноцветные</a></li>
-                        </ul>-->
-                    </li>
-                </ul>
-            </li>
-        </ul>
+                    <div>
+                        @if (ViewBag.ShelterId == 1)
+                            {
+                                <a href="@url?shelter=1" class="active">Частная передержка</a>
+                            }
+                        else{
+                                <a href="@url?shelter=1">Частная передержка</a>
+                        }
+                    </div>
+                    <div><a href="@url?type=@dog_type"@dogOnly>Собаки</a></div>
+                    <ul>
+                        <li><a href="@url?type=@dog_type&age_less=1"@dogYoung>Щенки</a></li>
+                        <li class="menu">
+                            <!--<div><span>Размер</span></div>
+                            <ul>
+                                <li><a href="@url?type=@dog_type&size=@large_size"@dogLarge>Большие</a></li>
+                                <li><a href="@url?type=@dog_type&size=@medium_size"@dogMedium>Средние</a></li>
+                                <li><a href="@url?type=@dog_type&size=@small_size"@dogSmall>Маленькие</a></li>
+                            </ul>-->
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    @{
+                        var catOnly = (ViewBag.Type == AnimalType.Cat &&
+                                       ViewBag.Color == null &&
+                                       ViewBag.AgeLess == null) ? " class=active" : "";
+                        var catYoung = (ViewBag.Type == AnimalType.Cat &&
+                                        ViewBag.AgeLess == 1) ? " class=active" : "";
+                        var catBlond = (ViewBag.Type == AnimalType.Cat &&
+                                        ViewBag.Color == Color.Blond) ? " class=active" : "";
+                        var catMulti = (ViewBag.Type == AnimalType.Cat &&
+                                         ViewBag.Color == Color.Varicoloured) ? " class=active" : "";
+                        var catDark = (ViewBag.Type == AnimalType.Cat &&
+                                        ViewBag.Color == Color.Dark) ? " class=active" : "";
+                    }
+                    <div><a href="@url?type=@cat_type"@catOnly>Кошки</a></div>
+                    <ul>
+                        <li><a href="@url?type=@cat_type&age_less=1"@catYoung>Котята</a></li>
+                        <li class="menu">
+                            <!--<div><span>Цвет</span></div>
+                            <ul>
+                                <li><a href="@url?type=@cat_type&color=@blond_color"@catBlond>Светлые</a></li>
+                                <li><a href="@url?type=@cat_type&color=@dark_color"@catDark>Темные</a></li>
+                                <li><a href="@url?type=@cat_type&color=@multi_color"@catMulti>Разноцветные</a></li>
+                            </ul>-->
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <button><a href="/Home/New">ДОБАВИТЬ ЗАПИСЬ</a></button>
     </div>
+   
     <div class="animals-display">
         @foreach(var animal in Model)
         {
@@ -141,7 +145,8 @@
                     <p>@animal.Shelter.Name</p>
                 }
                 else{
-                    <p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>
+                    <!--<p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>-->
+                    <p>Приют "@animal.Shelter.Name"</p>
                 }
                  @if(animal.BirthDay != null)
                      {
@@ -229,8 +234,14 @@
             // Заполним модал данными из animalData
             $('#animal-modal>aside>section:nth-child(1)>h3')
                 .html(animalData.Name);
-            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
-                .html("Живет в приюте <a>" + animalData.Shelter.Name + "</a>");
+            if (animalData.Shelter.Name == "Частная передержка"){
+                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
+                .html(animalData.Shelter.Name);
+            }
+            else{
+                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
+                    .html("Живет в приюте <a>" + animalData.Shelter.Name + "</a>");
+            }
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)>a')
                 .attr("href","/Shelters/"+animalData.Shelter.URL);
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')

@@ -81,7 +81,7 @@ namespace SweetHome
                     Images.RemoveAt(Images.Count-1);
                     return new ShelterAnimal
                     {
-                        Name = animalFields[0],
+                        Name = animalFields[0].ToLower(),
                         AnimalType = animalType,
                         BirthDay = birthday,
                         Gender = gender,

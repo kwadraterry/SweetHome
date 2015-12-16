@@ -193,7 +193,8 @@ namespace SweetHome.Controllers
         [HttpPost]
         public IActionResult AddAnimal(string animalName,
             string animalType, string info, string images,
-            string shelterId, string ownerName, string phoneNumbers)
+            string shelterId, string ownerName, string phoneNumbers,
+            string age)
         {
             var shelterIdNum = 1;
             if (shelterId != null){
@@ -210,8 +211,17 @@ namespace SweetHome.Controllers
             if (images == null) {
                 images = "";
             }
+            
+            DateTime? birthday = null;
+            int months;
+            if (Int32.TryParse(age, out months))
+            {
+                birthday = DateTime.UtcNow.AddMonths(- months);
+                Console.WriteLine(birthday);
+                
+            }
             phoneNumbers = RemoveExtraText(phoneNumbers);
-            Console.WriteLine(phoneNumbers);
+            
             using(var session = sessionFactory.OpenSession())
             using(var transaction = session.BeginTransaction())
             {
@@ -219,10 +229,11 @@ namespace SweetHome.Controllers
                 var imagesList = images.Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries);
                 var animal = new ShelterAnimal
                 {
-                    Name = animalName,
+                    Name = animalName.ToLower(),
                     AnimalType = animalTypeEnum,
                     OwnerName = ownerName,
                     Info = info,
+                    BirthDay = birthday,
                     Images = imagesList,
                     PhoneNumbers = phoneNumbers.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries),
                     Created = DateTime.UtcNow,
