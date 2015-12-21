@@ -16,18 +16,6 @@
 	}
 }
 
-#animal-age{
-	>div{
-		.row();
-		>div{
-			.col-xs-2();
-			>input{
-				.form-control();
-			}
-		}
-	}
-}
-
 .dz-remove {
 	position: absolute;
     top: -7px;
@@ -88,13 +76,21 @@
 					border:1px solid #ccc;
 					border-radius:4px;
 					color:#aaa;
-					
 				}
 				>input, select, textarea{
 					max-width: none;					
 					.form-control();
 					height: auto;
 					
+				}
+				>.input-group{
+					>input, select, textarea{
+						max-width: none;					
+						.form-control();
+						height: auto;
+						display: inline-block;
+					}
+					margin-left: -13px;
 				}
 				>:first-child {
 					flex: 3;

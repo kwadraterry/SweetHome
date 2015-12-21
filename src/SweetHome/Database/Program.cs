@@ -44,25 +44,35 @@ namespace SweetHome
             }
             Console.WriteLine("Finished saving items to the database");
         }
-        private void ParseAnimals(string fileContents, int shelterId, AnimalType animalType)
+        private void ParseAnimals(string fileContents)
         {
             Shelter shelter;
-            using (var session = sessionFactory.OpenSession())
-            using (session.BeginTransaction())
-            {
-                shelter = session.QueryOver<Shelter>().Where(sh => sh.Id == shelterId).Take(1).List()[0];
-            }
+          
             var animals = fileContents.Split(new string[]{"\n\n\n\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(animalString =>
                 {
                     var animalFields = animalString.Split(new string[]{"\n\n"}, StringSplitOptions.RemoveEmptyEntries);
                     
                     DateTime? birthday = null;
+                    using (var session = sessionFactory.OpenSession())
+                    using (session.BeginTransaction())
+                    {
+                        shelter = session.QueryOver<Shelter>().Where(sh => sh.Id == Int32.Parse(animalFields[0])).Take(1).List()[0];
+                        
+                    }
                     int months;
-                    if (Int32.TryParse(animalFields[1], out months))
+                    
+                    if (Int32.TryParse(animalFields[3], out months))
                     {
                         birthday = DateTime.UtcNow.AddMonths(- months);
                     }
+                    string type = animalFields[1];
+                    AnimalType animalType;
+                    if (type == "0") {
+                        animalType = AnimalType.Dog;
+                    } else {
+                        animalType = AnimalType.Cat;
+                    }   
                     
                     Gender gender;
                     //  if (animalFields[1] == "М")
@@ -77,15 +87,15 @@ namespace SweetHome
                     //  {
                     gender = Gender.Unknown;
                     //  }
-                    List<String> Images = new List<String>(animalFields[3].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries));
+                    List<String> Images = new List<String>(animalFields[5].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries));
                     Images.RemoveAt(Images.Count-1);
                     return new ShelterAnimal
                     {
-                        Name = animalFields[0].ToLower(),
+                        Name = animalFields[2].ToLower(),
                         AnimalType = animalType,
                         BirthDay = birthday,
                         Gender = gender,
-                        Info = animalFields[2],
+                        Info = animalFields[4],
                         Images = Images,
                         Created = DateTime.UtcNow,
                         Shelter = shelter
@@ -122,12 +132,7 @@ namespace SweetHome
 
             string filename = config.Get("file");
             string type = config.Get("type");
-            AnimalType animalType;
-            if (type == "c") {
-                animalType = AnimalType.Cat;
-            } else {
-                animalType = AnimalType.Dog;
-            }
+            
             string line = null;
             Console.WriteLine("Reading file...");
             using (StreamReader sr = new StreamReader(filename))
@@ -137,9 +142,7 @@ namespace SweetHome
             string command = config.Get("command");
             if (command == "animals")
             {
-                int shelterId = Int32.Parse(config.Get("shelter_id"));
-				Console.WriteLine (shelterId);
-                ParseAnimals(line, shelterId, animalType);
+                ParseAnimals(line);
 
             }
             else if (command == "shelters")

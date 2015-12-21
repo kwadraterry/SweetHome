@@ -217,8 +217,6 @@ namespace SweetHome.Controllers
             if (Int32.TryParse(age, out months))
             {
                 birthday = DateTime.UtcNow.AddMonths(- months);
-                Console.WriteLine(birthday);
-                
             }
             phoneNumbers = RemoveExtraText(phoneNumbers);
             

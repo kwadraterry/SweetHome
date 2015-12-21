@@ -116,7 +116,10 @@
                         }
                 });
                 $("#inputShelterIid").val($('#shelter option:selected').val());
-                $("#phone").mask("+7 (999) 999-9999",{completed:function(){alert("Вы ввели: "+this.val());}});
+                $("#phone").mask("+7 (999) 999-9999",{completed:function(){
+                        $("#phone").mask("+7 (999) 999-9999?, +7 (999) 999-9999");
+                        alert("stuff");
+                }});
                 $("#place").change(function() {
                         $("#shelter-name").toggleClass("myhidden");
                         if($(this).val() === "shelter"){
