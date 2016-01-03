@@ -15,7 +15,8 @@
     },
     "bootstrap": {
       "main": [
-        "fonts/*.*"
+        "fonts/*.*",
+        "dist/css/*.css"
       ]
     }
   }
