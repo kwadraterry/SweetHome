@@ -73,20 +73,9 @@ namespace SweetHome
                     } else {
                         animalType = AnimalType.Cat;
                     }   
-                    
-                    Gender gender;
-                    //  if (animalFields[1] == "М")
-                    //  {
-                    //      gender = Gender.Male;
-                    //  }
-                    //  else if (animalFields[1] == "Ж")
-                    //  {
-                    //      gender = Gender.Female;
-                    //  }
-                    //  else
-                    //  {
+                   
+                    Gender gender;                    
                     gender = Gender.Unknown;
-                    //  }
                     List<String> Images = new List<String>(animalFields[5].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries));
                     Images.RemoveAt(Images.Count-1);
                     return new ShelterAnimal
