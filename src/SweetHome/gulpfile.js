@@ -83,7 +83,7 @@ gulp.task('images', ['clean:img'], function() {
 gulp.task('bower:copy', ['clean:lib'], function() {
 	return gulp.src(mainBowerFiles(), {base: paths.src.bower})
 		// no need to serve source files: they will be bundled in one js and one css
-		.pipe(_ignore.exclude(["**/*.js", "**/*.css", "**/*.less"]))
+		.pipe(_ignore.exclude(["**/*.less"]))
 		.pipe(imagemin()) // ignore non-images, compress images from libs
 		.pipe(gulp.dest(paths.dst.bower));
 });
