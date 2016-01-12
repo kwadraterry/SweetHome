@@ -48,8 +48,13 @@
 							  }
 							  @if(shelter.Name == "Друг") 
 							  {
-								  <h2><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
+								  <h2 style="margin-top:0px;"><a href="/Shelters/Drug" target="_blank" >@shelter.Name</a></h2>
 							  }
+							  @if(shelter.Name == "Холли") 
+							  {
+								  <h2><a href="/Shelters/Holly" target="_blank" >@shelter.Name</a></h2>
+							  }
+							  
 							
 						  <div class="phone">
 							  @foreach(var ph in shelter.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){

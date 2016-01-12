@@ -1,5 +1,9 @@
 @import (reference) "mixins.less";
 
+.red{
+	color:@red;
+}
+
 .contacts-block {
 	.content-block();
 	> div {
@@ -10,6 +14,7 @@
 				>*:not(:first-child) {
 					margin-top:20px;
 				}
+				
 				>li{
 					>a{
 						color:@top-color;
@@ -49,6 +54,14 @@
 	.content-block();
 	> div {
 		.split-3-columns(40px);
+		> .message-info {
+			>ul {
+				padding-left:20px;
+				>li{
+					margin-bottom:5px; 
+				}
+			}
+		}
 	}
 	color:@text-color !important;
 }

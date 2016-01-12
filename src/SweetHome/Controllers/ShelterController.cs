@@ -46,6 +46,18 @@ namespace SweetHome.Controllers
 			    return View(shelter);
             }
         }
+        public IActionResult Holly()
+        {
+            ViewBag.PageAction = "Holly";
+            using(var session = sessionFactory.OpenSession())
+            using(session.BeginTransaction())
+            {
+                var Shelter = session.QueryOver<Shelter>().Take(5).List()[4];
+                Console.WriteLine(Shelter);
+                ViewBag.Shelter = Shelter;
+			    return View();
+            }
+        }
     }
        
 }

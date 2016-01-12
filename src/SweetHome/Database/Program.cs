@@ -77,7 +77,7 @@ namespace SweetHome
                     Gender gender;                    
                     gender = Gender.Unknown;
                     List<String> Images = new List<String>(animalFields[5].Split(new char[]{'\n'}, StringSplitOptions.RemoveEmptyEntries));
-                    Images.RemoveAt(Images.Count-1);
+                    //  Images.RemoveAt(Images.Count-1);
                     return new ShelterAnimal
                     {
                         Name = animalFields[2].ToLower(),

@@ -1,0 +1,158 @@
+
+
+<div class="shelters-list-info">
+	<div>
+		<div class="description">
+		  <h2>@ViewBag.Shelter.Name</h2>
+		  <div class="slogan">
+              <p>Временный дом для бездомных кошек г. Челябинска
+               </p>
+          </div>
+		  <!--<div class="vk"> <a href="https://vk.com/sobakot74" target="_blank">Группа Вконтакте</a> </div>-->
+		  <div class="text">
+          <h4>Условия отдачи животных:</h4>
+              <ul>
+                <li> Строгое соблюдение условий договора (описан для каждой кошки)</li>
+                <li> При себе иметь переноску (сумку спортивную)</li>
+                <li> Кастрация/стерилизация в срок 6-7 месяцев </li>
+                <li> Застекленные балконы и сетки на окнах </li>
+                <li> Лицам старше 21 года </li>
+                <li> Паспорт с пропиской (где будет проживать кошка) 
+                <li> Если семья с детьми, то СПРАВКУ о том, что нет Аллергии у ребенка на кошек!
+                <li> Только в квартиру 
+                <li> Соблюдение рекомендаций по кормлению, уходу и содержанию
+              </ul>
+          </div>
+		  <!--<button>Посмотреть животных</button>-->
+		  <div class="hrefs">
+              <a class="img-color" href="/Home/Animals?shelter=@ViewBag.Shelter.Id"></a>
+			  <div>
+				    <img src="/images/LAPA.png" style="width: 50px; height: 50px; display: block; margin: 0 auto;"/>
+					<span>Наши животные </span>
+			  </div>
+              <a class="img-color" href="@ViewBag.Shelter.VKGroup" target="_blank"></a>
+			  <div>
+			    <div class="img"
+		         style="background-image: url('http://thedkmodels.com/vk.jpg');height:50px;width:50px;margin:0 auto;"
+				 title="Животные">
+			    </div>
+				<span>Группа вконтакте </span>
+			</div>
+		  </div>
+		</div>
+		<div class="img"
+	         style="background-image: url('@ViewBag.Shelter.Image');
+	         title="1">
+	    </div>
+	</div>
+</div>
+
+
+
+<div class="help-block">
+    <header><h1>КАК ПОМОЧЬ</h1></header>
+    <div>
+        <div class="message-info">
+            <h3> Нужды приюта </h3>
+            <ul>
+                <li>Нам всегда нужны кошачьи переноски (не обязательно новые, но чистые) для перемещения кошек — например, в ветклинику, из приюта на передержку и т.д.</li>
+                <li>Кошки нуждаются в различных предметах обстановки и гигиены (лежанки, наполнители для туалетов, специальные пеленки, когтеточки, пуходерки и т.п.).</li>
+                <li>Для многих животных необходимы лекарства: вы можете приносить ветеринарные препараты для кошек или организовать закупку лекарств для кошек.</li>
+                <li>Животные всегда будут очень рады специальным кошачьим лакомствам (Gimpet, Beaphar, Titbit и т.д.).</li>          
+            </ul>
+        </div>
+        <div>
+            <h3> Общение с кошками </h3>
+            <p>Самое простое — всего лишь приехать в приют и немного пообщаться с его обитателями. Приютские кошки страдают от одиночества; для них настоящее счастье, когда кто-то их гладит, чешет за ушком, расчесывает, играет с ними (никакие игрушки этого не заменят). Некоторым из них пришлось пережить предательство хозяев, и теперь таким кошкам очень тяжело снова начать доверять людям — они шипят и забиваются в угол в ответ на любые попытки контакта. И, увы, не так много людей захотят взять себе такое животное. А ведь достаточно немного терпения и доброты, и через некоторое время кошка «оттает», снова станет игривой и ласковой и, вполне возможно, покорит чье-то чуткое сердце.</p>
+            
+        </div>
+        <div>
+            <h3> Финансовая помощь </h3>
+            <p>Карта Сбербанка: 4276 8801 6864 0096 (мобильный банк +79193349834)</p>
+            <p>Карта Челябинвестбанка: 4405 6620 5119 3241</p>
+            <p>Карта Альфа-Банка: 4154 8126 1055 0836 </p>
+            <p>Киви - кошелёк: 9193349834 </p>
+            <p>Яндекс Кошелек: 4100 128 343 26 945 </p>
+            <p>Сотовый: 8-919-334-98-34 </p>
+           
+
+        </div>
+        <!--<div class="message-form">
+            <form>
+                <div class="form-group">
+                    <input type="text"  id="inputName" placeholder="Имя">
+                </div>
+                <div class="form-group">
+                    <input type="email"  id="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="text"  id="inputTopic" placeholder="Тема">
+                </div>
+                <div class="form-group">
+                    <textarea  id="inputMessage" placeholder="Сообщение"></textarea>
+                </div>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>-->
+    </div>
+</div>
+
+<div class="find-block">
+    <header><h1>КАК НАС НАЙТИ</h1></header>
+    <div>
+        <div class="message_info">            
+           <h4>Проезд на общественном транспорте <br>(ост. Дорожная больница)</h4>
+           <!--<p>Ехать в сторону АМЗ</h4>-->
+           <p>Автобус </p>
+           <ul>
+               <li>81 Чистопольская (кольцевая) - ПКиО им. Гагарина </li>    
+           </ul>
+           <p>Трамвай </p>
+           <ul>
+               <li>6 ЧТЗ - Медгородок </li>
+               <li>17 Чичерина - Медгородок </li>
+               <li>20 ЧМК - Медгородок </li>
+           </ul>
+           <p>Маршрутное такси</p>
+           <ul>
+               <li>2, 14, 36, 46, 56, 58, 66, 75, 77, 82, 95, 136, 200, 370</li>
+           </ul>
+           <p> Доступен проезд на автомобиле </p>
+           <h5 class="red"> Перед посещением приюта нужно обязательно <br> <b>предупредить руководителя!</b></h5>
+        </div>
+        <div class="yandex_map">
+            <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=ciqqaX9AldBM-VyBWqAV5j5ucqin2DbN&width=500&height=400&lang=ru_RU&sourceType=constructor"></script>
+        </div>
+    </div>
+</div>
+
+<div class="contacts-block">
+    <header><h1>КОНТАКТЫ</h1></header>
+    <div>
+        <div class="message-info">
+            <ul>
+                <li><a href="https://vk.com/id22203379" target="_blank">Ольга Селевко</a><br>
+                    Руководитель<br>
+                    8-919-334-98-34<br>
+                </li>
+                
+        </div>
+        <div class="message-form">
+            <form>
+                <div class="form-group">
+                    <input type="text"  id="inputName" placeholder="Имя">
+                </div>
+                <div class="form-group">
+                    <input type="email"  id="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="text"  id="inputTopic" placeholder="Тема">
+                </div>
+                <div class="form-group">
+                    <textarea  id="inputMessage" placeholder="Сообщение"></textarea>
+                </div>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>

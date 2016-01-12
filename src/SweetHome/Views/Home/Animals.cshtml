@@ -22,7 +22,7 @@
         <section>
             <h3></h3>
             <p><a></a></p>
-            <p></p>
+            <p class="phone"></p>
         </section>
         <section class="gallery">
             <ul class="gallery-aux">
@@ -248,6 +248,9 @@
                 .html(animalData.Shelter.PhoneNumbers);
            $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
                 .html(animalData.Info);
+            $('.phone').text(function(i, text) {
+                return text.replace(/(\d{1})(\d{3})(\d{3})(\d{4})/, '$1-$2-$3-$4');
+            });
             var photoElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = "";
