@@ -15,44 +15,95 @@
 </head>
 <body>
     @RenderSection("modal", required: false)
-    <div class="navigation">
-        <div>
-            <a href='@Url.Action("Index", "Home", new {})'>
+    @if (ViewBag.PageAction != "Index")
+    {
+        <div class="navigation">
                 <div>
-                    <img src="/images/logo.png">
+                    <a href='@Url.Action("Index", "Home", new {})'>
+                        <div>
+                            <img src="/images/logo-new.png">
+                        </div>
+                       
+                    </a>
+                    
+                    @{
+                        var indexClass = "";
+                        var animalsClass = "";
+                        var sheltersClass = "";
+                        var volunteersClass = "";
+                        var current = " class=current";
+                        string pageAction = ViewBag.PageAction;
+                        switch (pageAction)
+                        {
+                            case "Index":
+                                indexClass = current;
+                                break;
+                            case "Animals":
+                                animalsClass = current;
+                                break;
+                            case "Shelters":
+                                sheltersClass = current;
+                                break;
+                            case "Volunteers":
+                                volunteersClass = current;
+                                break;
+                        }
+                    }
+                    <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
+                    <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
+                    <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
+                    <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
                 </div>
-               
-            </a>
-            
-            @{
-                var indexClass = "";
-                var animalsClass = "";
-                var sheltersClass = "";
-                var volunteersClass = "";
-                var current = " class=current";
-                string pageAction = ViewBag.PageAction;
-                switch (pageAction)
-                {
-                    case "Index":
-                        indexClass = current;
-                        break;
-                    case "Animals":
-                        animalsClass = current;
-                        break;
-                    case "Shelters":
-                        sheltersClass = current;
-                        break;
-                    case "Volunteers":
-                        volunteersClass = current;
-                        break;
-                }
-            }
-            <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
-            <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
-            <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
-            <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
-        </div>
-    </div>
+            </div>
+    }
+    else{
+        <div class="img"
+                 style="height:700px;background-image: url('http://wallpaperry.com/sites/default/files/styles/2880x1800/public/images/orig//433%20-%205Lwy0Qf.jpg?itok=Ne__YpFP');"
+                 title="1">
+            <div class="navigation">
+                    <div>
+                        <a href='@Url.Action("Index", "Home", new {})'>
+                            <div>
+                                <img src="/images/logo-new.png">
+                            </div>
+                           
+                        </a>
+                        
+                        @{
+                            var indexClass = "";
+                            var animalsClass = "";
+                            var sheltersClass = "";
+                            var volunteersClass = "";
+                            var current = " class=current";
+                            string pageAction = ViewBag.PageAction;
+                            switch (pageAction)
+                            {
+                                case "Index":
+                                    indexClass = current;
+                                    break;
+                                case "Animals":
+                                    animalsClass = current;
+                                    break;
+                                case "Shelters":
+                                    sheltersClass = current;
+                                    break;
+                                case "Volunteers":
+                                    volunteersClass = current;
+                                    break;
+                            }
+                        }
+                        <a href="@Url.Action("Index", "Home", new {})"@indexClass>Главная</a>
+                        <a href="@Url.Action("Animals", "Home", new {})"@animalsClass>Ищем хозяев</a>
+                        <a href="@Url.Action("Shelters", "Home", new {})"@sheltersClass>Приюты</a>
+                        <a href="@Url.Action("Volunteers", "Home", new {})"@volunteersClass>Волонтёрам</a>
+                    </div>
+                </div>
+                <div class="description"><h2>Подарите им право быть счастливыми</h2>
+                     Дари тепло - это общая база животных из приютов г.Челябинска и Челябинской области. Наша задача заключается в том, чтобы помочь каждому одинокому питомцу найти свой дом. На сегодняшний день в Челябинске и Челябинской области находится _ приютов. В каждом из них нашли пристанище около 150 кошек и собак.
+                </div>    
+         </div>
+}
+    
     <div class="main-container">
         @RenderBody()
         <hr />

@@ -13,6 +13,19 @@ body {
 	display: none !important;
 }
 
+.description{
+    position: absolute;
+    width: 550px;
+    top:220px;
+    left:120px;
+    color:@top-color-white;
+    font-size:16px;
+    >h2{
+        color:@top-color-white;    
+    }
+    
+}
+
 // главная навигационная панель
 .navigation {
     height: @navbar-height; 
@@ -23,24 +36,26 @@ body {
         height: 100%;
         .container();
         >a{
-            color:@top-color;
+            color:@top-color-white;
             height: 100px;
-            line-height: 80px;
-            border-top: 6px @body-bg solid ;
+            line-height: 60px;
+            // border-top: 6px @body-bg solid ;
+            margin-top:28px;
         }
         > *:first-child {
            font-size: 30px;
            >div>img {
                width: 270px;
-               height: 70px;
+               height: 90px;
                filter: FlipH;
            }
            margin-right: auto;
         }
         > .current{
-            color:#00897B;
-            border-top: 6px solid;
+            border-top: 14px #FF6600 solid;
+            margin-top:0px;
         }
+       
         > *:not(:first-child) {
             margin-left: 30px;
             font-size: 18px;
@@ -48,6 +63,7 @@ body {
         > *:hover {
             text-decoration: none;
         }
+        
         
     }
     @media only screen and (max-width: @screen-xs-max) {
