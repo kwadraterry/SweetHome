@@ -98,6 +98,22 @@
 {
 <script src="~/javascript/dropzone.js"></script>
 <script>
+        var mask_phone = function(i,base_mask, addition_mask){
+                console.log(base_mask);
+                if (i === 5){
+                        console.log('dasda');
+                        return 0;
+                }
+                else{                        
+                        var phone_val = $("#phone").val();
+                        $("#phone").mask(base_mask,{completed:function(){                             
+                                mask_phone(i+1,base_mask + addition_mask, addition_mask);
+                                return 0;
+                                
+                        }});  
+                        $("#phone").val(phone_val); 
+                }     
+        }
         $(document).ready(function () {
                 require('jquery.maskedinput');
                 var images = [];
@@ -116,10 +132,13 @@
                         }
                 });
                 $("#inputShelterIid").val($('#shelter option:selected').val());
-                $("#phone").mask("+7 (999) 999-9999",{completed:function(){
-                        $("#phone").mask("+7 (999) 999-9999?, +7 (999) 999-9999");
-                        alert("stuff");
-                }});
+                var base_mask = "+7 (999) 999-9999";
+                var addition_mask = "?, +7 (999) 999-9999";
+                mask_phone(0,base_mask, addition_mask);
+                // $("#phone").mask(base_mask,{completed:function(){
+                //         current_mask = base_mask + addition_mask;
+                //         $("#phone").mask(current_mask);
+                // }});
                 $("#place").change(function() {
                         $("#shelter-name").toggleClass("myhidden");
                         if($(this).val() === "shelter"){

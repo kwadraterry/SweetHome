@@ -156,11 +156,12 @@
                      {
                          @if (animal.PhoneNumbers.Count != 0)
                             {
-                            <p>
-                            @foreach(var ph in animal.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){
-								  @ph
-							  }	
-                            </p>
+                                <p>
+                                    @foreach(var ph in animal.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p))
+                                    {
+        								  @ph
+        							}	
+                                </p>
                             }
                             else{
                                 @if (animal.Shelter.PhoneNumbers.Count != 0)
@@ -244,13 +245,28 @@
             }
             $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)>a')
                 .attr("href","/Shelters/"+animalData.Shelter.URL);
-            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
+                   
+            if (animalData.PhoneNumbers.length != 0){
+                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
+                .html(animalData.PhoneNumbers);
+            }
+            else{
+                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
                 .html(animalData.Shelter.PhoneNumbers);
-           $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
+            }              
+          
+            $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
                 .html(animalData.Info);
-            $('.phone').text(function(i, text) {
-                return text.replace(/(\d{1})(\d{3})(\d{3})(\d{4})/, '$1-$2-$3-$4');
-            });
+            var phones = $('.phone').text().replace(/\s/g, '');
+            var end_phones = "";
+           
+            for (var i = 0; i < phones.length; i+=11) {
+                end_phones = end_phones + phones.substring(i,i+11).replace(/(\d{1})(\d{3})(\d{3})(\d{4})/, '$1-$2-$3-$4');
+                if (i<phones.length-11){
+                    end_phones += ", ";
+                }
+            }
+            $('.phone').text(end_phones);
             var photoElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = "";
