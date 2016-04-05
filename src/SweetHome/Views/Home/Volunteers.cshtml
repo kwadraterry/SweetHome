@@ -38,6 +38,7 @@
         
     <div class="volunteers-text">
         <h1 class="volunteers-h"><div>ПОМОГИТЕ СЕЙЧАС</div></h1>
+        
         <p>Это поможет не только животным найти любящую семью, но и навсегда</p>
         <p>изменит вашу жизнь к лучшему</p>
         <p>Есть много способов помочь: от расклейки объявлений до организации мероприятий. Просто выберите, что вам подходит</p>
@@ -62,9 +63,69 @@
                 <div>
                     Каждый приют, функционирующий в пределах Челябинской области, постоянно нуждается в кормах,
                     лекарственных средствах, строительных материалах, оплате передержек и стационаров для больных животных. Приюты не получают помощи ни от государства, ни от городских властей, поэтому финансирование лечения и содержания животных осуществляется только волонтерами-основателями и добровольными пожертвованиями неравнодушных граждан. Нам важна любая, даже самая маленькая помощь!
+                    
+                   
+                    
+                    
+                    
+                    <form id="paymentForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                      <input type="hidden" name="receiver" value="410013398640025"> 
+                      <input type="hidden" name="formcomment" value="Челябинский фонд помощи животным «GiveFuture»">
+                      <input type="hidden" name="short-dest" value="Челябинский фонд помощи животным «GiveFuture»">
+                      <input type="hidden" name="quickpay-form" value="donate"> 
+                      <input type="hidden" name="targets" value="Помощь животным в приютах г. Челябинска">
+                      <div class="form-group ">
+                        <label for="exampleInputEmail1" ">Сумма пожертвования</label>
+                        <div class="col-sm-6" >
+                            <input type="text" class="form-control" id="sum" name="sum" value="100" >
+                        </div>
+                        <div id="rubDiv" >
+                         <span>руб.</span>
+                        </div>
+                      </div>
+                      <div class="form-group" id="paymentTypes">
+                          <label for="">Способ оплаты</label>
+                          <div class="btn-group" data-toggle="buttons">
+                              <label class="btn btn-primary active">
+                                <input type="radio" name="paymentType" id="AC" autocomplete="off" value="AC" checked> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__any-card.png" alt="" title="">
+                              </label>
+                              <label class="btn btn-primary">
+                                <input type="radio" name="paymentType" id="AC" autocomplete="off" value="MC"> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__mobile.png" alt="" title="">
+                              </label>
+                              <label class="btn btn-primary">
+                                <input type="radio" name="paymentType" id="AC" autocomplete="off" value="PC"> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__yamoney.png" alt="" title="">
+                              </label>
+                           </div>
+                        </div>
+                        <div class="form-group" id="commentGroup">
+                            <label for="comment" ">Комментарий (необязательно)</label>
+                            <textarea class="form-control" name="comment" rows="3" placeholder="Здесь можно указать цель пожертвования, например, на корм и лечение животных."></textarea>
+                        </div> 
+                         <div class="buttonCover">                         
+                            <button type="submit" id="volunteers-help">ПОМОЧЬ</button>
+                        </div>
+                    </form>
+                    
+                    <!--<form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml"> 
+                        <input type="hidden" name="receiver" value="410013398640025"> 
+                        <input type="hidden" name="formcomment" value="Проект «GiveFuture»"> 
+                        <input type="hidden" name="short-dest" value="Проект «Железный человек: реактор холодного ядерного синтеза"> 
+                        <input type="hidden" name="label" value="$order_id"> 
+                        <input type="hidden" name="quickpay-form" value="donate"> 
+                        <input type="hidden" name="targets" value="транзакция {order_id}"> 
+                        <input type="hidden" name="sum" value="4568.25" data-type="number"> 
+                        <input type="hidden" name="comment" value="Хотелось бы дистанционного управления."> 
+                        <input type="hidden" name="need-fio" value="true"> 
+                        <input type="hidden" name="need-email" value="true"> 
+                        <input type="hidden" name="need-phone" value="false"> 
+                        <input type="hidden" name="need-address" value="false"> 
+                        <label><input type="radio" name="paymentType" value="PC">Яндекс.Деньгами</label> 
+                        <label><input type="radio" name="paymentType" value="AC">Банковской картой</label> 
+                        <input type="submit" value="Пожертвовать"> 
+                    </form>
                     <div>                         
                         <button id="volunteers-help">ПОМОЧЬ</button>
-                    </div>
+                    </div>-->
                    
                 </div>
              </div>             
@@ -107,18 +168,18 @@
 {
 <script>
     (function () {
-        $("#volunteers-modal").click(function(e){
-            if (e.target === this){
-                $(this).removeClass("active");   
-                $("body").css("overflow-y", "auto");
-                $("body").css("padding-right", 0);
-            }
-        });
-        $("#volunteers-help").click(function(){
-            $("#volunteers-modal").addClass("active");
-            $("body").css("overflow-y", "hidden");
-            $("body").css("padding-right", scroll_w + "px");
-        });
+        // $("#volunteers-modal").click(function(e){
+        //     if (e.target === this){
+        //         $(this).removeClass("active");   
+        //         $("body").css("overflow-y", "auto");
+        //         $("body").css("padding-right", 0);
+        //     }
+        // });
+        // $("#volunteers-help").click(function(){
+        //     $("#volunteers-modal").addClass("active");
+        //     $("body").css("overflow-y", "hidden");
+        //     $("body").css("padding-right", scroll_w + "px");
+        // });
         $(".close").click(function(){
             $(this).parents(".active").removeClass("active");
             $("body").css("overflow-y", "auto");
