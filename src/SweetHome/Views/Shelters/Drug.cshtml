@@ -79,15 +79,53 @@
             <p></p>
         </div>
         <div>
-            <h3> Финансовая помощь </h3>
-            <p>Номер карты СБ: 6390 0272 9011 9176 52</p>
-            <p>Яндекс кошелек: 41001434324861</p> 
-            <p>WebMoney: R246962901825</p>
-            <p>Челябинская городская общественная организация защиты животных "Друг"<br>
+             <h3> Финансовая помощь </h3>
+             <p>Номер карты СБ: 6390 0272 9011 9176 52</p>
+             <p>Яндекс кошелек: 41001434324861</p> 
+             <p>WebMoney: R246962901825</p>
+             <p>Челябинская городская общественная организация защиты животных "Друг"<br>
                 ЧЕЛЯБИНВЕСТБАНК <br>
                 р/с 40703810800120000142<br>
                 БИК банка 047501779 ИНН 7447037557<br>
-                Кор. счёт банка 30101810400000000779</p>            
+                Кор. счёт банка 30101810400000000779</p>     
+             <p>Вы можете помочь прямо сейчас и перевести любую сумму на наш Яндекс-кошелек</p>
+             <form class="paymentForm" method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+              <input type="hidden" name="receiver" value="41001434324861"> 
+              <input type="hidden" name="formcomment" value="Приют для животных «Друг»">
+              <input type="hidden" name="short-dest" value="Приют для животных «Друг»">
+              <input type="hidden" name="quickpay-form" value="donate"> 
+              <input type="hidden" name="targets" value="Помощь животным приюта «Друг» г.Челябинск">
+              <div class="form-group ">
+                <label for="sum" ">Сумма пожертвования</label>
+                <div class="col-sm-6" >
+                    <input type="text" class="form-control" id="sum" name="sum" value="100" >
+                </div>
+                <div id="rubDiv" >
+                 <span>руб.</span>
+                </div>
+              </div>
+              <div class="form-group" id="paymentTypes">
+                  <label for="">Способ оплаты</label>
+                  <div class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" name="paymentType" id="AC" autocomplete="off" value="AC" checked> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__any-card.png" alt="" title="">
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" name="paymentType" id="AC" autocomplete="off" value="MC"> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__mobile.png" alt="" title="">
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" name="paymentType" id="AC" autocomplete="off" value="PC"> <img class="b-icon b-form-radio__ico" src="/images/quickpay-widget__yamoney.png" alt="" title="">
+                      </label>
+                   </div>
+                </div>
+                <div class="form-group" id="commentGroup">
+                    <label for="comment" ">Комментарий (необязательно)</label>
+                    <textarea class="form-control" name="comment" rows="3" placeholder="Здесь можно указать цель пожертвования, например, на корм и лечение животных."></textarea>
+                </div> 
+                 <div>                         
+                    <button class="btn btn-danger" type="submit">ПОМОЧЬ</button>
+                </div>
+            </form>       
         </div>
     </div>
 </div>
