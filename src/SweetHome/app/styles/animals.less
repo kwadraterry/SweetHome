@@ -9,9 +9,33 @@
 @menu-item-checked-color: #B3E5FC;
 @menu-item-padding: 4px;
 
+
+.image-container{
+	width: 470px;
+	height: 470px;
+	background-color: #f7f7f7;
+	position: relative;
+	
+	&__image_portrait{
+		height: 100%;
+		width:auto;
+		margin: 0 auto;
+	}
+	
+	&__image_landscape{
+		width:100%;
+		height: auto;
+		position:absolute;
+	    top:0;
+	    bottom:0;
+	    margin:auto;
+	}
+}
+
 #animal-modal {
 	.bx-viewport {
-		height: 600px;
+		height: 470px;
+		border: 0;
 	}
 	.modal-x(@padding: 30px);
 	span.close {
@@ -69,6 +93,7 @@
 		}
 		.bx-wrapper {
 			margin-bottom: 30px;
+			width: 470px;
 		}
 		margin-bottom: 30px;
 	}

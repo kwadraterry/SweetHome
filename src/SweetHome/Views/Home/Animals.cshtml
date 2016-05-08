@@ -194,6 +194,22 @@
 @section scripts
 {
 <script>
+    
+    function get_orientation(src){
+        var img = new Image();
+        img.src = src;
+        var width = img.width;
+        var height = img.height;
+        
+        if(width > height) { 
+            return "image-container__image_landscape"; 
+        } else {
+            return "image-container__image_portrait";
+        }
+        
+    }
+    
+    
     (function () {
         var modalUtils = require('utils/modal');
         var scroll_w = modalUtils.getScrollBarWidth();
@@ -281,7 +297,7 @@
             for (var i = 0; i < animalData.Images.length; i++) {
                 var active = "";
                 if (i==0) active = ' class="selected"';
-                photoElems += '<li' + active + '>' + img.div(animalData.Images[i]) + '</li>';
+                photoElems += '<li' + active + '>' + '<div class="image-container"><img class="'+ get_orientation(animalData.Images[i]) +'"  src="' + animalData.Images[i] + '"/></div></li>';
             }
             var galleryElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
