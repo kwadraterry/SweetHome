@@ -17,156 +17,127 @@
 }
 
 @section modal {
-<div id="animal-modal"> 
-    <aside>
-        <section>
-            <h3></h3>
-            <p><a></a></p>
-            <p class="phone"></p>
-        </section>
-        <section class="gallery">
-            <ul class="gallery-aux">
+<div id="animal-modal" class="animal-modal"> 
+    <aside class="animal-modal__aside">
+        <section class="animal-modal__title-section">
+            <h3 class="animal-modal__animal-name"></h3>
+            <p class="animal-modal__place"><a class="animal-modal__place-link"></a></p>
+            <p class="animal-modal__phone"></p>
+            <ul class="animal-modal__gallery-aux">
             </ul>
         </section>
-        <section>
-            <p></p>
+        <section class="animal-modal__gallery">            
         </section>
-        <footer>
-            <a></a>
-            <a></a>
-            <a></a>
+        <section class="animal-modal__description">
+            <p class="animal-modal__description-text"></p>
+        </section>
+        <footer class="animal-modal__footer">
+            <a class="animal-modal__footer"></a>
+            <a class="animal-modal__footer"></a>
+            <a class="animal-modal__footer"></a>
         </footer>
-        <span class="close"></span>
+        <span class="animal-modal__close"></span>
     </aside>
 </div>
 }
 
 
-<div class="animals-container">
-    <div class="filter-column">
-        <div class="col-sm-3 col-md-3 pull-right" id="searchForm">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Поиск" name="srch-term" id="srch-term">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+<div class="animals">
+    <div class="animals__filter-column">
+        <div class="animals__search-form-container col-sm-3 col-md-3 pull-right" id="searchForm">
+            <form class="animals__search-form navbar-form" role="search">
+                <div class="animals__search-form-input-group input-group">
+                    <input type="text" class="animals__search-form-input form-control" placeholder="Поиск" name="srch-term" id="srch-term">
+                    <div class="animals__search-form-input-group-btn input-group-btn">
+                        <button class="animals__search-form-input-group-button btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
             </form>
         </div>
-        <div>
-            <ul>
+        <div class="animals__filter">
+            <ul class="animals__filter-list">
                 @{
-                    var allActive = ViewBag.All ? " class=active" : "";
+                    var allActive = ViewBag.All ? " animals__filter-link_active" : "";
                 }
-                <li><a href="@url"@allActive>Все</a></li>
-                <li class="menu">
-                    <div><span>Приюты</span></div>
-                    <ul> 
+                <li class="animals__filter-item"><a class="animals__filter-link" + @allActive href="@url">Все</a></li>
+                <li class="animals__filter-item animals__filter-menu">
+                    <div class="animals__filter-name">Приюты</div>
+                    <ul class="animals__filter-list">
                         @foreach(var shelter in ViewBag.Shelters)
     		            {
                             var shelterActive = "";
                             if (ViewBag.ShelterId == shelter.Id)
                             {
-                                shelterActive = " class=active";
+                                shelterActive = " animals__filter-link_active";
                             }
-                            <li><a href="@url?shelter=@shelter.Id"@shelterActive>@shelter.Name</a></li>
+                            <li class="animals__filter-item"><a class="animals__filter-link" + @shelterActive href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
                         }
                     </ul>
                 </li>
-                <li class="menu">
+                <li class="animals__filter-item animals__filter-menu">
                     @{
                         var dogOnly = (ViewBag.Type == AnimalType.Dog &&
                                        ViewBag.Size == null &&
-                                       ViewBag.AgeLess == null) ? " class=active" : "";
+                                       ViewBag.AgeLess == null) ? " animals__filter-link_active" : "";
                         var dogYoung = (ViewBag.Type == AnimalType.Dog &&
-                                        ViewBag.AgeLess == 1) ? " class=active" : "";
-                        var dogSmall = (ViewBag.Type == AnimalType.Dog &&
-                                        ViewBag.Size == Size.Small) ? " class=active" : "";
-                        var dogMedium = (ViewBag.Type == AnimalType.Dog &&
-                                         ViewBag.Size == Size.Medium) ? " class=active" : "";
-                        var dogLarge = (ViewBag.Type == AnimalType.Dog &&
-                                        ViewBag.Size == Size.Large) ? " class=active" : "";
+                                        ViewBag.AgeLess == 1) ? " animals__filter-link_active" : "";
                     }
-                    <div>
+                    <div class="animals__filter-name">
                         @if (ViewBag.ShelterId == 1)
                             {
-                                <a href="@url?shelter=1" class="active">Частная передержка</a>
+                                <a class="animals__filter-shelters-link animals__filter-shelters-link_active" href="@url?shelter=1">Частная передержка</a>
                             }
                         else{
-                                <a href="@url?shelter=1">Частная передержка</a>
+                                <a class="animals__filter-link" href="@url?shelter=1">Частная передержка</a>
                         }
                     </div>
-                    <div><a href="@url?type=@dog_type"@dogOnly>Собаки</a></div>
-                    <ul>
-                        <li><a href="@url?type=@dog_type&age_less=1"@dogYoung>Щенки</a></li>
-                        <li class="menu">
-                            <!--<div><span>Размер</span></div>
-                            <ul>
-                                <li><a href="@url?type=@dog_type&size=@large_size"@dogLarge>Большие</a></li>
-                                <li><a href="@url?type=@dog_type&size=@medium_size"@dogMedium>Средние</a></li>
-                                <li><a href="@url?type=@dog_type&size=@small_size"@dogSmall>Маленькие</a></li>
-                            </ul>-->
-                        </li>
+                    <a class="animals__filter-link" + @dogOnly href="@url?type=@dog_type">Собаки</a>
+                    <ul class="animals__filter-list">
+                        <li class="animals__filter-item"><a class="animals__filter-link" + @dogYoung href="@url?type=@dog_type&age_less=1">Щенки</a></li>
                     </ul>
                 </li>
-                <li class="menu">
+                <li class="animals__filter-item animals__filter-menu">
                     @{
                         var catOnly = (ViewBag.Type == AnimalType.Cat &&
                                        ViewBag.Color == null &&
-                                       ViewBag.AgeLess == null) ? " class=active" : "";
+                                       ViewBag.AgeLess == null) ? " animals__filter-link_active" : "";
                         var catYoung = (ViewBag.Type == AnimalType.Cat &&
-                                        ViewBag.AgeLess == 1) ? " class=active" : "";
-                        var catBlond = (ViewBag.Type == AnimalType.Cat &&
-                                        ViewBag.Color == Color.Blond) ? " class=active" : "";
-                        var catMulti = (ViewBag.Type == AnimalType.Cat &&
-                                         ViewBag.Color == Color.Varicoloured) ? " class=active" : "";
-                        var catDark = (ViewBag.Type == AnimalType.Cat &&
-                                        ViewBag.Color == Color.Dark) ? " class=active" : "";
+                                        ViewBag.AgeLess == 1) ? " animals__filter-link_active" : "";
                     }
-                    <div><a href="@url?type=@cat_type"@catOnly>Кошки</a></div>
-                    <ul>
-                        <li><a href="@url?type=@cat_type&age_less=1"@catYoung>Котята</a></li>
-                        <li class="menu">
-                            <!--<div><span>Цвет</span></div>
-                            <ul>
-                                <li><a href="@url?type=@cat_type&color=@blond_color"@catBlond>Светлые</a></li>
-                                <li><a href="@url?type=@cat_type&color=@dark_color"@catDark>Темные</a></li>
-                                <li><a href="@url?type=@cat_type&color=@multi_color"@catMulti>Разноцветные</a></li>
-                            </ul>-->
-                        </li>
+                    <a class="animals__filter-link" + @catOnly href="@url?type=@cat_type">Кошки</a>
+                    <ul class="animals__filter-list">
+                        <li class="animals__filter-item"><a class="animals__filter-link" + @catYoung href="@url?type=@cat_type&age_less=1">Котята</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <button><a href="/Home/New">ДОБАВИТЬ ЗАПИСЬ</a></button>
+        <button class="animals__filter-button"><a class="animals__filter-button-link" href="/Home/New">ДОБАВИТЬ ЗАПИСЬ</a></button>
     </div>
    
-    <div class="animals-display">
+    <div class="animals__display">
         @foreach(var animal in Model)
         {
         var jsonAnimal = SweetHome.Utils.Json.SerializeObject<Shelter>(animal, (shelter => shelter.Animals));
-        <div data-animal="@jsonAnimal" data-animal-id="@animal.Id">
-            <div class="img" style="background-image: url('@animal.Images[0]');"></div>
-            <h3>@animal.Name</h3>
+        <div class="animals__item" data-animal="@jsonAnimal" data-animal-id="@animal.Id">
+            <div class="animals__item-img" style="background-image: url('@animal.Images[0]');"></div>
+            <h3 class="animals__name">@animal.Name</h3>
             @if(animal.Shelter != null)
             {
                 @if(animal.Shelter.Name == "Частная передержка"){
-                    <p>@animal.Shelter.Name</p>
+                    <p class="animals__shelter-name">@animal.Shelter.Name</p>
                 }
                 else{
-                    <!--<p><a href="/Shelters/@animal.Shelter.URL">Приют "@animal.Shelter.Name" </a></p>-->
-                    <p>Приют "@animal.Shelter.Name"</p>
+                    <p class="animals__shelter-name">Приют "@animal.Shelter.Name"</p>
                 }
                  @if(animal.BirthDay != null)
                      {
-                        <p>@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
+                        <p class="animals__age">@DateUtils.Age(animal.BirthDay.Value,DateTime.UtcNow)</p>
                      }
                  else
                      {
                          @if (animal.PhoneNumbers.Count != 0)
                             {
-                                <p>
+                                <p class="animals__phones">
                                     @foreach(var ph in animal.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p))
                                     {
         								  @ph
@@ -176,7 +147,7 @@
                             else{
                                 @if (animal.Shelter.PhoneNumbers.Count != 0)
                                 {
-                                    <p>
+                                    <p class="animals__phones">
                                     @foreach(var ph in animal.Shelter.PhoneNumbers.Select(phone => String.Format("{0:#-###-###-####}", double.Parse(phone))).Aggregate((acc, p) => acc + ", " + p)){
         								  @ph
         							  }	
@@ -201,10 +172,10 @@
         var width = img.width;
         var height = img.height;
         
-        if(width > height) { 
-            return "image-container__image_landscape"; 
+        if(width > height) {
+            return "animal-modal__gallery-photos-image_landscape";
         } else {
-            return "image-container__image_portrait";
+            return "animal-modal__gallery-photos-image_portrait";
         }
         
     }
@@ -222,18 +193,18 @@
             }
             return height; 
         };
-        $('.filter-column').on(
+        $('.animals__filter-column').on(
             'click',
-            'li.menu>div',
+            '.animals__filter-name',
             function(e){
                 var $this = $(this);
                 if (e.offsetX < 0) { // клик по псевдоэлементу
                     $this.parent().children('ul').slideToggle(500);
-                    $this.parent().toggleClass("folded");
+                    $this.parent().toggleClass("animals__filter-menu_folded");
                 }
             }
         );
-        $(".close").click(function(){
+        $(".animal-modal__close").click(function(){
             $(this).parents(".active").removeClass("active");
             $("body").css("overflow-y", "auto");
             $("body").css("padding-right", 0);
@@ -248,7 +219,7 @@
         });
         require('bxslider');
         var slider = undefined;
-        $("#animal-modal").on("click", ".gallery-aux li", function(e){
+        $("#animal-modal").on("click", ".animal-modal__gallery-aux-item", function(e){
             var li = this;
             var ul = li.parentNode;
             var index = Array.prototype.indexOf.call(ul.children, li);
@@ -259,17 +230,17 @@
             var animalData = $(this).data('animal');
             console.log(animalData.Images);
             // Заполним модал данными из animalData
-            $('#animal-modal>aside>section:nth-child(1)>h3')
+            $('.animal-modal__animal-name')
                 .html(animalData.Name);
             if (animalData.Shelter.Name == "Частная передержка"){
-                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
+                $('.animal-modal__place')
                 .html(animalData.Shelter.Name);
             }
             else{
-                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)')
-                    .html("Живет в приюте <a>" + animalData.Shelter.Name + "</a>");
+                $('.animal-modal__place')
+                    .html("Живет в приюте <a class='animal-modal__place-link'>" + animalData.Shelter.Name + "</a>");
             }
-            $('#animal-modal>aside>section:nth-child(1)>p:nth-child(2)>a')
+            $('.animal-modal__place-link')
                 .attr("href","/Shelters/"+animalData.Shelter.URL);
                    
             if (animalData.PhoneNumbers.length != 0){
@@ -277,13 +248,13 @@
                 .html(animalData.PhoneNumbers);
             }
             else{
-                $('#animal-modal>aside>section:nth-child(1)>p:nth-child(3)')
+                $('.animal-modal__phone')
                 .html(animalData.Shelter.PhoneNumbers);
             }              
           
-            $('#animal-modal>aside>section:nth-child(3)>p:nth-child(1)')
+            $('.animal-modal__description-text')
                 .html(animalData.Info);
-            var phones = $('.phone').text().replace(/\s/g, '');
+            var phones = $('.animal-modal__phone').text().replace(/\s/g, '');
             var end_phones = "";
            
             for (var i = 0; i < phones.length; i+=11) {
@@ -292,33 +263,33 @@
                     end_phones += ", ";
                 }
             }
-            $('.phone').text(end_phones);
+            $('.animal-modal__phone').text(end_phones);
             var photoElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
-                var active = "";
-                if (i==0) active = ' class="selected"';
-                photoElems += '<li' + active + '>' + '<div class="image-container"><img class="'+ get_orientation(animalData.Images[i]) +'"  src="' + animalData.Images[i] + '"/></div></li>';
+                var active = '"';
+                if (i==0) active = ' selected" ';
+                photoElems += '<li class="animal-modal__gallery-photo' + active + '>' + '<div class="animal-modal__gallery-photos-image-container"><img class="'+ get_orientation(animalData.Images[i]) +'"  src="' + animalData.Images[i] + '"/></div></li>';
             }
             var galleryElems = "";
             for (var i = 0; i < animalData.Images.length; i++) {
-                var active = "";
-                if (i==0) active = ' class="selected"';
-                galleryElems += '<li' + active + '>' + img.div(animalData.Images[i]) + '</li>';
+                var active = '"';
+                if (i==0) active = ' selected" ';
+                galleryElems += '<li class="animal-modal__gallery-item' + active + '>' + img.div(animalData.Images[i]) + '</li>';
             }
             if (animalData.Images.length > 1) {
-                $('#animal-modal>aside>.gallery>.gallery-aux').html(galleryElems);
+                $('.animal-modal__gallery-aux').html(galleryElems);
             } else {
-                $('#animal-modal>aside>.gallery>.gallery-aux').html("");
+                $('.animal-modal__gallery-aux').html("");
             }
-            $('#animal-modal>aside>.gallery>.bx-wrapper').remove();
-            $('#animal-modal>aside>.gallery').prepend('<ul class="bxslider">' + photoElems + '</ul>');
-            slider = $('#animal-modal>aside>.gallery>.bxslider').bxSlider({
+            $('.animal-modal__gallery>.bx-wrapper').remove();
+            $('.animal-modal__gallery').prepend('<ul class="animal-modal__bxslider">' + photoElems + '</ul>');
+            slider = $('.animal-modal__bxslider').bxSlider({
                 mode: 'horizontal',
                 // captions: true,
                 pager:  false,
                 onSlideBefore: function(e, o, i) {
-                    $("#animal-modal .gallery .gallery-aux li").removeClass("selected");
-                    $("#animal-modal .gallery .gallery-aux li:nth-child("+ (i + 1) +")").addClass("selected");
+                    $(".animal-modal__gallery-item").removeClass("selected");
+                    $(".animal-modal__gallery-item:nth-child("+ (i + 1) +")").addClass("selected");
                 }
             });
             window.history.pushState(animalData, animalData.Name, "/Home/Animals?animal_id=" + animalData.Id);

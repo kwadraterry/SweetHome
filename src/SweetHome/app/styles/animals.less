@@ -10,240 +10,125 @@
 @menu-item-padding: 4px;
 
 
-.image-container{
-	width: 470px;
-	height: 470px;
-	background-color: #f7f7f7;
-	position: relative;
-	
-	&__image_portrait{
-		height: 100%;
-		width:auto;
-		margin: 0 auto;
-	}
-	
-	&__image_landscape{
-		width:100%;
-		height: auto;
-		position:absolute;
-	    top:0;
-	    bottom:0;
-	    margin:auto;
-	}
-}
-
-#animal-modal {
-	.bx-viewport {
-		height: 470px;
-		border: 0;
-	}
-	.modal-x(@padding: 30px);
-	span.close {
-		.close-button();
-		@color: #666;
-		position: absolute;
-		right: 0;
-		.md({
-			right: -30px;
-		});
-		top: 0;
-		cursor: pointer;
-		color: @color;
-		&:hover {
-			color: darken(@color, 20%);
-		}
-	}
-	section:first-child > h3 {
-		margin-top: 0;
-		text-transform: uppercase;
-	}
-	section:first-child > p {
-		color: @top-color;
-		>a{
-			text-decoration: none;
-			color:@h-color;
-		}
-		a:hover{
-			text-decoration: none;
-			color:@top-color;
-		}
-	}
-	section.gallery {
-		@gallery-border-color: @h-color;
-		@gallery-border-width: 4px;
-		ul.gallery-aux {
-			display: flex;
-			padding: 0;
-			> li {
-				display: inline-block;
-				flex: 1;
-				> div.img {
-					width: 100%;
-					height: 200px;
-					box-sizing: content-box;
-				}
-				&.selected > .img {
-					border: @gallery-border-width solid @gallery-border-color;
-					margin: -@gallery-border-width;
-				}
-			}
-			> li + li {
-				margin-left: 30px;
-			}
-		}
-		.bx-wrapper {
-			margin-bottom: 30px;
-			width: 470px;
-		}
-		margin-bottom: 30px;
-	}
-	footer {
-		padding-top: 30px;
-		display: flex;
-		> a {
-			padding-left: 30px;
-			padding-right: 30px;
-			flex: 1;
-			text-align: center;
-		}
-		> a + a {
-			border-left: 1px solid #aaa;
-		}
-	}
-}
-
-#searchForm{
-	width:100%;
-}
-
-.animals-container {
+.animals {
 	display: flex;
-	> .filter-column {
+
+	&__search-form-container {
+		width:100%;
+	}
+
+	&__filter-column {
 		align-self: flex-start;
 		width: @animal-card-width;
-		margin-right: @animal-card-gutter;		
-		>div{
-			background-color: @text-block-bg;
-			padding:20px;
-			ul {
-				list-style: none outside none;
-				padding-left:20px;
-				> li {
-					a, span {
-						display: inline-block;
-						padding: @menu-item-padding;
-						transition: background-color 0.2s;
-						border-radius: @menu-item-padding;
-						
-					}
-					a {
-						cursor: pointer;
-						color:#1f1f1f;
-					}
-					span {
-						cursor: default;
-						color:#7f7f7f;
-					}
-					a:hover {
-						background-color: @menu-item-hover-color;
-						text-decoration: none;
-					}
-					a.active {
-						background-color: @menu-item-checked-color;
-					}
-				}
-				> li.menu {
-					position: relative;
-					& > div::before {
-						cursor: pointer;
-						content: "-";
-						display: inline-block;
-						width: @fold-icon-size;
-						position: absolute;
-						left: -@fold-icon-size;
-						padding-top: @menu-item-padding;
-					}
-					// > ul {
-					// 	transition: height 0.5s;
-					// 	overflow: hidden;
-					// }
-					&.folded {
-						& > div::before {
-							content: "+";
-						}
-					}
-				}
-			}
+		margin-right: @animal-card-gutter;
+	}
+
+	&__filter {
+		background-color: @text-block-bg;
+		padding:20px;
+	}
+
+	&__filter-list {
+		list-style: none outside none;
+		padding-left:20px;
+	}
+
+	&__filter-link {
+		display: inline-block;
+		padding: @menu-item-padding;
+		transition: background-color 0.2s;
+		border-radius: @menu-item-padding;
+		cursor: pointer;
+		color:#1f1f1f;
+
+		&:hover {
+			background-color: @menu-item-hover-color;
+			text-decoration: none;
 		}
-		>button{
-			.btn();
-			
-			margin-top: 20px;
-			width: 100%;
-			border-radius: 0px;		
-			color: #FFF;			
-			background-color: #009688;
-			border: 1px solid #009688;
-			>a{
-				color: #FFF;
-				text-decoration: none;				
-			}
-			>a:hover{
-				color: #FFF;
-				text-decoration: none;				
-			}
+
+		&_active {
+			background-color: @menu-item-checked-color;
 		}
-		>button:hover {
+
+	}
+
+	&__filter-menu {
+		position: relative;
+	}
+
+	&__filter-name::before {
+		cursor: pointer;
+		content: "-";
+		display: inline-block;
+		width: @fold-icon-size;
+		position: absolute;
+		left: -@fold-icon-size;
+		padding-top: @menu-item-padding;
+	}
+
+	&__filter-menu_folded &__filter-name::before{
+		content: "+";
+	}
+
+	&__filter-button {
+		.btn();
+		margin-top: 20px;
+		width: 100%;
+		border-radius: 0;
+		color: #FFF;
+		background-color: #009688;
+		border: 1px solid #009688;
+
+		&:hover {
 			color: #FFF;
-		  	background-color: #00796B;
+			background-color: #00796B;
 			border: 1px solid #00796B;
 			cursor: pointer;
 		}
 	}
-	> .animals-display {
-		flex: 1; // растянуться на всю оставшуюся ширину
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		margin: -@animal-card-gutter/2;
-		> div {
-			.text-block();
-			padding: @animal-card-padding;
-			width: @animal-card-width;
-			margin: @animal-card-gutter/2;
-			cursor:pointer;
-			
-			> .img {
-				.square(@animal-image-width);
-				border-radius: 50%;
-			}
-			
-			> h3 {
-				width: @animal-image-width;
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				text-transform: uppercase;
-			}
-			>p{
-				color:@top-color;
-				>a{
-					text-decoration: none;
-					color:@top-color;
-				}
-				a:hover{
-					text-decoration: none;
-					color:@h-color;
-				}
-			}
+
+	&__filter-button-link {
+		color: #FFF;
+		text-decoration: none;
+
+		&:hover {
+			color: #FFF;
+			text-decoration: none;
 		}
-		>div:hover{
+	}
+
+	&__item {
+		.text-block();
+		padding: @animal-card-padding;
+		width: @animal-card-width;
+		margin: @animal-card-gutter/2;
+		cursor:pointer;
+
+		&:hover {
 			background-color: #80CBC4;
 			transition: background-color 0.5s ease;
-			> h3 {
-				color:white;
-				transition: color 0.3s ease;
-			}
 		}
+	}
+
+	&__item:hover &__name {
+		color:white;
+		transition: color 0.3s ease;
+	}
+
+	&__item-img {
+		.square(@animal-image-width);
+		border-radius: 50%;
+	}
+
+	&__name {
+		width: @animal-image-width;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+	}
+
+	&__shelter-name, &__age, &__phones{
+		color:@top-color;
 	}
 }
