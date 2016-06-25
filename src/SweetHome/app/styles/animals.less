@@ -15,6 +15,8 @@
 
 	&__search-form-container {
 		width:100%;
+		background-color: #fff;
+		padding: 20px;
 	}
 
 	&__filter-column {
@@ -50,6 +52,10 @@
 			background-color: @menu-item-checked-color;
 		}
 
+		&_disabled {
+			cursor: default;
+			color: #7f7f7f;
+		}
 	}
 
 	&__filter-menu {
@@ -97,6 +103,14 @@
 		}
 	}
 
+	&__display {
+		flex: 1; // растянуться на всю оставшуюся ширину
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin: -@animal-card-gutter/2;
+	}
+
 	&__item {
 		.text-block();
 		padding: @animal-card-padding;
@@ -118,6 +132,8 @@
 	&__item-img {
 		.square(@animal-image-width);
 		border-radius: 50%;
+		background-position: center center;
+		background-size: cover;
 	}
 
 	&__name {

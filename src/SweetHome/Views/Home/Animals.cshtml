@@ -57,20 +57,20 @@
         <div class="animals__filter">
             <ul class="animals__filter-list">
                 @{
-                    var allActive = ViewBag.All ? " animals__filter-link_active" : "";
+                    var allActive = ViewBag.All ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
                 }
-                <li class="animals__filter-item"><a class="animals__filter-link" + @allActive href="@url">Все</a></li>
+                <li class="animals__filter-item"><a class="@allActive" href="@url">Все</a></li>
                 <li class="animals__filter-item animals__filter-menu">
-                    <div class="animals__filter-name">Приюты</div>
+                    <div class="animals__filter-name"><span class="animals__filter-link animals__filter-link_disabled">Приюты</span></div>
                     <ul class="animals__filter-list">
                         @foreach(var shelter in ViewBag.Shelters)
     		            {
-                            var shelterActive = "";
+                            var shelterActive = "animals__filter-link";
                             if (ViewBag.ShelterId == shelter.Id)
                             {
-                                shelterActive = " animals__filter-link_active";
+                                shelterActive = "animals__filter-link animals__filter-link_active";
                             }
-                            <li class="animals__filter-item"><a class="animals__filter-link" + @shelterActive href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
+                            <li class="animals__filter-item"><a class="@shelterActive" href="@url?shelter=@shelter.Id">@shelter.Name</a></li>
                         }
                     </ul>
                 </li>
@@ -78,35 +78,35 @@
                     @{
                         var dogOnly = (ViewBag.Type == AnimalType.Dog &&
                                        ViewBag.Size == null &&
-                                       ViewBag.AgeLess == null) ? " animals__filter-link_active" : "";
+                                       ViewBag.AgeLess == null) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
                         var dogYoung = (ViewBag.Type == AnimalType.Dog &&
-                                        ViewBag.AgeLess == 1) ? " animals__filter-link_active" : "";
+                                        ViewBag.AgeLess == 1) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
                     }
                     <div class="animals__filter-name">
                         @if (ViewBag.ShelterId == 1)
                             {
-                                <a class="animals__filter-shelters-link animals__filter-shelters-link_active" href="@url?shelter=1">Частная передержка</a>
+                                <a class="animals__filter-link animals__filter-link_active" href="@url?shelter=1">Частная передержка</a>
                             }
                         else{
                                 <a class="animals__filter-link" href="@url?shelter=1">Частная передержка</a>
                         }
                     </div>
-                    <a class="animals__filter-link" + @dogOnly href="@url?type=@dog_type">Собаки</a>
+                    <a class="@dogOnly" href="@url?type=@dog_type">Собаки</a>
                     <ul class="animals__filter-list">
-                        <li class="animals__filter-item"><a class="animals__filter-link" + @dogYoung href="@url?type=@dog_type&age_less=1">Щенки</a></li>
+                        <li class="animals__filter-item"><a class="@dogYoung" href="@url?type=@dog_type&age_less=1">Щенки</a></li>
                     </ul>
                 </li>
                 <li class="animals__filter-item animals__filter-menu">
                     @{
                         var catOnly = (ViewBag.Type == AnimalType.Cat &&
                                        ViewBag.Color == null &&
-                                       ViewBag.AgeLess == null) ? " animals__filter-link_active" : "";
+                                       ViewBag.AgeLess == null) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
                         var catYoung = (ViewBag.Type == AnimalType.Cat &&
-                                        ViewBag.AgeLess == 1) ? " animals__filter-link_active" : "";
+                                        ViewBag.AgeLess == 1) ? "animals__filter-link animals__filter-link_active" : "animals__filter-link";
                     }
-                    <a class="animals__filter-link" + @catOnly href="@url?type=@cat_type">Кошки</a>
+                    <a class=@catOnly href="@url?type=@cat_type">Кошки</a>
                     <ul class="animals__filter-list">
-                        <li class="animals__filter-item"><a class="animals__filter-link" + @catYoung href="@url?type=@cat_type&age_less=1">Котята</a></li>
+                        <li class="animals__filter-item"><a class="@catYoung" href="@url?type=@cat_type&age_less=1">Котята</a></li>
                     </ul>
                 </li>
             </ul>
