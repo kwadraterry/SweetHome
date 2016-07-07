@@ -19,18 +19,20 @@
 @section modal {
 <div id="animal-modal" class="animal-modal"> 
     <aside class="animal-modal__aside">
-        <section class="animal-modal__title-section">
+        <section class="animal-modal__gallery">            
+        </section>
+         <section class="animal-modal__title-section">
             <h3 class="animal-modal__animal-name"></h3>
             <p class="animal-modal__place"><a class="animal-modal__place-link"></a></p>
             <p class="animal-modal__phone"></p>
             <ul class="animal-modal__gallery-aux">
             </ul>
+
+            <section class="animal-modal__description">
+                <p class="animal-modal__description-text"></p>
+            </section>
         </section>
-        <section class="animal-modal__gallery">            
-        </section>
-        <section class="animal-modal__description">
-            <p class="animal-modal__description-text"></p>
-        </section>
+
         <footer class="animal-modal__footer">
             <a class="animal-modal__footer"></a>
             <a class="animal-modal__footer"></a>
@@ -219,7 +221,7 @@
         });
         require('bxslider');
         var slider = undefined;
-        $("#animal-modal").on("click", ".animal-modal__gallery-aux-item", function(e){
+        $("#animal-modal").on("click", ".animal-modal__gallery-item", function(e){
             var li = this;
             var ul = li.parentNode;
             var index = Array.prototype.indexOf.call(ul.children, li);
@@ -285,7 +287,6 @@
             $('.animal-modal__gallery').prepend('<ul class="animal-modal__bxslider">' + photoElems + '</ul>');
             slider = $('.animal-modal__bxslider').bxSlider({
                 mode: 'horizontal',
-                // captions: true,
                 pager:  false,
                 onSlideBefore: function(e, o, i) {
                     $(".animal-modal__gallery-item").removeClass("selected");

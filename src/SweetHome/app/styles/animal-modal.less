@@ -1,0 +1,162 @@
+@import (reference) "mixins.less";
+
+@animal-card-gutter: 15px;
+@animal-card-width: (@container-lg - 30px - @animal-card-gutter*3)/4;
+@animal-card-padding: 20px;
+@animal-image-width: @animal-card-width - 2*@animal-card-padding;
+@fold-icon-size: 8px;
+@menu-item-hover-color: #ddd;
+@menu-item-checked-color: #B3E5FC;
+@menu-item-padding: 4px;
+@gallery-border-color: @h-color;
+@gallery-border-width: 4px;
+
+.animal-modal {
+	.modal-x(@padding:0px);
+
+	&__aside {
+		width: 830px;
+	}
+
+	&__title-section {
+		width:312px;
+		display: inline-block;
+		padding: 10px 20px;
+		box-sizing: border-box;
+		vertical-align: top;
+	}
+
+	&__close {
+		.close-button();
+		@color: #666;
+		position: absolute;
+		right: 0;
+		.md({
+			right: -30px;
+		});
+		top: 0;
+		cursor: pointer;
+		color: @color;
+		&:hover {
+			color: darken(@color, 20%);
+		}
+	}
+	
+	&__animal-name {
+		margin-top: 0;
+		text-transform: uppercase;
+	}
+	
+	&__place {
+		color: @top-color;
+	}
+	
+	&__place-link {
+		text-decoration: none;
+		color:@h-color;
+		
+		&:hover{
+			text-decoration: none;
+			color:@top-color;
+		}
+	}
+	
+	&__gallery {
+		@gallery-border-color: @h-color;
+		@gallery-border-width: 4px;
+		margin-bottom: 30px;
+		width: 480px;
+		display: inline-block;
+	}
+	
+	&__gallery-aux {
+		display: inline-flex;
+		padding: 0;
+	}
+
+	&__gallery-item{
+		display: inline-block;
+		margin-right: 10px;
+		> .img {
+			width: 56px;
+			height: 56px;
+		}
+		&.selected > .img {
+			border: @gallery-border-width solid @gallery-border-color;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	&__gallery-photo {
+		background-color: #f7f9fa;
+	}
+
+	&__description {
+		margin-top: 20px;
+	}
+
+    &__img {
+      width: 100%;
+      height: 200px;
+      box-sizing: content-box;
+    }
+	
+	.bx-wrapper {
+		margin-bottom: 30px;
+		width: 470px;
+		display: inline-block;
+		height: 468px;
+	}
+	
+	&__footer {
+		padding-top: 30px;
+		display: flex;
+	}
+	
+	&__footer-link {
+		padding-left: 30px;
+		padding-right: 30px;
+		flex: 1;
+		text-align: center;
+	}
+		
+	&__footer-link:nth-last-child {
+		border-left: 1px solid #aaa;
+	}
+
+	&__gallery-photos-image-container {
+		height: 468px;
+	}
+
+    &__gallery-photos-image {
+        width: 470px;
+        height: 470px;
+        background-color: #f7f7f7;
+        position: relative;
+
+        &_portrait{
+            height: 100%;
+            width:auto;
+            margin: 0 auto;
+        }
+
+        &_landscape{
+            width:100%;
+            height: auto;
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+            margin:auto;
+        }
+    }
+}
+
+.animal-modal .bx-viewport {
+    height: 470px;
+    border: 0;
+}
